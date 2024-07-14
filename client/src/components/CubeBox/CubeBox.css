@@ -1,0 +1,149 @@
+.box .new,
+.box .bestseller {
+    position: absolute;
+    top: 2%;
+    left: -1px;
+    background-color: rgb(0, 198, 0);
+    width: fit-content;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: flex;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+}
+
+.box .bestseller {
+    top: 8.5%;
+    background-color: orange;
+}
+
+
+.box {
+    background-color: white;
+    position: relative;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-top: none;
+    color: rgb(70, 0, 114);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.box>img {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.box h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    height: 2.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-line-clamp: 2;
+    display: -ms-flexbox;
+    -ms-flex-orient: vertical;
+    -ms-line-clamp: 2;
+    display: box;
+    box-orient: vertical;
+    line-clamp: 2;
+    text-overflow: ellipsis;
+}
+
+.box .price {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.box .price .finalPrice {
+    color: red;
+}
+
+.box .price .actualPrice {
+    margin-left: 0.25rem;
+    scale: 0.8;
+    text-decoration: line-through;
+}
+
+.box .price .offer {
+    position: absolute;
+    right: 0;
+    border: 1px solid orangered;
+    color: orangered;
+    padding: 0.1rem 0.3rem;
+    border-radius: 5px;
+}
+
+.box .ratings {
+    display: flex;
+    align-items: center;
+}
+
+.box .ratings img {
+    width: 1rem;
+}
+
+.box .ratings span {
+    margin-left: 0.5rem;
+}
+
+.box .inStock::before {
+    content: "";
+    background-color: green;
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.box .inStock {
+    padding-left: 1rem;
+    position: relative;
+    color: green;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.box .outOfStock::before {
+    content: "";
+    background-color: red;
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.box .outOfStock {
+    padding-left: 1rem;
+    position: relative;
+    color: red;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.box button {
+    margin-top: 1.5rem;
+    background-color: orangered;
+    border: none;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.8rem;
+}

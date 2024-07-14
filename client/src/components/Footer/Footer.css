@@ -1,0 +1,93 @@
+footer {
+    padding: 3rem;
+    color: purple;
+    background-color: white;
+}
+
+footer>div P:last-child {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    line-height: 1.5rem;
+}
+
+footer>div P:first-child {
+    font-weight: bolder;
+    color: orangered;
+    text-transform: uppercase;
+}
+
+footer>div P a {
+    padding: 0.25rem 0;
+    text-decoration: none;
+    color: purple;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: orangered;
+}
+
+@media only screen and (min-width:640px) {
+    footer {
+        display: grid;
+        grid-template-columns: 30% auto auto 20%;
+        grid-gap: 3rem;
+        grid-row: auto;
+
+    }
+
+    footer>div:first-child,
+    footer>div:last-child {
+        max-width: 20rem;
+    }
+
+    @media screen and (max-width:1066px) {
+        footer {
+            grid-template-columns: auto auto auto;
+            grid-gap: 1rem;
+        }
+    }
+
+    @media screen and (max-width:760px) {
+        footer {
+            grid-template-columns: auto auto;
+            grid-gap: 3rem;
+        }
+    }
+
+}
+
+@media only screen and (max-width:640px) {
+    footer>div {
+        position: relative;
+        height: max-content;
+        overflow: hidden;
+    }
+
+    footer>div p:first-child {
+        border-top: 1px solid #ccc;
+        padding: 1.5rem 1rem;
+    }
+
+    footer>div:first-child p:first-child {
+        border-top: none;
+    }
+
+    footer>div:last-child p:last-child {
+        border-bottom: 1px solid #ccc;
+    }
+
+    footer>div p:first-child:hover {
+        cursor: pointer;
+    }
+
+    footer>div p:last-child {
+        overflow: hidden;
+        min-height: 0px;
+        height: 0rem;
+        padding: 0;
+        padding-left: 1rem;
+        transition: all 0.3s ease;
+    }
+}

@@ -1,0 +1,83 @@
+main {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    padding: 3rem;
+    padding-top: 2rem;
+    gap: 2rem;
+}
+
+main .cubeList {
+    background-color: white;
+    height: fit-content;
+    position: relative;
+}
+
+main .cubeList .top {
+    border-bottom: 1px solid #ccc;
+    padding: 1.5rem;
+    color: rgb(0, 0, 83);
+
+}
+
+main .cubeList .bottom {
+    display: grid;
+    grid-template-columns: 33.333% 33.333% 33.333%;
+    width: 100%;
+}
+
+main .cubeList .bottom .box {
+    width: 100%;
+}
+
+@media only screen and (max-width:1076px) {
+    main .cubeList .bottom {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width:893px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    main .cubeList .bottom {
+        grid-template-columns: 33.333% 33.333% 33.333%;
+    }
+}
+
+@media only screen and (max-width:750px) {
+    main .cubeList .bottom {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width:531px) {
+    main {
+        padding: 1rem;
+    }
+}
+
+@media only screen and (max-width:470px) {
+    main .cubeList .bottom {
+        grid-template-columns: auto;
+    }
+
+    main {
+        padding: 3rem;
+    }
+}
+
+@media only screen and (max-width:470px) {
+
+    main {
+        padding: 1rem;
+    }
+}
+
+.loadingAnimation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.854);
+    z-index: 20;
+}

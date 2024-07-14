@@ -19,9 +19,64 @@ main .cubeList .top {
 
 }
 
+main .cubeList .top .apiBasicBottom {
+    /* border-top: 1px solid #ccc; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .cubeList .top .apiBasicBottom .sort {
+    display: flex;
+    align-items: center;
+}
+
+main .cubeList .top .apiBasicBottom .sort>p {
+    text-transform: lowercase;
+    padding-right: 1rem;
+}
+
+#productChoice {
+    padding: 0.5rem 1rem;
+    padding-right: 2rem;
+    border-radius: 5px;
+    outline: none;
+    appearance: none;
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 50%;
+}
+
+#productChoice:hover {
+    cursor: pointer;
+}
+
+#productChoice option {
+    border: none;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+#productChoice option:checked {
+    background-color: #e9ecef;
+}
+
+@media only screen and (max-width:430px) {
+    main .cubeList .top .apiBasicBottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
 main .cubeList .bottom {
     display: grid;
-    grid-template-columns: 33.333% 33.333% 33.333%;
+    grid-template-columns: repeat(3, calc(100%/3));
     width: 100%;
 }
 
@@ -41,7 +96,7 @@ main .cubeList .bottom .box {
     }
 
     main .cubeList .bottom {
-        grid-template-columns: 33.333% 33.333% 33.333%;
+        grid-template-columns: repeat(3, calc(100%/3));
     }
 }
 

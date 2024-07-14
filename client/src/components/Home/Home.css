@@ -9,7 +9,6 @@
 
 .swiper {
     width: 100%;
-    min-height: 10rem;
     background-color: rgb(196, 196, 196);
 }
 
@@ -35,7 +34,19 @@
     background: rgb(255, 255, 255);
 }
 
-@media screen and (max-width:751px) {
+@media only screen and (min-width:700px) {
+    .swiper {
+        aspect-ratio: 1800/600;
+    }
+}
+
+@media only screen and (max-width:700px) {
+    .swiper {
+        aspect-ratio: 900/600;
+    }
+}
+
+@media only screen and (max-width:751px) {
     .second {
         padding-left: 0;
         padding-right: 0;

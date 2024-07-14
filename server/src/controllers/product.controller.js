@@ -12,6 +12,9 @@ const handleProductRequest = async function (req, res) {
     else if (category == 'most-favourite') {
         products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(10);
     }
+    else if (category == "sale") {
+        products = await productSchema.find({ discount: { $gt: 0 } });
+    }
     else products = await productSchema.find({ category });
 
     if (!products) return res.status(400).json({

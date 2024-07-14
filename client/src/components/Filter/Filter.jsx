@@ -1,5 +1,5 @@
 import "./Filter.css";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { cubeContext } from "../CubeLists/CubeList.jsx";
 import { useState, useEffect, useContext, useRef } from "react";
 
@@ -8,11 +8,11 @@ export default function Filter() {
     let data = useLoaderData();
     let max = 10000;
 
-    const { setCubeData, setLoadingState } = useContext(cubeContext);
+    const { setCubeData, setLoadingState, searchParams, setSearchParams, sortBy } = useContext(cubeContext);
 
     const [currMinRange, setCurrMinRange] = useState(0)
     const [currMaxRange, setCurrMaxRange] = useState(max)
-    const [searchParams, setSearchParams] = useSearchParams();
+
 
     const [currChoosenCompany, setCompany] = useState('All');
     let [trackCompanyCheckbox, setCompanyCheckBox] = useState(() => {
@@ -40,13 +40,14 @@ export default function Filter() {
         let obj = {
             minPrice: currMinRange,
             maxPrice: currMaxRange,
-            company: currChoosenCompany
+            company: currChoosenCompany,
+            sort_by: sortBy
         };
 
         addFilterQuery(obj);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, currMaxRange, currMinRange, currChoosenCompany]);
+    }, [data, currMaxRange, currMinRange, currChoosenCompany, sortBy]);
 
     function addFilterQuery(obj) {
         if (updateDuration.current) {
@@ -68,6 +69,40 @@ export default function Filter() {
                             (newSearchParams.get("company") === "All" || newSearchParams.get("company") === val.company)
                         );
                     });
+                    //sort by logic
+                    if (sortBy == "discount") {
+                        ans.sort((a, b) => a.discount < b.discount ? 1 : -1)
+                    }
+                    else if (sortBy == "a-z") {
+                        ans.sort((a, b) => a.name > b.name ? 1 : -1)
+                    }
+                    else if (sortBy == "z-a") {
+                        ans.sort((a, b) => a.name < b.name ? 1 : -1)
+                    }
+                    else if (sortBy == "low-high") {
+                        ans.sort((a, b) => {
+                            let aPrice = a.price - Math.floor(a.price * (a.discount / 100));
+                            let bPrice = b.price - Math.floor(b.price * (b.discount / 100))
+
+                            return aPrice > bPrice ? 1 : -1;
+                        })
+                    }
+                    else if (sortBy == "high-low") {
+                        ans.sort((a, b) => {
+                            let aPrice = a.price - Math.floor(a.price * (a.discount / 100));
+                            let bPrice = b.price - Math.floor(b.price * (b.discount / 100))
+
+                            return aPrice < bPrice ? 1 : -1;
+                        })
+                    }
+                    else if (sortBy == "old-new") {
+                        //no need to implement logic .. it'll give value by default
+                    }
+                    else if (sortBy == "new-old") {
+                        ans.sort((a, b) => {
+                            return (Date.parse(a.createdAt)) < (Date.parse(b.createdAt)) ? 1 : -1;
+                        })
+                    }
                     setLoadingState(false);
                     return ans;
                 });

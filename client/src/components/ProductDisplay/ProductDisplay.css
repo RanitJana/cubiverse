@@ -5,8 +5,20 @@
         'productImages productInfo'
         'productUserReview productInfo'
     ;
-    padding: 2rem;
+    padding: 2rem 3rem;
     gap: 2rem;
+    position: relative;
+}
+
+@media screen and (max-width:1001px) {
+    .productDetails {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            'productImages'
+            'productInfo'
+            'productUserReview'
+        ;
+    }
 }
 
 .productDetails>div {
@@ -15,9 +27,12 @@
     border-radius: 3px;
     border: 1px solid rgb(215, 215, 215);
     padding: 1.5rem 2rem;
+    height: fit-content;
 }
 
 .productDetails .productImages {
+    display: flex;
+    flex-direction: column;
     grid-area: productImages;
 }
 
@@ -114,6 +129,12 @@
     font-size: 1.5rem;
 }
 
+.productInfo .stock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .productInfo .stock .availStock::before {
     content: "";
     background-color: green;
@@ -152,4 +173,151 @@
     color: red;
     font-weight: bold;
     font-size: 0.9rem;
+}
+
+.imageMonitor {
+    height: 25rem;
+    max-width: 100%;
+}
+
+@keyframes appearMonitor {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.productDetails .productImages .imageRemote {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow: auto;
+    background-color: #dedede;
+    border-radius: 3px;
+    padding: 0.5rem;
+}
+
+.remoteBox {
+    min-width: 5rem;
+    width: 5rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid;
+    border-color: white;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.remoteBox:hover {
+    cursor: pointer;
+}
+
+.remoteBox:first-child {
+    border-color: orange;
+}
+
+.remoteBox img,
+.imageMonitor img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.buyButtons {
+    margin-right: 2rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.buyButtons a {
+    border-radius: 3px;
+}
+
+.buyButtons button:hover {
+    cursor: pointer;
+}
+
+.buyButtons button {
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background-color: transparent;
+    padding: 1rem;
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.buyButtons a {
+    background-color: orangered;
+}
+
+.productInfo .information {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.productInfo .information img {
+    width: 2.5rem;
+    filter: invert(30%);
+}
+
+.productInfo .information>div {
+    color: rgb(109, 109, 109);
+    font-weight: bold;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.productDetails .productUserReview {
+    display: grid;
+    grid-template-columns: repeat(3, calc(100%/3));
+    width: 100%;
+}
+
+.productDetails .productUserReview span {
+    border-bottom: 3px solid #ccc;
+    color: gray;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0 0.5rem 0;
+}
+
+.productDetails .productUserReview span {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.productDetails .productUserReview span:first-child {
+    border-color: orangered;
+    color: rgb(0, 0, 97);
+}
+
+.productDetails .details {
+    margin-top: 1rem;
+    font-size: 1.0.5rem;
+}
+
+pre {
+
+    white-space: pre-wrap;
+    /* Preserves formatting but allows wrapping */
+    word-wrap: break-word;
+    /* Breaks long words */
+    overflow-wrap: break-word;
+    /* Ensures compatibility */
 }

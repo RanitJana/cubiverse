@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./ProductDisplay.css";
@@ -12,25 +12,29 @@ export default function ProductDisplay() {
 
     const [productDetails, setProductDetails] = useState("");
 
+    const [monitorImage, setMonitorImage] = useState("");
+
     async function handleFetchData() {
 
         const productID = searchParams.get("product");
         let response = await fetch(`http://localhost:5000/api/v1/product/id?product=${productID}`);
         let jsonFormat = await response.json();
         let productDetails = JSON.parse(jsonFormat);
+        setMonitorImage(productDetails.images[0]);
+        setDetails(productDetails.description);
         console.log(productDetails);
         setProductDetails(productDetails);
     }
 
+
     useEffect(() => {
         handleFetchData();
+        // window.scrollTo(0, 0);
     }, [])
-
 
 
     function handleRatings(ratings) {
         try {
-
 
             let avarage = ratings.count ? ratings.result / ratings.count : 0;
 
@@ -60,12 +64,57 @@ export default function ProductDisplay() {
         }
     }
 
+    function handleDisplayMonitorImage(e) {
+        document.querySelectorAll('.remoteBox').forEach(val => {
+            val.style.borderColor = "white";
+        })
+        console.log(e.target.parentNode);
+        e.target.parentNode.style.borderColor = "orange";
+
+        document.querySelector(".imageMonitor").style.animation = "appearMonitor 0.5s ease forwards"
+        setMonitorImage(e.target.getAttribute('src'));
+    }
+
+    const [details, setDetails] = useState("");
+
+    function handleDetails(e) {
+        document.querySelectorAll(".productUserReview span").forEach(val => {
+            val.style.borderColor = "#ccc";
+            val.style.color = "gray";
+        })
+
+        e.target.style.borderColor = "orangered";
+        e.target.style.color = "rgb(0,0,97)";
+
+        if (e.target.innerText == "SPECIFICATIONS") {
+            setDetails(productDetails.specifications);
+        }
+        else if (e.target.innerText == "DESCRIPTION") {
+            setDetails(productDetails.description)
+        }
+    }
 
     return (
         <>
-            <div className="productDetails">
+            <div className="productDetails" id="top">
                 <div className="productImages">
-                    abc
+                    <div className="imageMonitor">
+                        <img src={monitorImage} alt="image" />
+                    </div>
+                    <div className="imageRemote">
+                        {
+                            productDetails.images?.map(
+                                (val, index) =>
+                                (
+                                    <div className="remoteBox" onClick={handleDisplayMonitorImage}
+
+                                        key={index}>
+                                        <img src={val} alt="cube" />
+                                    </div>
+                                )
+                            )
+                        }
+                    </div>
                 </div>
                 <div className="productInfo">
                     <h2>{productDetails.name}</h2>
@@ -114,18 +163,51 @@ export default function ProductDisplay() {
                         </div>
                     </div>
                     <div className="stock">
+                        <span>
+                            Stock:
+                        </span>
                         {
-                            productDetails.stock?
+                            productDetails.stock ?
                                 <div className="availStock">In stock</div>
                                 : <div className="outStock">Out of stock</div>
                         }
                     </div>
-                    <div className="productStatus"></div>
+                    <div className="buyButtons">
+                        <Link>
+                            <button>Add to cart</button>
+                        </Link>
+                        <Link>
+                            {
+                                productDetails.stock ?
+                                    <button>Buy now</button> :
+                                    <button style={{ backgroundColor: "gray" }} onMouseOver={e => e.target.style.cursor = "not-allowed"}>Out of stock</button>
+                            }
+                        </Link>
+                    </div>
+                    <div className="information">
+                        <div className="div">
+                            <img src="../../../public/images/icons8-truck-100.png" alt="" />
+                            <span>Fast Delivery</span>
+                        </div>
+                        <div className="div">
+                            <img src="../../../public/images/icons8-cart-100.png" alt="" />
+                            <span>Easy Returns</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="productUserReview">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam cum laboriosam facilis dolorum culpa iste quis officia deleniti, odit, recusandae quos? Aut, totam. Aperiam facilis ab reiciendis obcaecati voluptate non?
+                <div className="productDescriptions">
+                    <div className="productUserReview">
+                        <span onClick={handleDetails}>DESCRIPTION</span>
+                        <span onClick={handleDetails}>FAQs</span>
+                        <span onClick={handleDetails}>SPECIFICATIONS</span>
+                    </div>
+                    <div className="details">
+                        <pre>
+                            {details}
+                        </pre>
+                    </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

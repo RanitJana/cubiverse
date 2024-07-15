@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLoaderData } from "react-router-dom";
 import CubeBox from "../CubeBox/CubeBox.jsx";
 

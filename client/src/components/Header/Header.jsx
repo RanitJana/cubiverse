@@ -1,6 +1,6 @@
 import "./Header.css";
 import "./Nav.css"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { useRef, useEffect } from "react";
 import CubeCollection from "../CubeTop/CubeCollection";
 
@@ -53,6 +53,9 @@ export default function Header() {
                     <div className="middle">
                         <input type="text" name="searchCube" id="searchCube" placeholder="Search your puzzle" />
                         <img src="/images/search.png" alt="Search" />
+                        <ul>
+
+                        </ul>
                     </div>
                     <div className="right">
                         <div className="left">
@@ -80,7 +83,9 @@ export default function Header() {
                     <NavLink activeclassname="active" to="/collections/sale">Sale</NavLink>
                 </nav>
             </header>
-            <CubeCollection />
+            {
+                useLocation().pathname !== '/buy' ? <CubeCollection /> : ""
+            }
         </>
     )
 }

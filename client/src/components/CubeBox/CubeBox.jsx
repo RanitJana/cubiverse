@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import "./CubeBox.css";
+import { Link } from "react-router-dom";
 
 export default function CubeBox(props) {
 
@@ -39,22 +41,32 @@ export default function CubeBox(props) {
                 cube.New ? <div className="new">new</div> : ""
             }
             {
-                cube.New ? <div className="bestseller">bestseller</div> : <div className="bestseller" style={{ top: "2%" }}>bestseller</div>
+                cube.ratings.count >= 50 ?
+                    (
+                        cube.New ?
+                            (
+                                <div className="bestseller">bestseller</div>
+                            )
+                            :
+                            <div className="bestseller" style={{ top: "2%" }}>bestseller</div>
+                    )
+                    : ""
             }
-
-            <img src={cube.images[0]} alt="cube" />
+            <Link to={`/buy?product=${cube._id}`} >
+                <img src={cube.images[0]} alt="cube" />
+            </Link>
             <h2>{cube.name}</h2>
             <span className="price">
                 {
                     cube.discount ?
                         (<>
-                            <div className="finalPrice">₹{cube.price - Math.floor(cube.price * (cube.discount / 100))}</div>
-                            <div className="actualPrice">₹{cube.price}</div>
+                            <div className="finalPrice">₹{Number(cube.price - Math.floor(cube.price * (cube.discount / 100))).toLocaleString()}</div>
+                            <div className="actualPrice">₹{Number(cube.price).toLocaleString()}</div>
                             <div className="offer">{cube.discount}% off </div>
                         </>)
                         :
                         (<>
-                            <div className="finalPrice">₹{cube.price}</div>
+                            <div className="finalPrice">₹{Number(cube.price).toLocaleString()}</div>
                         </>)
                 }
 
@@ -71,13 +83,18 @@ export default function CubeBox(props) {
             }
             {
                 cube.stock ?
-                    <button
-                        className="buy"
-                        onMouseOver={e => {
-                            e.target.style.cursor = 'pointer';
-                        }}
-                    >
-                        Buy Now</button> :
+                    (
+                        <Link to={`/buy?product=${cube._id}`} >
+                            <button
+                                className="buy"
+                                onMouseOver={e => {
+                                    e.target.style.cursor = 'pointer';
+                                }}
+                            >
+                                Buy Now</button>
+                        </Link>
+                    )
+                    :
                     <button
                         className="buy"
                         style={{ backgroundColor: "gray" }}

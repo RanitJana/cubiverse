@@ -114,11 +114,7 @@ export default function Filter() {
 
         let currNodeImage = e.target.lastChild;
 
-        console.log(currNodeImage);
-
         let toggleNode = e.target.parentNode.lastChild;
-
-        console.log(toggleNode);
 
         if (toggleNode.style.height == "0px") {
 

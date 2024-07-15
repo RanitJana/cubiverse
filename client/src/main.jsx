@@ -2,13 +2,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Home from './components/Home/Home.jsx';
 import CubeList from './components/CubeLists/CubeList.jsx';
+import ProductDisplay from "./components/ProductDisplay/ProductDisplay.jsx";
 
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
-      <Route
+      <Route path=""
         loader=
         {
           async () => {
@@ -23,7 +24,6 @@ const router = createBrowserRouter(
             }
           }
         }
-        path=""
         element={<Home />}
       />
       <Route path="collections/">
@@ -32,7 +32,6 @@ const router = createBrowserRouter(
           {
             async ({ params }) => {
               try {
-
                 let response = await fetch(`http://localhost:5000/api/v1/product/${params.product}`);
                 let jsonFormat = await response.json();
                 return JSON.parse(jsonFormat);
@@ -45,6 +44,8 @@ const router = createBrowserRouter(
           path=":product"
           element={<CubeList />} />
       </Route>
+      <Route path="buy" element={<ProductDisplay />}
+      />
     </Route>
 
   )

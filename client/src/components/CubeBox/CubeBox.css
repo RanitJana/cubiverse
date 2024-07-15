@@ -34,7 +34,7 @@
     gap: 0.5rem;
 }
 
-.box>img {
+.box >a img {
     width: 100%;
     padding: 0 1rem;
 }

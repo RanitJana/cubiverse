@@ -1,6 +1,7 @@
 import productSchema from "../models/prodect.model.js";
 import uploadAvater from "../utils/cloudinary.js";
 import fs from "fs";
+import url from "url";
 
 const handleProductRequest = async function (req, res) {
 
@@ -8,14 +9,33 @@ const handleProductRequest = async function (req, res) {
 
     let products = null;
 
+    if (category == 'id') {
+        const myUrl = url.parse(req.url);
+
+        products = await productSchema.findById(myUrl.query.replace('product=', ''));
+        return res.status(200).json(JSON.stringify(products));
+    }
+
     if (category == 'new') products = await productSchema.find({ New: true });
+
+    else if (category == "bestsellers") {
+
+        let ratio = 50; // for the time being let this be fixed
+
+        products = await productSchema.find({ "ratings.count": { $gt: ratio } })
+    }
+
     else if (category == 'most-favourite') {
+
         products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(10);
     }
     else if (category == "sale") {
+
         products = await productSchema.find({ discount: { $gt: 0 } });
     }
     else products = await productSchema.find({ category });
+
+
 
     if (!products) return res.status(400).json({
         message: "No such items are found."

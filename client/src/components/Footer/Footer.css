@@ -1,3 +1,44 @@
+.preFooter {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    align-items: center;
+    padding: 3rem;
+}
+
+@media only screen and (max-width:1090px) {
+    .preFooter {
+        grid-template-columns: repeat(2,50%);
+        margin-right: 3rem;
+        gap: 3rem;
+    }
+}
+@media only screen and (max-width:620px) {
+    .preFooter {
+        grid-template-columns: 1fr;
+        margin: 0;
+        gap: 3rem;
+    }
+}
+
+.preFooter>div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 97);
+}
+
+.preFooter img {
+    width: 2.5rem;
+}
+
+.preFooter>div .topic {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
 footer {
     padding: 3rem;
     color: purple;

@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Home from './components/Home/Home.jsx';
 import CubeList from './components/CubeLists/CubeList.jsx';
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay.jsx";
+import NotFound from './components/NotFound/NotFound.jsx';
 
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
@@ -44,8 +46,8 @@ const router = createBrowserRouter(
           path=":product"
           element={<CubeList />} />
       </Route>
-      <Route path="buy" element={<ProductDisplay />}
-      />
+      <Route path="buy" element={<ProductDisplay />} />
+      {/* <Route path='*' Component={<NotFound />} /> */}
     </Route>
 
   )

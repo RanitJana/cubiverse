@@ -54,7 +54,7 @@ export default function Header() {
                         <input type="text" name="searchCube" id="searchCube" placeholder="Search your puzzle" />
                         <img src="/images/search.png" alt="Search" />
                         <ul>
-
+                        
                         </ul>
                     </div>
                     <div className="right">

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
 import "./ProductDisplay.css";
@@ -48,11 +48,12 @@ export default function ProductDisplay() {
 
     }
 
+    const location = useLocation();
 
     useEffect(() => {
         handleFetchData();
         window.scrollTo(0, 0);
-    }, [])
+    }, [location])
 
 
     function handleRatings(ratings) {

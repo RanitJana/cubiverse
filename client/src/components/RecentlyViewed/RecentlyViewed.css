@@ -1,0 +1,19 @@
+.pastViewed {
+    padding: 3rem;
+    padding-top: 0;
+}
+
+.pastViewed>h2 {
+    margin-bottom: 1rem;
+    color: rgb(0, 0, 97);
+}
+
+.pastContainers {
+    overflow: auto;
+    display: flex
+}
+
+.pastContainers .box {
+    width: calc(100%/4);
+    min-width: 20rem;
+}

@@ -2,10 +2,10 @@
 import "./CubeBox.css";
 import { Link } from "react-router-dom";
 
-export default function CubeBox(props) {
+export default function CubeBox({ cube }) {
 
-    let cube = props.cube.cube;
-
+    
+    cube = cube.cube;
 
     function handleRatings(ratings) {
 

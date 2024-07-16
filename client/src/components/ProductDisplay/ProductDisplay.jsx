@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useSearchParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import "./ProductDisplay.css";
+import { recentViewContext } from "../../App";
 
 
 export default function ProductDisplay() {
@@ -14,22 +15,43 @@ export default function ProductDisplay() {
 
     const [monitorImage, setMonitorImage] = useState("");
 
+    const { setProducts } = useContext(recentViewContext);
+
     async function handleFetchData() {
 
         const productID = searchParams.get("product");
         let response = await fetch(`http://localhost:5000/api/v1/product/id?product=${productID}`);
         let jsonFormat = await response.json();
         let productDetails = JSON.parse(jsonFormat);
+
         setMonitorImage(productDetails.images[0]);
         setDetails(productDetails.description);
-        console.log(productDetails);
         setProductDetails(productDetails);
+
+        let arr = [];
+
+        if (!localStorage.getItem("cubes")) arr.push(productDetails);
+        else {
+            arr = JSON.parse(localStorage.getItem("cubes"));
+
+            arr = arr.filter(val => {
+                return val._id !== productDetails._id;
+            })
+
+            arr.unshift(productDetails);
+            if (arr.length > 5) arr.pop();
+        }
+
+        localStorage.setItem("cubes", JSON.stringify(arr));
+
+        setProducts(arr);
+
     }
 
 
     useEffect(() => {
         handleFetchData();
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }, [])
 
 
@@ -186,11 +208,11 @@ export default function ProductDisplay() {
                     </div>
                     <div className="information">
                         <div className="div">
-                            <img src="../../../public/images/icons8-truck-100.png" alt="" />
+                            <img src="/images/icons8-truck-100.png" alt="" />
                             <span>Fast Delivery</span>
                         </div>
                         <div className="div">
-                            <img src="../../../public/images/icons8-cart-100.png" alt="" />
+                            <img src="/images/icons8-cart-100.png" alt="" />
                             <span>Easy Returns</span>
                         </div>
                     </div>

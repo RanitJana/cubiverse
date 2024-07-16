@@ -82,7 +82,7 @@ export default function Home() {
             <section className="third">
                 <div className="newArrivalTop">
                     <h2>Our Most Favourite Cubes</h2>
-                    <Link>View All</Link>
+                    <Link to="/collections/most-favourite">View All</Link>
                 </div>
                 <div className="newArrivalContainer">
 

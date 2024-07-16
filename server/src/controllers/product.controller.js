@@ -27,7 +27,14 @@ const handleProductRequest = async function (req, res) {
 
     else if (category == 'most-favourite') {
 
-        products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(10);
+        let limitValue = null;
+
+        if (req.cookies.limit) limitValue = Number(req.cookies.limit);
+        else limitValue = 20;
+
+        products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(limitValue);
+
+        if (req.cookies.limit) res.clearCookie("limit");
     }
     else if (category == "sale") {
 

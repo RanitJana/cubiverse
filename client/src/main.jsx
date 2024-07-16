@@ -17,12 +17,15 @@ const router = createBrowserRouter(
           async () => {
             try {
 
-              let response = await fetch(`http://localhost:5000/api/v1/product/most-favourite`);
+              document.cookie = "limit=10; path=/";
+              let response = await fetch(`http://localhost:5000/api/v1/product/most-favourite`, {
+                credentials: 'include'
+              });
               let jsonFormat = await response.json();
               return JSON.parse(jsonFormat);
             } catch (error) {
               console.log(error);
-              return {};
+              return [];
             }
           }
         }

@@ -78,8 +78,8 @@ export default function Header() {
                 <nav ref={navRef}>
                     <NavLink activeclassname="active" to="/collections/new">New</NavLink>
                     <NavLink activeclassname="active" to="/collections/bestsellers">Bestsellers</NavLink>
-                    <NavLink activeclassname="active" to="/collections/shop">Shop</NavLink>
-                    <NavLink activeclassname="active" to="/collections/shopby">Shop By</NavLink>
+                    <NavLink activeclassname="active" to="/collections/most-favourite">Most favourite</NavLink>
+                    {/* <NavLink activeclassname="active" to="/collections/shopby">Shop By</NavLink> */}
                     <NavLink activeclassname="active" to="/collections/sale">Sale</NavLink>
                 </nav>
             </header>

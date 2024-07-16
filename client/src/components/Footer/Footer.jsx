@@ -37,23 +37,23 @@ export default function Footer() {
         <>
             <div className="preFooter">
                 <div className="">
-                    <img src="../../../public/images/icons8-truck-100.png" alt="" />
+                    <img src="/images/icons8-truck-100.png" alt="" />
                     <div className="topic">Fast Delivery</div>
                     <div className="para">PAN India in 3-5 working days</div>
                 </div>
                 <div className="">
-                    <img src="../../../public/images/icons8-cart-100.png" alt="" />
+                    <img src="/images/icons8-cart-100.png" alt="" />
                     <div className="topic">Easy Replacement Policy</div>
                     <div className="para">Within 7 days of delivery</div>
                 </div>
                 <div className="">
-                    <img src="../../../public/images/icons8-customer-support-48.png" alt="" />
+                    <img src="/images/icons8-customer-support-48.png" alt="" />
                     <div className="topic">Top-notch support
                     </div>
                     <div className="para">WhatsApp, call or email us</div>
                 </div>
                 <div className="">
-                    <img src="../../../public/images/icons8-payment-32.png" alt="" />
+                    <img src="/images/icons8-payment-32.png" alt="" />
                     <div className="topic">Secure payments</div>
                     <div className="para">Prepaid and Cash on Delivery</div>
                 </div>

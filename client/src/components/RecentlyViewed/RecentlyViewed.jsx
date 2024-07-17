@@ -27,9 +27,13 @@ export default function RecentlyViewed() {
                 <h2>Recently viewed products</h2>
                 <div className="pastContainers">
                     {
-                        products.map((cube, idx) => {
-                            return < CubeBox key={idx} cube={{ cube: cube }} />
-                        })
+                        products.length ?
+                            products.map((cube, idx) => {
+                                return < CubeBox key={idx} cube={{ cube: cube }} />
+                            })
+                            :
+                            <p className="noProductsViewed">No Products Viewed.. 💔</p>
+
                     }
                 </div>
             </div>

@@ -1,0 +1,82 @@
+.account {
+    display: grid;
+    place-items: center;
+    padding: 3rem;
+    color: rgb(0, 0, 97);
+}
+
+.formParents {
+    gap: 1rem;
+}
+
+.formParents,
+.account form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.account form input {
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin: 0.25rem 0;
+    width: 100%;
+    max-width: 25rem;
+}
+
+.account form {
+    max-width: 25rem;
+}
+
+.account form>div {
+    width: 100%;
+    position: relative;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.account form>div>span {
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 1rem;
+}
+
+.account form input:focus,
+.account form input:user-valid,
+.account form input:user-invalid {
+    border-color: orangered;
+}
+
+.account form input:focus+span,
+.account form input:user-valid+span,
+.account form input:user-invalid+span {
+    top: 25%;
+    font-size: small;
+    font-weight: bold;
+}
+
+.account form button {
+    background-color: orangered;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-top: 1rem;
+}
+
+.account form button:hover {
+    cursor: pointer;
+    background-color: rgb(212, 57, 1);
+}

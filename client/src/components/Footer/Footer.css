@@ -7,11 +7,12 @@
 
 @media only screen and (max-width:1090px) {
     .preFooter {
-        grid-template-columns: repeat(2,50%);
+        grid-template-columns: repeat(2, 50%);
         margin-right: 3rem;
         gap: 3rem;
     }
 }
+
 @media only screen and (max-width:620px) {
     .preFooter {
         grid-template-columns: 1fr;
@@ -32,6 +33,7 @@
 
 .preFooter img {
     width: 2.5rem;
+    filter: brightness(0) saturate(100%) invert(16%) sepia(20%) saturate(5855%) hue-rotate(222deg) brightness(85%) contrast(141%);
 }
 
 .preFooter>div .topic {

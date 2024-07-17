@@ -3,9 +3,9 @@ import userSchema from "../models/user.model.js";
 const handleRegister = async (req, res, next) => {
 
     try {
-        const { fullName, contactNumber1, contactNumber2, email, password, confirmPassword, address, pincode } = req.body;
+        const { firstName, lastName, contactNumber1, email, password, confirmPassword, address, pincode } = req.body;
 
-        if (!fullName || !contactNumber1 || !contactNumber2 || !email || !password || !confirmPassword || !address || !pincode) {
+        if (!firstName || !lastName || !contactNumber1 || !email || !password || !confirmPassword || !address || !pincode) {
             return res.status(401).json({
                 message: "All input fields must be filled!"
             })
@@ -14,24 +14,25 @@ const handleRegister = async (req, res, next) => {
         let user = await userSchema.findOne({ email });
 
         if (password !== confirmPassword) return res.status(401).json({
-            message: "Password didn't match"
+            message: "Password didn't match."
         })
 
         if (user) return res.status(403).json({
-            message: "Already registered"
+            message: "Already registered."
         })
 
 
         await userSchema.create({
-            fullName,
-            contactNumber: [contactNumber1, contactNumber2 ? contactNumber2 : 0],
+            firstName,
+            lastName,
+            contactNumber: [contactNumber1],
             email,
             password,
             address: [{ location: address, pincode }]
         })
 
         return res.status(200).json({
-            message: "Registration successful"
+            message: "Registration successfull."
         })
 
     } catch (error) {

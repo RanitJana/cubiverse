@@ -1,8 +1,10 @@
 import "./Header.css";
 import "./Nav.css"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import CubeCollection from "../CubeTop/CubeCollection";
+import { recentViewContext } from "../../App.jsx";
+import Cookies from 'js-cookie';
 
 
 export default function Header() {
@@ -33,7 +35,14 @@ export default function Header() {
                 document.querySelector('body').style.overflow = "auto";
             }
         })
-    })
+
+        if (Cookies.get('accessToken'))
+            setUserLoggedIn(true);
+    }, [])
+
+    const { userLoggedIn, setUserLoggedIn } = useContext(recentViewContext);
+
+    const location = useLocation().pathname;
 
     return (
         <>
@@ -54,18 +63,22 @@ export default function Header() {
                         <input type="text" name="searchCube" id="searchCube" placeholder="Search your puzzle" />
                         <img src="/images/search.png" alt="Search" />
                         <ul>
-                        
+
                         </ul>
                     </div>
                     <div className="right">
-                        <div className="left">
-                            <Link to="/login">Login</Link>
-                            <Link to="/login" className="userLogin">
-                                <img src="/images/user.png" alt="user" />
-                            </Link>
-                            <span style={{ color: "white" }}> | </span>
-                            <Link to="/register">Signup</Link>
-                        </div>
+                        {
+                            !userLoggedIn ?
+                                <div className="left">
+                                    <Link to="/login">Login</Link>
+                                    <Link to="/login" className="userLogin">
+                                        <img src="/images/user.png" alt="user" />
+                                    </Link>
+                                    <span style={{ color: "white" }}> | </span>
+                                    <Link to="/register">Signup</Link>
+                                </div>
+                                : ""
+                        }
                         <Link className="right" to="/user/cart">
                             <div className="carParent">
                                 <img src="/images/cart.png" alt="Cart" />
@@ -84,7 +97,7 @@ export default function Header() {
                 </nav>
             </header>
             {
-                useLocation().pathname !== '/buy' ? <CubeCollection /> : ""
+                location !== '/buy' && location !== '/register' && location !== '/login' ? <CubeCollection /> : ""
             }
         </>
     )

@@ -5,6 +5,8 @@ import Home from './components/Home/Home.jsx';
 import CubeList from './components/CubeLists/CubeList.jsx';
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay.jsx";
 import NotFound from './components/NotFound/NotFound.jsx';
+import Register from './components/Register/Register.jsx';
+import Login from './components/Login/Login.jsx';
 
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
@@ -50,6 +52,8 @@ const router = createBrowserRouter(
           element={<CubeList />} />
       </Route>
       <Route path="buy" element={<ProductDisplay />} />
+      <Route path="register" element={<Register />} />
+      <Route path="login" element={<Login />} />
       {/* <Route path='*' Component={<NotFound />} /> */}
     </Route>
 

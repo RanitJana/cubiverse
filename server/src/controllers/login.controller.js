@@ -22,20 +22,20 @@ const handleLogin = async (req, res) => {
         const accessToken = await user.generateAccessToken();
         const refreshToken = await user.generateRefreshToken();
 
-        res.cookie("accessToken", accessToken);
+        res.cookie("accessToken", accessToken, { maxAge: 1000 * 60 * 60 * 24 * 7, });
 
         user.refreshToken = refreshToken;
 
         user.save({ validateBeforeSave: false });
 
         return res.status(200).json({
-            message: "Login successful"
+            message: "Login successfull!!"
         })
 
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            message: "An error occurred!Please try again"
+            message: "An error occurred!Please try again."
         })
     }
 

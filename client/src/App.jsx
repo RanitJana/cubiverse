@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer.jsx"
 import Header from "./components/Header/Header.jsx"
 import RecentlyViewed from "./components/RecentlyViewed/RecentlyViewed.jsx";
 
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 
 import { useState, createContext } from "react";
 
@@ -17,12 +17,19 @@ export { recentViewContext };
 export default function App() {
 
   const [products, setProducts] = useState([]);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  const location = useLocation().pathname;
 
   return (
-    <recentViewContext.Provider value={{ products, setProducts }}>
+    <recentViewContext.Provider value={{ products, setProducts, userLoggedIn, setUserLoggedIn }}>
       <Header />
       <Outlet />
-      <RecentlyViewed />
+      {
+        location !== '/register' && location !== '/login' ?
+          <RecentlyViewed />
+          : ""
+      }
       <Footer />
     </recentViewContext.Provider>
   )

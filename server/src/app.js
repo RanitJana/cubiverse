@@ -19,10 +19,11 @@ app.use(cookieParsar());
 import register from "./routes/register.route.js";
 import login from "./routes/login.route.js";
 import Product from "./routes/product.route.js";
+import user from "./routes/user.route.js";
 
 app.use("/api/v1/register", register);
 app.use("/api/v1/login", login);
 app.use("/api/v1/product", Product);
-
+app.use("/api/v1/user", user);
 
 export default app;

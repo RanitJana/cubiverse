@@ -3,9 +3,9 @@ import { useEffect, useState, useContext } from "react";
 import "../Register/Register.css";
 import Cookies from 'js-cookie';
 import axios from "axios";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import PopupMessage from "../PopUp/PopUp.jsx";
-import { recentViewContext } from "../../App.jsx";
+import { globalContext } from "../../App.jsx";
 
 export default function Login() {
 
@@ -13,7 +13,9 @@ export default function Login() {
     const [color, setColor] = useState('white');
     const [message, setMessage] = useState("");
 
-    const { setUserLoggedIn } = useContext(recentViewContext);
+    const { changeUserState, setChangeUserState } = useContext(globalContext);
+
+    const navigate = useNavigate();
 
     async function handleLogin(e) {
 
@@ -24,24 +26,34 @@ export default function Login() {
         let loginData = {
             email, password
         };
+        try {
+            console.log('hi');
 
-        let response = await axios.post("http://localhost:5000/api/v1/login", loginData, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            withCredentials: true
-        });
+            let response = await axios.post("http://localhost:5000/api/v1/login", loginData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true
+            });
 
-        if (response.status === 401 || response.status === 403 || response.status === 500) {
-            setColor("red");
-        } else {
             setColor("green");
+
+            setPopup(response.data.message);
+            setMessage(response.data.message);
+
+            setChangeUserState(true);
+
+            navigate("/user");
+
+        } catch (error) {
+
+            console.log(error);
+
+            if (error.response.status === 401 || error.response.status === 403 || error.response.status === 500)
+                setColor("red");
+            setPopup(error.response.data.message);
+            setMessage(error.response.data.message);
         }
-
-        setPopup(response.message);
-        setMessage(response.message);
-
-        setUserLoggedIn(true);
     }
 
 
@@ -53,7 +65,7 @@ export default function Login() {
                 }
                 <h2>Login</h2>
                 <p>Please fill the information below</p>
-                <form method="POST" onSubmit={handleLogin}>
+                <form onSubmit={handleLogin}>
                     <div className="email">
                         <input type="email" required name="email" id="email" />
                         <span>Email</span>

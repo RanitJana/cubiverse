@@ -4,7 +4,8 @@ import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
 import "./ProductDisplay.css";
-import { recentViewContext } from "../../App";
+import { globalContext } from "../../App.jsx";
+import axios from "axios";
 
 
 export default function ProductDisplay() {
@@ -15,7 +16,7 @@ export default function ProductDisplay() {
 
     const [monitorImage, setMonitorImage] = useState("");
 
-    const { setProducts } = useContext(recentViewContext);
+    const { setProducts, setChangeUserState } = useContext(globalContext);
 
     async function handleFetchData() {
 
@@ -117,6 +118,19 @@ export default function ProductDisplay() {
         }
     }
 
+    async function handleAddCart(e) {
+        try {
+            const productID = searchParams.get("product");
+            let res = await axios.post(`http://localhost:5000/api/v1/product/${productID}`, {}, { withCredentials: true });
+            setChangeUserState(prev => prev + 1);
+
+        } catch (error) {
+            // {}
+
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <div className="productDetails" id="top">
@@ -197,7 +211,7 @@ export default function ProductDisplay() {
                     </div>
                     <div className="buyButtons">
                         <Link>
-                            <button>Add to cart</button>
+                            <button onClick={handleAddCart}>Add to cart</button>
                         </Link>
                         <Link>
                             {

@@ -3,11 +3,11 @@
 import { useContext, useEffect, useState } from "react";
 import "./RecentlyViewed.css";
 import CubeBox from "../CubeBox/CubeBox.jsx";
-import { recentViewContext } from "../../App.jsx";
+import { globalContext } from "../../App.jsx";
 
 export default function RecentlyViewed() {
 
-    const { products, setProducts } = useContext(recentViewContext);
+    const { products, setProducts } = useContext(globalContext);
 
     useEffect(() => {
 

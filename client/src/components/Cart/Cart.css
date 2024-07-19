@@ -1,0 +1,69 @@
+.cart {
+    padding: 3rem;
+    padding-top: 2rem;
+}
+
+.cart>h2 {
+    margin-bottom: 1rem;
+}
+
+.cartCollections {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    gap: 2rem;
+}
+
+@media only screen and (max-width:984px) {
+    .cartCollections {
+        grid-template-columns: auto;
+    }
+}
+
+.cart .cubes {
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: fit-content;
+}
+
+.total {
+    color: rgb(0, 0, 97);
+    padding: 2rem;
+    font-size: 1.1rem;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    position: sticky;
+    top: 11rem;
+}
+
+.total .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.total .middle {
+    color: orangered;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2rem;
+}
+
+.total>p {
+    margin: 2rem 0;
+}
+
+.total button {
+    padding: 0.8rem;
+    border-radius: 3px;
+    border: none;
+    background-color: orangered;
+    color: white;
+}

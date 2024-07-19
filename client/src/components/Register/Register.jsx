@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import PopupMessage from "../PopUp/PopUp.jsx";
 
 
@@ -11,6 +11,7 @@ export default function Register() {
     const [color, setColor] = useState('white');
     const [message, setMessage] = useState("");
 
+    const navigate = useNavigate();
 
     async function handleRegister(e) {
         e.preventDefault();
@@ -29,7 +30,7 @@ export default function Register() {
             pincode
         };
 
-        let getFetch = await fetch("http://127.0.0.1:5000/api/v1/register", {
+        let getFetch = await fetch("http://localhost:5000/api/v1/register", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -44,6 +45,8 @@ export default function Register() {
 
         setPopup(resposnse.message);
         setMessage(resposnse.message);
+
+        if (getFetch.status == 200) navigate('/login');
 
     }
 

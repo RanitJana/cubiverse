@@ -41,10 +41,18 @@ const userSchema = new Schema(
                 }
             }
         ],
-        cart: {
-            type: Schema.Types.ObjectId,
-            ref: "Product"
-        },
+        cart: [
+            {
+                productId: {
+                    type: Schema.Types.ObjectId,
+                    ref: "Product"
+                },
+                count: {
+                    type: Number,
+                    default: 1
+                }
+            }
+        ],
         orderHistory: [
             {
                 product: {

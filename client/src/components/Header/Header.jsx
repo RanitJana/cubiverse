@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./Header.css";
 import "./Nav.css"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { useRef, useEffect, useContext } from "react";
 import CubeCollection from "../CubeTop/CubeCollection";
-import { recentViewContext } from "../../App.jsx";
+import { globalContext } from "../../App.jsx";
 import Cookies from 'js-cookie';
 
 
@@ -35,12 +37,10 @@ export default function Header() {
                 document.querySelector('body').style.overflow = "auto";
             }
         })
-
-        if (Cookies.get('accessToken'))
-            setUserLoggedIn(true);
+        console.log(userData)
     }, [])
 
-    const { userLoggedIn, setUserLoggedIn } = useContext(recentViewContext);
+    const { userData, handleServeUserData, changeUserState, setChangeUserState } = useContext(globalContext);
 
     const location = useLocation().pathname;
 
@@ -68,7 +68,7 @@ export default function Header() {
                     </div>
                     <div className="right">
                         {
-                            !userLoggedIn ?
+                            !userData ?
                                 <div className="left">
                                     <Link to="/login">Login</Link>
                                     <Link to="/login" className="userLogin">
@@ -77,12 +77,15 @@ export default function Header() {
                                     <span style={{ color: "white" }}> | </span>
                                     <Link to="/register">Signup</Link>
                                 </div>
-                                : ""
+                                :
+                                <Link to="/user" className="userLoggedIn">
+                                    <img src="/images/user.png" style={{ width: "2rem" }} alt="user" />
+                                </Link>
                         }
                         <Link className="right" to="/user/cart">
                             <div className="carParent">
                                 <img src="/images/cart.png" alt="Cart" />
-                                <span>5</span>
+                                <span>{userData ? userData.data.user.cart.length : 0}</span>
                             </div>
                             <span>Cart</span>
                         </Link>
@@ -97,7 +100,7 @@ export default function Header() {
                 </nav>
             </header>
             {
-                location !== '/buy' && location !== '/register' && location !== '/login' ? <CubeCollection /> : ""
+                location !== '/buy' && location !== '/register' && location !== '/login' && location != '/user/cart' ? <CubeCollection /> : ""
             }
         </>
     )

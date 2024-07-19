@@ -1,4 +1,5 @@
 import productSchema from "../models/prodect.model.js";
+import userSchema from "../models/user.model.js";
 import uploadAvater from "../utils/cloudinary.js";
 import fs from "fs";
 import url from "url";
@@ -90,7 +91,44 @@ const handleProductUpload = async function (req, res) {
 
 }
 
+async function handleProductAddCart(req, res) {
+    try {
+
+        const id = req.user._id;
+
+        let user = await userSchema.findById(id);
+
+        let getIndexProduct = user.cart.findIndex(value => value.productId.toString() === req.params.product.toString());
+
+        if (getIndexProduct === -1) {
+
+            user.cart.push(
+                {
+                    productId: req.params.product,
+                    count: 1
+                }
+            );
+        }
+        else {
+            user.cart[getIndexProduct].count++;
+        }
+
+        user.save({ validateBeforeSave: false });
+
+        return res.status(200).json({
+            message: "Added successfully."
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occurred!!"
+        })
+    }
+}
+
 export {
     handleProductRequest,
-    handleProductUpload
+    handleProductUpload,
+    handleProductAddCart
 }

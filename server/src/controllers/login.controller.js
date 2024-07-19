@@ -22,7 +22,11 @@ const handleLogin = async (req, res) => {
         const accessToken = await user.generateAccessToken();
         const refreshToken = await user.generateRefreshToken();
 
-        res.cookie("accessToken", accessToken, { maxAge: 1000 * 60 * 60 * 24 * 7, });
+        res.cookie("accessToken", accessToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: true,
+            secure: false
+        });
 
         user.refreshToken = refreshToken;
 

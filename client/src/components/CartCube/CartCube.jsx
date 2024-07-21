@@ -1,42 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./CartCube.css";
 import axios from 'axios';
 import { globalContext } from "../../App";
-
-async function handleCubeDataFetch(id, setCubeData, prop) {
-
-    try {
-
-        let response = await axios.get(`http://localhost:5000/api/v1/product/id?product=${id}`, { withCredentials: true });
-
-        response = JSON.parse(response.data);
-
-        console.log(response);
-        setCubeData(response);
-
-        prop.productAllCosts.setTotalCost(prev => prev + (prop.product.count * response.price));
-        prop.productAllCosts.setAfterOfferCost(prev => prev + (prop.product.count * (response.price - Math.floor(response.price * (response.discount / 100)))));
-
-        return response;
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 export default function CartCube(prop) {
 
     const { setChangeUserState } = useContext(globalContext);
 
     const [cubeData, setCubeData] = useState(null);
-    useEffect(() => {
-        prop.productAllCosts.setTotalCost(0);
-        prop.productAllCosts.setAfterOfferCost(0);
-        handleCubeDataFetch(prop.product.productId, setCubeData, prop);
-    }, [])
 
+    useState(() => {
+        setCubeData(prop.product.val)
+    }, [])
 
     if (!cubeData) return <h1>loading..</h1>
 
@@ -44,7 +22,7 @@ export default function CartCube(prop) {
         try {
             let response = await axios.post('http://localhost:5000/api/v1/product/user/cart',
                 {
-                    productId: prop.product.productId,
+                    productId: prop.product.userInfo.productId,
                     operation: e.target.value
                 },
                 {
@@ -54,28 +32,25 @@ export default function CartCube(prop) {
                     withCredentials: true
                 }
             )
-
-            if (e.target.value == '+') {
-                prop.productAllCosts.setTotalCost(prev => prev + response.data.price);
-                prop.productAllCosts.setAfterOfferCost(prev => prev + Number(response.data.price - Math.floor(response.data.price * (response.data.offer / 100))));
-            }
-            else {
-                prop.productAllCosts.setTotalCost(prev => prev - response.data.price);
-                prop.productAllCosts.setAfterOfferCost(prev => prev - Number(response.data.price - Math.floor(response.data.price * (response.data.offer / 100))));
-            }
-            setChangeUserState(prev => prev + 1);
+            console.log(response);
+            setChangeUserState(prev => (prev + 1) % 2);
         } catch (error) {
             console.log(error);
         }
     }
 
+    async function handleErase(e) {
+        prop.product.setConfirmErase(true);
+        prop.product.setProduct(prop.product.userInfo.productId);
+    }
+
     return (
         <div className="cartCube">
             <div className="cartCubeImage">
-                <img src={cubeData.images[0]} alt="" />
+                <img src={cubeData.images[0]} alt="cube image" />
             </div>
             <div className="cartCubeDetails">
-                <Link to={`/buy?product=${prop.product.productId}`}>{cubeData.name}</Link>
+                <Link to={`/buy?product=${prop.product.userInfo?.productId}`}>{cubeData.name}</Link>
                 <div className="price">
                     {
                         cubeData.discount ?
@@ -90,10 +65,15 @@ export default function CartCube(prop) {
                     }
                 </div>
             </div>
-            <div className="cartCubeAddRemove">
-                <button value={"-"} onClick={handleSendRequestToAddOrRemoveCartProduct}>-</button>
-                <div className="count">{prop.product.count}</div>
-                <button value={"+"} onClick={handleSendRequestToAddOrRemoveCartProduct}>+</button>
+            <div className="eraseAndupdate">
+
+                <div className="cartCubeAddRemove">
+                    <button value={"-"} onClick={handleSendRequestToAddOrRemoveCartProduct}>-</button>
+                    <div className="count">{prop.product.userInfo?.count}</div>
+                    <button value={"+"} onClick={handleSendRequestToAddOrRemoveCartProduct}>+</button>
+                </div>
+
+                <div className="eraseProduct" onClick={handleErase} >Remove</div>
             </div>
         </div>
     )

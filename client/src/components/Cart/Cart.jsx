@@ -2,53 +2,121 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from "react";
 import "./Cart.css";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { globalContext } from "../../App.jsx";
 import CartCube from "../CartCube/CartCube.jsx";
+import axios from "axios";
+
 
 export default function Cart() {
 
-    let response = useLoaderData();
+    // let response = useLoaderData();
     const navigate = useNavigate();
 
-    const { userData, changeUserState,setChangeUserState } = useContext(globalContext);
+    const { userData, changeUserState, setChangeUserState } = useContext(globalContext);
 
-    function handleDisplayCartCubes() {
-        return (
-            userData ?
-                userData.data.user.cart.map((val, index) => {
-                    return <CartCube key={index} product={val} productAllCosts={{ setAfterOfferCost, setTotalCost, totalCost, afterOfferCost }} />
+    const [cubes, setCubes] = useState([]);
+    const [price, setPrice] = useState(0);
+    const [offerPrice, setOfferPrice] = useState(0);
+
+    async function handleGetAllCartCube() {
+        if (!userData) return;
+        let tempPrice = 0;
+        let tempOfferPrice = 0;
+        try {
+
+            let tempCubes = await Promise.all(
+
+                userData.data.user.cart.map(async (val) => {
+
+                    let cube = await axios.get(`http://localhost:5000/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
+                    cube = JSON.parse(cube.data);
+
+                    tempPrice += val.count * cube.price;
+                    tempOfferPrice += val.count * (cube.price - Math.floor(cube.price * (cube.discount / 100)));
+                    return cube;
                 })
-                :
-                "Empty.."
-        )
+
+            );
+
+            setPrice(tempPrice);
+            setOfferPrice(tempOfferPrice);
+
+            setCubes(tempCubes);
+        } catch (error) {
+            console.log(error);
+            setCubes([]);
+        }
     }
 
+    const [confirmErase, setConfirmErase] = useState(false);
+    const [product, setProduct] = useState('');
+
+
     useEffect(() => {
-        console.log(userData);
+        handleGetAllCartCube();
+    }, [changeUserState, userData, product])
+
+    useEffect(() => {
         if (!userData) navigate('/login');
     }, [changeUserState, userData])
 
-    useEffect(() => {
-        handleDisplayCartCubes();
-    }, [changeUserState, userData])
+    async function removeItem(e) {
 
-    const [totalCost, setTotalCost] = useState(Number(0));
-    const [afterOfferCost, setAfterOfferCost] = useState(Number(0));
+        try {
+            let response = await axios.post(`http://localhost:5000/api/v1/product/cart/erase/${product}`, {},
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true
+                }
+            );
+            setChangeUserState(prev => prev + 1);
+        } catch (error) {
+            console.log(error);
+        }
+        setProduct('');
+        setConfirmErase(false);
+    }
 
     return (
         <div className="cart">
+            {
+                confirmErase ?
+                    <>
+                        <div className="confirmEraseBlackCover"></div>
+                        <div className="confirmErase">
+                            <p>Do you want to remove this product from your cart?</p>
+                            <div className="buttons">
+                                <Link onClick={removeItem}>Yes</Link>
+                                <Link onClick={e => setConfirmErase(false)} >cancel</Link>
+                            </div>
+                        </div>
+                    </>
+                    :
+                    ""
+            }
             <h2>My cart</h2>
             <div className="cartCollections">
-
-                <div className="cubes">{handleDisplayCartCubes()}</div>
+                <div className="cubes">
+                    {
+                        cubes ?
+                            cubes.map((val, index) => {
+                                let userInfo = userData.data.user.cart[index];
+                                return <CartCube key={index} product={{ val, userInfo, setConfirmErase, setProduct }} />
+                            })
+                            :
+                            "Empty.."
+                    }
+                </div>
                 <div className="total">
                     <div className="top">
                         <span>Total</span>
-                        <span>₹{afterOfferCost.toLocaleString()}</span>
+                        <span>₹{offerPrice.toLocaleString()}</span>
                     </div>
                     <div className="middle">
-                        <p>You saved ₹{(totalCost - afterOfferCost).toLocaleString()}!</p>
+                        <p>You saved ₹{(price - offerPrice).toLocaleString()}!</p>
                     </div>
                     <p>Tax included. Shipping calculated at checkout</p>
                     <button>PLACE ORDER</button>

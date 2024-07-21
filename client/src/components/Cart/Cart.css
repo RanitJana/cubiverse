@@ -68,3 +68,51 @@
     background-color: orangered;
     color: white;
 }
+
+.confirmErase {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 3px;
+    z-index: 50;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.confirmErase .buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.confirmErase .buttons>a {
+    font-weight: bold;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+    width: 5rem;
+}
+
+.confirmErase .buttons>a:first-child {
+    background-color: red;
+}
+
+.confirmErase .buttons>a:last-child {
+    background-color: green;
+}
+
+.confirmEraseBlackCover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100dvw;
+    background-color: rgba(0, 0, 0, 0.323);
+    z-index: 50;
+}

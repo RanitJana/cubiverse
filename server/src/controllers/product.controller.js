@@ -100,7 +100,7 @@ async function handleProductAddCart(req, res) {
 
         let getIndexProduct = user.cart.findIndex(value => value.productId.toString() === req.params.product.toString());
 
-        let product = await productSchema.findById(user.cart[getIndexProduct].productId);
+        let product = await productSchema.findById(req.params.product);
         if (product.stock) {
 
             if (getIndexProduct === -1) {
@@ -127,6 +127,35 @@ async function handleProductAddCart(req, res) {
         }
         else return res.status(403).json({
             message: "Product out of stock"
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occurred!!"
+        })
+    }
+}
+
+async function handleRemoveFromCart(req, res) {
+
+    try {
+        const productId = req.params.id;
+        console.log(productId);
+        const product = await productSchema.findById(productId);
+
+        if (!product) return res.status(403).json({
+            message: "product not found"
+        })
+
+        const user = await userSchema.findById(req.user._id);
+
+        user.cart = user.cart.filter(products => products.productId.toString() !== productId.toString());
+
+        user.save({ validateBeforeSave: false });
+
+        return res.status(200).json({
+            message: "Successfully deleted the item"
         })
 
     } catch (error) {
@@ -188,5 +217,6 @@ export {
     handleProductRequest,
     handleProductUpload,
     handleProductAddCart,
-    increaseDecreaseProductCart
+    increaseDecreaseProductCart,
+    handleRemoveFromCart
 }

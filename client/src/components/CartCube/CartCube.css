@@ -53,6 +53,13 @@
     text-decoration: line-through;
 }
 
+.eraseAndupdate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
 .cartCube .cartCubeAddRemove {
     display: flex;
     align-items: center;
@@ -83,7 +90,16 @@
         margin-left: 0;
         margin-right: 0;
     }
-    .cartCubeDetails{
+
+    .cartCubeDetails {
         width: 100%;
     }
+}
+
+.eraseAndupdate .eraseProduct:hover {
+    cursor: pointer;
+}
+
+.eraseAndupdate .eraseProduct {
+    color: red;
 }

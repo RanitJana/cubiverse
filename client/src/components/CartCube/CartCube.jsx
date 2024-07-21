@@ -7,7 +7,7 @@ import axios from 'axios';
 import { globalContext } from "../../App";
 
 async function handleCubeDataFetch(id, setCubeData, prop) {
-    console.log(id);
+
     try {
 
         let response = await axios.get(`http://localhost:5000/api/v1/product/id?product=${id}`, { withCredentials: true });
@@ -28,16 +28,46 @@ async function handleCubeDataFetch(id, setCubeData, prop) {
 
 export default function CartCube(prop) {
 
+    const { setChangeUserState } = useContext(globalContext);
+
     const [cubeData, setCubeData] = useState(null);
     useEffect(() => {
-        console.log(prop);
         prop.productAllCosts.setTotalCost(0);
         prop.productAllCosts.setAfterOfferCost(0);
         handleCubeDataFetch(prop.product.productId, setCubeData, prop);
     }, [])
 
+
     if (!cubeData) return <h1>loading..</h1>
 
+    async function handleSendRequestToAddOrRemoveCartProduct(e) {
+        try {
+            let response = await axios.post('http://localhost:5000/api/v1/product/user/cart',
+                {
+                    productId: prop.product.productId,
+                    operation: e.target.value
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true
+                }
+            )
+
+            if (e.target.value == '+') {
+                prop.productAllCosts.setTotalCost(prev => prev + response.data.price);
+                prop.productAllCosts.setAfterOfferCost(prev => prev + Number(response.data.price - Math.floor(response.data.price * (response.data.offer / 100))));
+            }
+            else {
+                prop.productAllCosts.setTotalCost(prev => prev - response.data.price);
+                prop.productAllCosts.setAfterOfferCost(prev => prev - Number(response.data.price - Math.floor(response.data.price * (response.data.offer / 100))));
+            }
+            setChangeUserState(prev => prev + 1);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div className="cartCube">
@@ -61,9 +91,9 @@ export default function CartCube(prop) {
                 </div>
             </div>
             <div className="cartCubeAddRemove">
-                <button>-</button>
+                <button value={"-"} onClick={handleSendRequestToAddOrRemoveCartProduct}>-</button>
                 <div className="count">{prop.product.count}</div>
-                <button>+</button>
+                <button value={"+"} onClick={handleSendRequestToAddOrRemoveCartProduct}>+</button>
             </div>
         </div>
     )

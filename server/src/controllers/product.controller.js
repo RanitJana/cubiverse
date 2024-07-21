@@ -100,23 +100,33 @@ async function handleProductAddCart(req, res) {
 
         let getIndexProduct = user.cart.findIndex(value => value.productId.toString() === req.params.product.toString());
 
-        if (getIndexProduct === -1) {
+        let product = await productSchema.findById(user.cart[getIndexProduct].productId);
+        if (product.stock) {
 
-            user.cart.push(
-                {
-                    productId: req.params.product,
-                    count: 1
-                }
-            );
+            if (getIndexProduct === -1) {
+
+                user.cart.push(
+                    {
+                        productId: req.params.product,
+                        count: 1
+                    }
+                );
+                product.stock--;
+            }
+            else {
+                user.cart[getIndexProduct].count++;
+                product.stock--;
+            }
+
+            user.save({ validateBeforeSave: false });
+            product.save({ validateBeforeSave: false });
+
+            return res.status(200).json({
+                message: "Added successfully."
+            })
         }
-        else {
-            user.cart[getIndexProduct].count++;
-        }
-
-        user.save({ validateBeforeSave: false });
-
-        return res.status(200).json({
-            message: "Added successfully."
+        else return res.status(403).json({
+            message: "Product out of stock"
         })
 
     } catch (error) {
@@ -127,8 +137,56 @@ async function handleProductAddCart(req, res) {
     }
 }
 
+async function increaseDecreaseProductCart(req, res) {
+    try {
+
+        let user = await userSchema.findById(req.user._id);
+
+        let productId = req.body.productId;
+
+        let productIndex = user.cart.findIndex(value => value.productId.toString() === productId.toString());
+
+        let operation = req.body.operation;
+
+        let product = await productSchema.findById(productId);
+
+        if (operation == '-') {
+            if (user.cart[productIndex].count == 0) return res.status(403).json({
+                message: 'Product cannot be counted as negetive!!.'
+            })
+
+            user.cart[productIndex].count--;
+            product.stock++;
+        }
+        else {
+            if (product.stock == 0) return res.status(403).json({
+                message: 'Out of Stock.'
+            })
+
+            user.cart[productIndex].count++;
+            product.stock--;
+        }
+
+        user.save({ validateBeforeSave: false });
+        product.save({ validateBeforeSave: false });
+
+        return res.status(200).json({
+            message: "Succesfull.",
+            price: product.price,
+            offer: product.discount
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occerred!!"
+        })
+    }
+}
+
 export {
     handleProductRequest,
     handleProductUpload,
-    handleProductAddCart
+    handleProductAddCart,
+    increaseDecreaseProductCart
 }

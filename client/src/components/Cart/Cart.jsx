@@ -11,7 +11,7 @@ export default function Cart() {
     let response = useLoaderData();
     const navigate = useNavigate();
 
-    const { userData, changeUserState } = useContext(globalContext);
+    const { userData, changeUserState,setChangeUserState } = useContext(globalContext);
 
     function handleDisplayCartCubes() {
         return (

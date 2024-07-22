@@ -39,6 +39,7 @@
 .productDetails .productInfo {
     color: rgb(0, 0, 97);
     grid-area: productInfo;
+    transition: all 0.3s ease;
 }
 
 .productDetails .productUserReview {

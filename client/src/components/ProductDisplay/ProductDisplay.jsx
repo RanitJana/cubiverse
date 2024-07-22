@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useSearchParams, Link, useLocation } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 
 import "./ProductDisplay.css";
 import { globalContext } from "../../App.jsx";
@@ -132,6 +132,38 @@ export default function ProductDisplay() {
             console.log(error);
         }
     }
+
+    const prevScrollY = useRef(0);
+
+    useEffect(() => {
+        const productInfo = document.querySelector('.productInfo');
+
+        window.addEventListener('scroll', e => {
+
+            if (window.innerWidth > 1000) {
+
+                const rect = productInfo.getBoundingClientRect();
+                const topBoundary = 11 * 16;
+                const bottomBoundary = window.innerHeight - rect.height - 32;
+                const currentScrollY = window.scrollY;
+                const delScrollY = currentScrollY - prevScrollY.current;
+
+                productInfo.style.position = 'sticky';
+
+                if (delScrollY > 0 && rect.bottom > bottomBoundary) {
+
+                    productInfo.style.top = `${bottomBoundary}px`;
+
+                } else if (delScrollY < 0 && rect.top < topBoundary) {
+
+                    productInfo.style.top = '11rem';
+                }
+
+                prevScrollY.current = currentScrollY;
+            }
+        })
+
+    }, []);
 
     return (
         <>

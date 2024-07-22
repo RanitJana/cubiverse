@@ -69,6 +69,11 @@
     color: white;
 }
 
+.total button:hover {
+    cursor: pointer;
+    background-color: rgb(212, 57, 0);
+}
+
 .confirmErase {
     position: fixed;
     top: 50%;
@@ -116,7 +121,8 @@
     background-color: rgba(0, 0, 0, 0.323);
     z-index: 50;
 }
-.emptyCart{
+
+.emptyCart {
     display: flex;
     align-items: center;
     justify-content: center;

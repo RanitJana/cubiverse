@@ -2,8 +2,9 @@
 /* eslint-disable no-unused-vars */
 import "./Faq.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { globalContext } from "../../App.jsx"
 
 export default function Faq() {
 
@@ -12,6 +13,7 @@ export default function Faq() {
     const [maxPage, setMaxPage] = useState(1);
     const [faqs, setFaqs] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const { changeUserState, setChangeUserState } = useContext(globalContext);
 
 
     async function handlePostFaq(e) {
@@ -28,6 +30,8 @@ export default function Faq() {
                 },
                 withCredentials: true
             })
+            neighbour.value = "";
+            setChangeUserState(prev => (prev + 1) % 2);
 
         } catch (error) {
             console.log(error);
@@ -49,7 +53,7 @@ export default function Faq() {
 
     useEffect(() => {
         handleFetchFaq();
-    }, [faqPage]);
+    }, [faqPage, changeUserState]);
 
     useEffect(() => {
         const updateButtonState = () => {

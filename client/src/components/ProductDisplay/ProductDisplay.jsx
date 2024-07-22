@@ -111,9 +111,24 @@ export default function ProductDisplay() {
         e.target.style.color = "rgb(0,0,97)";
 
         if (e.target.innerText == "SPECIFICATIONS") {
-            setDetails(productDetails.specifications);
+            let specifications = JSON.parse(productDetails.specifications);
+            const specTable = (
+                <table>
+                    <tbody>
+                        {Object.entries(specifications).map(([key, value]) => (
+                            <tr key={key}>
+                                <td>{key}</td>
+                                <td>{value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table >
+            );
+
+            setDetails(specTable);
         }
         else if (e.target.innerText == "DESCRIPTION") {
+
             setDetails(productDetails.description)
         }
         else {

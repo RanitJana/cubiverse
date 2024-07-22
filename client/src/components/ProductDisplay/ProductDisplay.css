@@ -322,3 +322,34 @@ pre {
     overflow-wrap: break-word;
     /* Ensures compatibility */
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table tr {
+    height: 2.5rem;
+    border-bottom: 1px solid #ccc;
+    color: rgb(0, 0, 97);
+}
+
+table tr td:first-child {
+    text-wrap: nowrap;
+    font-weight: bold;
+    padding-right: 1rem;
+}
+
+table tr td:last-child::before {
+    content: ": ";
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+table tr td:last-child {
+    position: relative;
+    padding: 0.5rem 0;
+    padding-left: 1rem;
+}

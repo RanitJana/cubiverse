@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useLoaderData, useParams, useSearchParams } from "react-router-dom";
 import "./CubeList.css";
 import CubeBox from "../CubeBox/CubeBox.jsx";

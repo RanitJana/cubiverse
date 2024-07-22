@@ -32,7 +32,6 @@ export default function CartCube(prop) {
                     withCredentials: true
                 }
             )
-            console.log(response);
             setChangeUserState(prev => (prev + 1) % 2);
         } catch (error) {
             console.log(error);

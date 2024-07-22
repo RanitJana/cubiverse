@@ -2,13 +2,8 @@ import { Schema, model } from "mongoose";
 
 const faqSchema = new Schema(
     {
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        },
         product: {
-            type: Schema.Types.ObjectId,
-            ref: "Product"
+            type: String
         },
         question: {
             type: String,

@@ -20,10 +20,12 @@ import register from "./routes/register.route.js";
 import login from "./routes/login.route.js";
 import Product from "./routes/product.route.js";
 import user from "./routes/user.route.js";
+import faq from "./routes/faq.route.js";
 
 app.use("/api/v1/register", register);
 app.use("/api/v1/login", login);
 app.use("/api/v1/product", Product);
 app.use("/api/v1/user", user);
+app.use("/api/v1/faqs", faq)
 
 export default app;

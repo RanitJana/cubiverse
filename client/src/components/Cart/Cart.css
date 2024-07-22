@@ -116,3 +116,13 @@
     background-color: rgba(0, 0, 0, 0.323);
     z-index: 50;
 }
+.emptyCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5rem 0;
+    color: #ccc;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}

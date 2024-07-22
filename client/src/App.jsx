@@ -54,7 +54,7 @@ export default function App() {
       <Header />
       <Outlet />
       {
-        location !== '/register' && location !== '/login' && location !== '/user' && location !== '/user/cart' ?
+        location !== '/register' && location !== '/login' && location !== '/user' ?
           < RecentlyViewed />
           : ""
       }

@@ -58,6 +58,7 @@ header .top .middle {
     max-width: 100%;
     border-radius: 3px;
     margin-left: 1rem;
+    position: relative;
 }
 
 header>.top>.middle img {
@@ -199,4 +200,37 @@ header .top .right .left img {
     transform: translate(-100%);
     transition: opacity 0.3s ease;
     opacity: 0;
+}
+
+header .middle>ul {
+    width: 93.3%;
+    position: absolute;
+    top: 100%;
+    margin-top: 0.5rem;
+    left: 0;
+    background-color: white;
+    z-index: 101;
+    max-height: 300px;
+    overflow: auto;
+    padding: 0.5rem 0;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.177);
+    transition: all 0.3s ease;
+}
+
+header .middle ul li {
+    list-style: none;
+}
+
+header .middle>ul li a {
+    color: rgb(0, 0, 97);
+    padding: 1rem;
+    margin: 0 1rem;
+    display: flex;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #ccc;
+}
+
+header .middle>ul li a:hover {
+    background-color: #efefef;
+    color: orangered;
 }

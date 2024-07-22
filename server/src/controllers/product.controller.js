@@ -41,6 +41,10 @@ const handleProductRequest = async function (req, res) {
 
         products = await productSchema.find({ discount: { $gt: 0 } });
     }
+    else if (category == "all") {
+        let count = await productSchema.countDocuments();
+        products = await productSchema.aggregate([{ $sample: { size: count } }])
+    }
     else products = await productSchema.find({ category });
 
 

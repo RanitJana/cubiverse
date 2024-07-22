@@ -7,6 +7,7 @@ import "./ProductDisplay.css";
 import { globalContext } from "../../App.jsx";
 import axios from "axios";
 
+import Faq from "../Faq/Faq.jsx";
 
 export default function ProductDisplay() {
 
@@ -92,16 +93,15 @@ export default function ProductDisplay() {
         document.querySelectorAll('.remoteBox').forEach(val => {
             val.style.borderColor = "white";
         })
-        console.log(e.target.parentNode);
         e.target.parentNode.style.borderColor = "orange";
 
-        document.querySelector(".imageMonitor").style.animation = "appearMonitor 0.5s ease forwards"
+        document.querySelector(".imageMonitor").style.animation = "appearMonitor 0.5s ease"
         setMonitorImage(e.target.getAttribute('src'));
     }
 
     const [details, setDetails] = useState("");
 
-    function handleDetails(e) {
+    async function handleDetails(e) {
         document.querySelectorAll(".productUserReview span").forEach(val => {
             val.style.borderColor = "#ccc";
             val.style.color = "gray";
@@ -116,6 +116,9 @@ export default function ProductDisplay() {
         else if (e.target.innerText == "DESCRIPTION") {
             setDetails(productDetails.description)
         }
+        else {
+            setDetails(<Faq />);
+        }
     }
 
     async function handleAddCart(e) {
@@ -125,7 +128,6 @@ export default function ProductDisplay() {
             setChangeUserState(prev => prev + 1);
 
         } catch (error) {
-            // {}
 
             console.log(error);
         }

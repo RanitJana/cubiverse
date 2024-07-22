@@ -36,11 +36,8 @@ const router = createBrowserRouter(
             try {
 
               document.cookie = "limit=10; path=/";
-              let response = await fetch(`http://localhost:5000/api/v1/product/most-favourite`, {
-                credentials: 'include'
-              });
-              let jsonFormat = await response.json();
-              return JSON.parse(jsonFormat);
+              let response = await (await axios.get(`http://localhost:5000/api/v1/product/most-favourite`, { withCredentials: true })).data
+              return JSON.parse(response);
             } catch (error) {
               console.log(error);
               return [];
@@ -55,9 +52,8 @@ const router = createBrowserRouter(
           {
             async ({ params }) => {
               try {
-                let response = await fetch(`http://localhost:5000/api/v1/product/${params.product}`);
-                let jsonFormat = await response.json();
-                return JSON.parse(jsonFormat);
+                let response = (await axios.get(`http://localhost:5000/api/v1/product/${params.product}`, { withCredentials: true })).data;
+                return JSON.parse(response);
               } catch (error) {
                 console.log(error);
                 return {}

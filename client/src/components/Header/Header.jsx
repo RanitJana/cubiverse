@@ -44,6 +44,31 @@ export default function Header() {
 
     const location = useLocation().pathname;
 
+    function handleSuggestionFocus(e) {
+        e.preventDefault();
+        let suggestion = document.querySelector('.middle >ul');
+        suggestion.style.height = Math.min(suggestion.scrollHeight, 500) + "px";
+        suggestion.style.padding = "0.5rem 0";
+    }
+    function handleSuggestionBlur(e) {
+        e.preventDefault();
+        let suggestion = document.querySelector('.middle >ul');
+        setTimeout(() => {
+
+            suggestion.style.height = "0px";
+            suggestion.style.padding = "0";
+        }, 100)
+    }
+    function handleSearchBarInput(e) {
+        let lists = document.querySelectorAll(".middle ul li");
+
+        lists.forEach((list, index) => {
+            let keywords = list.childNodes[0].textContent.toLocaleLowerCase();
+            if (keywords.includes(e.target.value.toLocaleLowerCase())) {
+                list.parentNode.prepend(list);
+            }
+        })
+    }
     return (
         <>
             <header>
@@ -60,10 +85,62 @@ export default function Header() {
                         </h1>
                     </Link>
                     <div className="middle">
-                        <input type="text" name="searchCube" id="searchCube" placeholder="Search your puzzle" />
+                        <input
+                            type="text"
+                            name="searchCube"
+                            id="searchCube"
+                            placeholder="Search your puzzle"
+                            onFocus={handleSuggestionFocus}
+                            onBlur={handleSuggestionBlur}
+                            onInput={handleSearchBarInput}
+                        />
                         <img src="/images/search.png" alt="Search" />
-                        <ul>
-
+                        <ul style={{ height: 0, padding: 0 }}>
+                            <li>
+                                <Link to="/collections/all">All cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/3x3">3x3 cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/4x4">4x4 cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/pyraminx">Pyraminx</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/megaminx">Meagaminx</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/2x2">2x2 cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/mirror cube">Mirror Cuebs</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/big cubes">Big Cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/timer">Timer</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/lubricants">Lubricants</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/odd shape">Odd shapes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/new">New cubes</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/bestsellers">Bestsellers</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/most favourite">Most Favourite</Link>
+                            </li>
+                            <li>
+                                <Link to="/collections/sales">Sales</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="right">

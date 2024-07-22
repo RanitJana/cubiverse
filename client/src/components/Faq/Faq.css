@@ -1,0 +1,75 @@
+.productDetails .details {
+    /* min-height: 19rem; */
+}
+
+
+.faqRes {
+    margin-top: 1.5rem;
+    color: rgb(0, 0, 97);
+}
+
+.faqRes>div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+}
+
+.faqRes>div p:first-child {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.postFaq {
+    border-top: 1px solid #b1b1b1;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.postFaq>* {
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    border: none;
+}
+
+.postFaq button {
+    background-color: orangered;
+    color: white;
+
+}
+
+.postFaq button:hover {
+    cursor: pointer;
+    background-color: rgb(230, 61, 0);
+}
+
+.postFaq input {
+    outline: none;
+    color: rgb(0, 0, 97);
+    border: 2px solid #ccc;
+}
+
+.pageBtns {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.pageBtns button {
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    border: none;
+    color: white;
+}
+
+.enabled {
+    background-color: orangered;
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: #b1b1b1;
+    cursor: not-allowed;
+}

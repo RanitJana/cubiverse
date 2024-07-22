@@ -15,6 +15,10 @@ export default function Cart() {
 
     const { userData, changeUserState, setChangeUserState } = useContext(globalContext);
 
+    useEffect(() => {
+        if (!userData) navigate('/login');
+    }, [changeUserState, userData])
+
     const [cubes, setCubes] = useState([]);
     const [price, setPrice] = useState(0);
     const [offerPrice, setOfferPrice] = useState(0);
@@ -57,9 +61,7 @@ export default function Cart() {
         handleGetAllCartCube();
     }, [changeUserState, userData, product])
 
-    useEffect(() => {
-        if (!userData) navigate('/login');
-    }, [changeUserState, userData])
+
 
     async function removeItem(e) {
 
@@ -108,6 +110,15 @@ export default function Cart() {
                             })
                             :
                             "Empty.."
+                    }
+                    {
+                        !cubes.length ?
+                            <div className="emptyCart">
+                                <img src="/images/icons8-empty-box-100.png" alt="Empty" />
+                                <p>Your cart is empty!!</p>
+                            </div>
+                            : ""
+
                     }
                 </div>
                 <div className="total">

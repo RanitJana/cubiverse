@@ -7,10 +7,6 @@ import PopupMessage from "../PopUp/PopUp.jsx";
 
 export default function Register() {
 
-    const [enablePopup, setPopup] = useState(false);
-    const [color, setColor] = useState('white');
-    const [message, setMessage] = useState("");
-
     const navigate = useNavigate();
 
     async function handleRegister(e) {
@@ -40,12 +36,6 @@ export default function Register() {
 
         let resposnse = await getFetch.json();
 
-        if (getFetch.status == 401 || getFetch.status == 403 || getFetch.status == 500) setColor("red");
-        else setColor("green");
-
-        setPopup(resposnse.message);
-        setMessage(resposnse.message);
-
         if (getFetch.status == 200) navigate('/login');
 
     }
@@ -53,9 +43,6 @@ export default function Register() {
     return (
         <div className="account">
             <div className="formParents">
-                {
-                    enablePopup ? <PopupMessage color={color} message={message} /> : ""
-                }
                 <h2>Create my account</h2>
                 <p>Please fill the information below</p>
                 <form onSubmit={handleRegister}>

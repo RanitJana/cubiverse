@@ -17,7 +17,7 @@ export default function ProductDisplay() {
 
     const [monitorImage, setMonitorImage] = useState("");
 
-    const { setProducts, setChangeUserState } = useContext(globalContext);
+    const { setProducts, setChangeUserState, setVisible, setMessage, setColor } = useContext(globalContext);
 
     async function handleFetchData() {
 
@@ -142,9 +142,20 @@ export default function ProductDisplay() {
             let res = await axios.post(`http://localhost:5000/api/v1/product/${productID}`, {}, { withCredentials: true });
             setChangeUserState(prev => prev + 1);
 
+            console.log(res);
+            let message = res.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('green');
+
         } catch (error) {
 
             console.log(error);
+
+            let message = error.response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('red');
         }
     }
 
@@ -243,7 +254,7 @@ export default function ProductDisplay() {
                                         : ""
                                 }
                             </div>
-                            <div className="bottom">
+                            <div className="bottom" style={{display:"flex"}}>
                                 Inclusive of all taxes
                             </div>
                         </div>

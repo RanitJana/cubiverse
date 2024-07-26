@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 import "./App.css";
-
+import PopupMessage from "./components/PopUp/PopUp.jsx";
 import Footer from "./components/Footer/Footer.jsx"
 import Header from "./components/Header/Header.jsx"
 import RecentlyViewed from "./components/RecentlyViewed/RecentlyViewed.jsx";
@@ -41,20 +41,43 @@ export default function App() {
   }
 
   const [changeUserState, setChangeUserState] = useState(false);
+  const [isAuthUser, setAuthUser] = useState(false);
 
   useEffect(() => {
     handleServeUserData();  //when user will login then we set the state so that change will reflect all used values
   }, [changeUserState])
 
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
+  const [color, setColor] = useState('red');
 
   const location = useLocation().pathname;
 
   return (
-    <globalContext.Provider value={{ products, setProducts, userData, handleServeUserData, changeUserState, setChangeUserState }}>
+    <globalContext.Provider
+      value={{
+        products,
+        setProducts,
+        userData,
+        setUserData,
+        handleServeUserData,
+        changeUserState,
+        setChangeUserState,
+        isAuthUser,
+        setAuthUser,
+        visible,
+        setVisible,
+        message,
+        setMessage,
+        color,
+        setColor
+      }}
+    >
       <Header />
       <Outlet />
+      <PopupMessage />
       {
-        location !== '/register' && location !== '/login' && location !== '/user' ?
+        location !== '/register' && location !== '/login' && location !== '/user' && location !== '/user/address' ?
           < RecentlyViewed />
           : ""
       }

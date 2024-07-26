@@ -1,0 +1,35 @@
+.userSection {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    gap: 3rem;
+    padding: 3rem;
+    position: relative;
+}
+
+.userSection .userSectionLeft {
+    background-color: white;
+    display: flex;
+    height: fit-content;
+    position: sticky;
+    top: 11rem;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.userSection .userSectionLeft a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media only screen and (max-width:933px){
+    .userSection{
+        grid-template-columns: auto;
+    }
+    .userSection .userSectionLeft{
+        position: relative;
+        top: 0;
+    }
+}

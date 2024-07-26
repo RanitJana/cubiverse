@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from "react";
 import "./Cart.css";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { globalContext } from "../../App.jsx";
 import CartCube from "../CartCube/CartCube.jsx";
 import axios from "axios";
@@ -10,14 +10,9 @@ import axios from "axios";
 
 export default function Cart() {
 
-    // let response = useLoaderData();
     const navigate = useNavigate();
 
     const { userData, changeUserState, setChangeUserState } = useContext(globalContext);
-
-    useEffect(() => {
-        if (!userData) navigate('/login');
-    }, [changeUserState, userData])
 
     const [cubes, setCubes] = useState([]);
     const [price, setPrice] = useState(0);
@@ -85,19 +80,17 @@ export default function Cart() {
     return (
         <div className="cart">
             {
-                confirmErase ?
-                    <>
-                        <div className="confirmEraseBlackCover"></div>
-                        <div className="confirmErase">
-                            <p>Do you want to remove this product from your cart?</p>
-                            <div className="buttons">
-                                <Link onClick={removeItem}>Yes</Link>
-                                <Link onClick={e => setConfirmErase(false)} >cancel</Link>
-                            </div>
+                confirmErase &&
+                <>
+                    <div className="confirmEraseBlackCover"></div>
+                    <div className="confirmErase">
+                        <p>Do you want to remove this product from your cart?</p>
+                        <div className="buttons">
+                            <Link onClick={removeItem}>Yes</Link>
+                            <Link onClick={e => setConfirmErase(false)} >cancel</Link>
                         </div>
-                    </>
-                    :
-                    ""
+                    </div>
+                </>
             }
             <h2>My cart</h2>
             <div className="cartCollections">
@@ -112,13 +105,11 @@ export default function Cart() {
                             "Empty.."
                     }
                     {
-                        !cubes.length ?
-                            <div className="emptyCart">
-                                <img src="/images/icons8-empty-box-100.png" alt="Empty" />
-                                <p>Your cart is empty!!</p>
-                            </div>
-                            : ""
-
+                        !cubes.length &&
+                        <div className="emptyCart">
+                            <img src="/images/icons8-empty-box-100.png" alt="Empty" />
+                            <p>Your cart is empty!!</p>
+                        </div>
                     }
                 </div>
                 <div className="total">

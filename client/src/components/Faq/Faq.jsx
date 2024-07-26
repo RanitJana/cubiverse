@@ -70,7 +70,7 @@ export default function Faq() {
                 prev.classList.remove('disabled');
             }
 
-            if (faqPage === maxPage) {
+            if (faqPage === maxPage || maxPage == 0) {
                 next.setAttribute('disabled', true);
                 next.classList.add('disabled');
                 next.classList.remove('enabled');

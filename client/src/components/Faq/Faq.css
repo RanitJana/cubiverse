@@ -45,7 +45,7 @@
     background-color: rgb(230, 61, 0);
 }
 
-.postFaq input {
+.postFaq input[type="text"] {
     outline: none;
     color: rgb(0, 0, 97);
     border: 2px solid #ccc;

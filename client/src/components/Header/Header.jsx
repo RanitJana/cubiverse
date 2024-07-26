@@ -57,7 +57,7 @@ export default function Header() {
 
             suggestion.style.height = "0px";
             suggestion.style.padding = "0";
-        }, 100)
+        }, 200)
     }
     function handleSearchBarInput(e) {
         let lists = document.querySelectorAll(".middle ul li");

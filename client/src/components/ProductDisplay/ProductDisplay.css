@@ -321,6 +321,7 @@ pre {
     /* Breaks long words */
     overflow-wrap: break-word;
     /* Ensures compatibility */
+    color: rgb(0, 0, 97);
 }
 
 table {

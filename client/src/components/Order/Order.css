@@ -1,0 +1,35 @@
+.orderEmpty {
+    background-color: white;
+    flex-direction: column;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.orderEmpty .top {
+    border-bottom: 1px solid #ccc;
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 97);
+}
+
+.tempBottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem;
+}
+.orderEmpty a:hover {
+    cursor: pointer;
+    background-color: rgb(221, 59, 0);
+}
+
+.orderEmpty a {
+    background-color: orangered;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+}

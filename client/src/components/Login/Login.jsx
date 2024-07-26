@@ -9,11 +9,7 @@ import { globalContext } from "../../App.jsx";
 
 export default function Login() {
 
-    const [enablePopup, setPopup] = useState(false);
-    const [color, setColor] = useState('white');
-    const [message, setMessage] = useState("");
-
-    const { changeUserState, setChangeUserState } = useContext(globalContext);
+    const { setVisible, setMessage, setColor, setChangeUserState } = useContext(globalContext);
 
     const navigate = useNavigate();
 
@@ -36,33 +32,29 @@ export default function Login() {
                 withCredentials: true
             });
 
-            setColor("green");
-
-            setPopup(response.data.message);
-            setMessage(response.data.message);
-
             setChangeUserState(true);
 
-            navigate("/user");
+            navigate("/");
+
+            let message = response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('green');
 
         } catch (error) {
 
             console.log(error);
 
-            if (error.response.status === 401 || error.response.status === 403 || error.response.status === 500)
-                setColor("red");
-            setPopup(error.response.data.message);
-            setMessage(error.response.data.message);
+            let message = error.response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('red');
         }
     }
-
 
     return (
         <div className="account">
             <div className="formParents">
-                {
-                    enablePopup ? <PopupMessage color={color} message={message} /> : ""
-                }
                 <h2>Login</h2>
                 <p>Please fill the information below</p>
                 <form onSubmit={handleLogin}>

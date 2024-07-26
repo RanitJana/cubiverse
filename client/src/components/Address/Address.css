@@ -1,0 +1,240 @@
+.myAddress {
+    background-color: white;
+    flex-direction: column;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: fit-content;
+}
+
+.myAddress .top {
+    border-bottom: 1px solid #ccc;
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 97);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myAddress .top button {
+    border: none;
+    color: white;
+    background-color: orangered;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+}
+
+.myAddress .top button:hover {
+    cursor: pointer;
+    background-color: rgb(223, 59, 0);
+}
+
+.bottom {
+    display: grid;
+    grid-template-columns: repeat(3, calc(100%/3));
+}
+
+.componentAddress {
+    border: 1px solid #ccc;
+    height: 100%;
+    padding: 1rem;
+    color: rgb(0, 0, 97);
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.componentAddress>.edit {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    align-items: start;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+.componentAddress>.edit>button {
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    background-color: white;
+    color: orangered;
+    text-decoration: underline;
+}
+
+.componentAddress>.edit>button:hover {
+    background-color: white;
+    color: rgb(210, 56, 0);
+    cursor: pointer;
+}
+
+.componentAddress>p:first-child {
+    margin-bottom: 1rem;
+}
+
+.componentAddress>p:nth-child(2) {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.myAddress a:hover {
+    cursor: pointer;
+    background-color: rgb(221, 59, 0);
+}
+
+.myAddress a {
+    background-color: orangered;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+}
+
+@media only screen and (max-width:695px) {
+    .bottom {
+        grid-template-columns: 50% 1fr;
+    }
+}
+
+@media only screen and (max-width:520px) {
+    .bottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+.addAddressSection,
+.editAddressSection {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.424);
+    width: 100dvw;
+    height: 100dvh;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addAddressSection form,
+.editAddressSection form {
+
+    padding: 2rem;
+    border-radius: 3px;
+    background-color: white;
+    width: 100%;
+    max-width: 30rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.addAddressSection form input,
+.editAddressSection form input {
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin: 0.25rem 0;
+    width: 100%;
+    max-width: 25rem;
+}
+
+.addAddressSection form>div,
+.editAddressSection form>div {
+    width: 100%;
+    position: relative;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.addAddressSection form>div>span,
+.editAddressSection form>div>span {
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 1rem;
+}
+
+.addAddressSection form input:focus,
+.addAddressSection form input:user-valid,
+.addAddressSection form input:user-invalid,
+.editAddressSection form input:focus,
+.editAddressSection form input:user-valid,
+.editAddressSection form input:user-invalid {
+    border-color: orangered;
+}
+
+.addAddressSection form input:focus+span,
+.addAddressSection form input:user-valid+span,
+.addAddressSection form input:user-invalid+span,
+.editAddressSection form input:focus+span,
+.editAddressSection form input:user-valid+span,
+.editAddressSection form input:user-invalid+span {
+    top: 25%;
+    font-size: small;
+    font-weight: bold;
+}
+
+.addAddressSection form button,
+.editAddressSection form button {
+    outline: none;
+    background-color: orangered;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-top: 1rem;
+
+}
+
+.appear {
+    animation: appear 0.5s ease forwards;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        scale: 0;
+    }
+
+    50% {
+        scale: 1.02;
+    }
+
+    100% {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+
+.temp form input:not(:focus) {
+    border-color: orangered;
+}
+
+.temp form input:not(:focus)+span {
+    top: 25%;
+    font-size: small;
+    font-weight: bold;
+}
+.editAddressSection button:hover{
+    cursor: pointer;
+    background-color: rgb(224, 60, 0);
+}

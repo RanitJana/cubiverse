@@ -1,52 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { globalContext } from '../../App.jsx';
 
-const PopupMessage = ({ message, color = "red", duration = 3000 }) => {
-    const [visible, setVisible] = useState(true);
-    const timeoutRef = useRef(null);
-    const remainingTimeRef = useRef(duration);
-    const startTimeRef = useRef(null);
+const PopupMessage = () => {
+    const { visible, setVisible, color, message } = useContext(globalContext);
+    const visibleRef = useRef(null);
 
     useEffect(() => {
-        startTimer();
-        return () => clearTimeout(timeoutRef.current);
-    }, []);
+        if (visible) {
+            clearTimeout(visibleRef.current);
+            visibleRef.current = setTimeout(() => {
+                setVisible(false);
+            }, 3000);
+        }
 
-    const startTimer = () => {
-        startTimeRef.current = Date.now();
-        timeoutRef.current = setTimeout(() => setVisible(false), remainingTimeRef.current);
-    };
-
-    const handleMouseEnter = () => {
-        clearTimeout(timeoutRef.current);
-        remainingTimeRef.current -= Date.now() - startTimeRef.current;
-    };
-
-    const handleMouseLeave = () => {
-        startTimer();
-    };
-
-    if (!visible) return null;
+        return () => {
+            clearTimeout(visibleRef.current);
+        };
+    }, [visible, setVisible, message, color]);
 
     return (
-        <div
-            className="popup-message"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                position: 'fixed',
-                bottom: '20px',
-                right: '20px',
-                padding: '10px 20px',
-                backgroundColor: `${color}`,
-                color: '#fff',
-                borderRadius: '5px',
-                boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-                zIndex: 1000,
-            }}
-        >
-            {message}
-        </div>
+        visible && (
+            <div
+                className="popup-message"
+                style={{
+                    position: 'fixed',
+                    margin: '1rem',
+                    top: '10rem',
+                    right: '0',
+                    wordBreak: 'break-all',
+                    padding: '10px 20px',
+                    backgroundColor: color,
+                    color: '#fff',
+                    borderRadius: '5px',
+                    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+                    zIndex: 1000,
+                }}
+            >
+                {message}
+            </div>
+        )
     );
 };
 

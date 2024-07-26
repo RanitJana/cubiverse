@@ -11,8 +11,11 @@ import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
 import User from './components/User/User.jsx';
 import Cart from './components/Cart/Cart.jsx';
+import Order from './components/Order/Order.jsx';
+import Address from './components/Address/Address.jsx';
 
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider, Navigate } from "react-router-dom";
+import { VerifyAuth } from './components/VerifyAuth/VerifyAuth.jsx';
 
 
 const handleUserData = async () => {
@@ -67,8 +70,13 @@ const router = createBrowserRouter(
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
       <Route path="user/" loader={handleUserData}>
-        <Route path="" element={<User />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="" element={<VerifyAuth />}>
+          <Route path="" element={<User />} >
+            <Route path="" element={<Order />} />
+            <Route path="address" element={<Address />} />
+          </Route>
+          <Route path="cart" element={<Cart />} />
+        </Route>
       </Route>
       {/* <Route path='*' Component={<NotFound />} /> */}
     </Route>

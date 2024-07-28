@@ -121,7 +121,7 @@ export default function Cart() {
                         <p>You saved ₹{(price - offerPrice).toLocaleString()}!</p>
                     </div>
                     <p>Tax included. Shipping calculated at checkout</p>
-                    <button>PLACE ORDER</button>
+                    <button onClick={e => navigate('/user/order')} >PLACE ORDER</button>
                 </div>
             </div>
         </div>

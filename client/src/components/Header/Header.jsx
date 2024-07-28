@@ -177,7 +177,7 @@ export default function Header() {
                 </nav>
             </header>
             {
-                location !== '/buy' && location !== '/register' && location !== '/login' && location != '/user/cart' ? <CubeCollection /> : ""
+                location !== '/buy' && location !== '/register' && location !== '/login' && location != '/user/cart' && location!=='/user/order' ? <CubeCollection /> : ""
             }
         </>
     )

@@ -3,6 +3,10 @@
     padding-top: 2rem;
 }
 
+.cartCube:not(.cartCube:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
 .cart>h2 {
     color: rgb(0, 0, 97);
     margin-bottom: 1rem;

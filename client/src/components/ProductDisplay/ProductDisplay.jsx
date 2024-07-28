@@ -21,32 +21,44 @@ export default function ProductDisplay() {
 
     async function handleFetchData() {
 
-        const productID = searchParams.get("product");
-        let response = await fetch(`http://localhost:5000/api/v1/product/id?product=${productID}`);
-        let jsonFormat = await response.json();
-        let productDetails = JSON.parse(jsonFormat);
+        try {
+            const productID = searchParams.get("product");
+            let response = await axios.get(`http://localhost:5000/api/v1/product/id?product=${productID}`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            });
+            let productDetails = JSON.parse(response.data);
 
-        setMonitorImage(productDetails.images[0]);
-        setDetails(productDetails.description);
-        setProductDetails(productDetails);
+            setMonitorImage(productDetails.images[0]);
+            setDetails(productDetails.description);
+            setProductDetails(productDetails);
 
-        let arr = [];
+            let arr = [];
 
-        if (!localStorage.getItem("cubes")) arr.push(productDetails);
-        else {
-            arr = JSON.parse(localStorage.getItem("cubes"));
+            if (!localStorage.getItem("cubes")) arr.push(productDetails);
+            else {
+                arr = JSON.parse(localStorage.getItem("cubes"));
 
-            arr = arr.filter(val => {
-                return val._id !== productDetails._id;
-            })
+                arr = arr.filter(val => {
+                    return val._id !== productDetails._id;
+                })
 
-            arr.unshift(productDetails);
-            if (arr.length > 5) arr.pop();
+                arr.unshift(productDetails);
+                if (arr.length > 5) arr.pop();
+            }
+
+            localStorage.setItem("cubes", JSON.stringify(arr));
+
+            setProducts(arr);
+        } catch (error) {
+            console.log(error);
+            let message = error.response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('red');
         }
-
-        localStorage.setItem("cubes", JSON.stringify(arr));
-
-        setProducts(arr);
 
     }
 
@@ -254,7 +266,7 @@ export default function ProductDisplay() {
                                         : ""
                                 }
                             </div>
-                            <div className="bottom" style={{display:"flex"}}>
+                            <div className="bottom" style={{ display: "flex" }}>
                                 Inclusive of all taxes
                             </div>
                         </div>

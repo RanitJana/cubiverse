@@ -77,7 +77,7 @@ export default function App() {
       <Outlet />
       <PopupMessage />
       {
-        location !== '/register' && location !== '/login' && location !== '/user' && location !== '/user/address' ?
+        location !== '/register' && location !== '/login' && location !== '/user' && location !== '/user/address' && location!=='/user/order' ?
           < RecentlyViewed />
           : ""
       }

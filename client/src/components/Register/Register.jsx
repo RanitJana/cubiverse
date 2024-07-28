@@ -1,42 +1,60 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom"
-import PopupMessage from "../PopUp/PopUp.jsx";
-
+import { globalContext } from "../../App.jsx";
+import axios from "axios";
 
 export default function Register() {
 
     const navigate = useNavigate();
 
+    const { setColor, setMessage, setVisible } = useContext(globalContext)
+
     async function handleRegister(e) {
         e.preventDefault();
 
-        let [firstName, lastName, email, password, confirmPassword, contactNumber1, address, pincode]
-            = [e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value, e.target[4].value, e.target[5].value, e.target[6].value, e.target[7].value]
+        try {
 
-        let registerData = {
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword,
-            contactNumber1,
-            address,
-            pincode
-        };
+            let [firstName, lastName, email, password, confirmPassword, contactNumber1, address, pincode]
+                = [e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value, e.target[4].value, e.target[5].value, e.target[6].value, e.target[7].value]
 
-        let getFetch = await fetch("http://localhost:5000/api/v1/register", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(registerData)
-        })
+            let registerData = {
+                firstName,
+                lastName,
+                email,
+                password,
+                confirmPassword,
+                contactNumber1,
+                address,
+                pincode
+            };
 
-        let resposnse = await getFetch.json();
+            let response = await axios.post("http://localhost:5000/api/v1/register",
+                registerData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            )
+            console.log(response);
+            let message = response.data.message;
 
-        if (getFetch.status == 200) navigate('/login');
+            setVisible(true);
+            setMessage(message);
+            setColor('green');
+
+            navigate('/login');
+
+        } catch (error) {
+            console.log(error);
+            let message = error.response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('red');
+        }
 
     }
 

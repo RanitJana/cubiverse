@@ -13,6 +13,7 @@ import User from './components/User/User.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import Order from './components/Order/Order.jsx';
 import Address from './components/Address/Address.jsx';
+import Payment from './components/Payment/Payment.jsx';
 
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider, Navigate } from "react-router-dom";
 import { VerifyAuth } from './components/VerifyAuth/VerifyAuth.jsx';
@@ -75,7 +76,9 @@ const router = createBrowserRouter(
             <Route path="" element={<Order />} />
             <Route path="address" element={<Address />} />
           </Route>
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart/" element={<Cart />} >
+          </Route>
+            <Route path="order" element={<Payment />} />
         </Route>
       </Route>
       {/* <Route path='*' Component={<NotFound />} /> */}

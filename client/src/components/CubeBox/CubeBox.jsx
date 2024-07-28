@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function CubeBox({ cube }) {
 
-    
+    if (!cube.cube) return;
     cube = cube.cube;
 
     function handleRatings(ratings) {

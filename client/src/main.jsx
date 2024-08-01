@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
+import { Suspense } from 'react';
 
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -70,7 +71,7 @@ const router = createBrowserRouter(
       <Route path="buy" element={<ProductDisplay />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
-      <Route path="user/" loader={handleUserData}>
+      <Route path="user/">
         <Route path="" element={<VerifyAuth />}>
           <Route path="" element={<User />} >
             <Route path="" element={<Order />} />
@@ -78,7 +79,7 @@ const router = createBrowserRouter(
           </Route>
           <Route path="cart/" element={<Cart />} >
           </Route>
-            <Route path="order" element={<Payment />} />
+          <Route path="order" element={<Payment />} />
         </Route>
       </Route>
       {/* <Route path='*' Component={<NotFound />} /> */}

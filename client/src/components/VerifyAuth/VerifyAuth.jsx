@@ -3,24 +3,31 @@
 import { useContext, useEffect, useState } from "react";
 import { globalContext } from "../../App.jsx";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 export function VerifyAuth() {
 
     let navigate = useNavigate();
-
-    const { userData, changeUserState, isAuthUser, setAuthUser, setColor, setMessage, setVisible } = useContext(globalContext);
+    const { userData, isAuthUser, setAuthUser, setColor, setMessage, setVisible, isLoading, changeUserState } = useContext(globalContext);
 
     useEffect(() => {
-        if (userData)
-            setAuthUser(true);
-        else {
-            let message = "You need to login first"
-            setVisible(true);
-            setMessage(message);
-            setColor('red');
-            navigate("/login");
+        if (!isLoading) {
+            if (userData) {
+                setAuthUser(true);
+            }
+            else {
+                let message = "You need to login first";
+                setVisible(true);
+                setMessage(message);
+                setColor('red');
+                navigate('/login')
+            }
         }
-    }, [userData, changeUserState, isAuthUser])
 
-    return isAuthUser && <Outlet />
+    }, [isLoading, changeUserState]);
+
+    return !isLoading && isAuthUser && userData ? (
+        <Outlet />
+    ) : null;
 }

@@ -7,6 +7,14 @@
     position: relative;
 }
 
+@media only screen and (max-width:1050px) {
+    .payment {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
 .payment>div {
     display: flex;
     flex-direction: column;
@@ -75,6 +83,7 @@
     flex-direction: column;
     gap: 1rem;
     position: relative;
+    transition: all 0.3s ease;
 }
 
 .allAddresses .address P:last-child {
@@ -139,6 +148,7 @@
 
 .tick {
     position: absolute;
+    background-color: gray;
     left: -2px;
     top: -2px;
     border-top-left-radius: 10px;
@@ -148,14 +158,12 @@
     padding: 0.1rem;
 }
 
-.tick img{
+.tick img {
     width: 100%;
     height: 100;
     object-fit: contain;
 }
 
-
-.paymentOrder {}
 
 .PayTotal {
     position: sticky;
@@ -170,19 +178,27 @@
     padding: 1rem;
     padding-bottom: 2rem;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
 .paymentCard {
-    background-color: orangered;
+    position: relative;
     border-radius: 3px;
     padding: 1rem;
-    color: white;
+    padding-left: 2rem;
+    border: 2.5px solid gray;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    transition: all 0.3s ease;
 }
+
+.paymentCard:hover {
+    cursor: pointer;
+}
+
 
 .calculation {
     display: flex;
@@ -212,4 +228,88 @@
 
 .finalTotal {
     padding: 1rem;
+}
+
+.proceed {
+    border: none;
+    background-color: orangered;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 3px;
+    font-weight: bold;
+    font-style: italic;
+    width: 15rem;
+}
+
+.proceed:hover {
+    cursor: pointer;
+    background-color: rgb(232, 62, 0);
+}
+
+@media only screen and (max-width:530px) {
+    .storeAddress {
+        grid-template-columns: 1fr;
+    }
+
+    .payment {
+        padding: 2rem;
+    }
+
+    .childBox {
+        grid-template-columns: 1fr;
+    }
+
+    .childBox .childBoxImage {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .childBox .childBoxImage img {
+        max-width: 7rem;
+    }
+
+    .payOptions {
+        grid-template-columns: 1fr;
+    }
+
+    .proceed {
+        width: 10rem;
+    }
+}
+
+.successOrdered {
+    background-color: rgba(0, 0, 0, 0.829);
+    height: 100dvh;
+    width: 100dvw;
+    position: fixed;
+    z-index: 200;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.successOrdered>p {
+    opacity: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.3rem;
+    animation: appear 1s 0.5s ease forwards;
+    margin-top: 8rem;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

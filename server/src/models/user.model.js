@@ -57,26 +57,36 @@ const userSchema = new Schema(
             {
                 product: {
                     type: Schema.Types.ObjectId,
-                    ref: "Product"
+                    ref: "Product",
+                    required: true
                 },
                 finalPrice: {
-                    type: Number
+                    type: Number,
+                    default: 0,
+                    required: true
                 },
                 state: {
                     type: String,
-                    enum: ["CANCELLED", "DELIVERED"],
-                    default: "DELIVERED"
+                    enum: ["ORDER PLACED", "SHIPPED", "CANCELLED", "DELIVERED"],
+                    default: "DELIVERED",
+                    required: true
+                },
+                progress: {
+                    type: Number,
+                    default: 0
                 },
                 orderedDate: {
                     type: Date,
-                    required: [true, "obviously user orderd it!!"]
+                    required: [true, "obviously user orderd it!!"],
+                    required: true
                 },
                 arrived: {
                     type: Date
                 },
                 count: {
                     type: Number,
-                    default: 1
+                    default: 1,
+                    required: true
                 }
             }
         ],

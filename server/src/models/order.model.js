@@ -15,6 +15,10 @@ const orderSchema = new Schema(
             type: Number,
             default: 0
         },
+        payment: {
+            type: String,
+            enum: ["CASH ON DELIVARY", "PAID"]
+        },
         delivaryLocation: {
             type: String,
             required: true,
@@ -22,7 +26,11 @@ const orderSchema = new Schema(
         },
         state: {
             type: String,
-            enum: ["ORDER PLACED", "ORDER SHIPPED"]
+            enum: ["ORDER PLACED", "ORDER SHIPPED", "DELIVERED"]
+        },
+        progress: {
+            type: Number,
+            default: 0
         },
         product: {
             type: Schema.Types.ObjectId,

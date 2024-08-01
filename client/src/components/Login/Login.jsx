@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from "react";
 import "../Register/Register.css";
-import Cookies from 'js-cookie';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"
-import PopupMessage from "../PopUp/PopUp.jsx";
 import { globalContext } from "../../App.jsx";
 
 export default function Login() {
 
     const { setVisible, setMessage, setColor, setChangeUserState } = useContext(globalContext);
+
+    const [submitFrom, setSubmitForm] = useState(false);
 
     const navigate = useNavigate();
 
@@ -22,8 +22,10 @@ export default function Login() {
         let loginData = {
             email, password
         };
+
+        setSubmitForm(true);
+
         try {
-            console.log('hi');
 
             let response = await axios.post("http://localhost:5000/api/v1/login", loginData, {
                 headers: {
@@ -50,6 +52,8 @@ export default function Login() {
             setMessage(message);
             setColor('red');
         }
+
+        setSubmitForm(false);
     }
 
     return (
@@ -66,7 +70,12 @@ export default function Login() {
                         <input type="password" required name="password" id="password" />
                         <span>Password</span>
                     </div>
-                    <button type="submit">Login</button>
+                    {
+                        submitFrom ?
+                            <button style={{ backgroundColor: "rgb(255, 124, 76)" }} >Loading...</button>
+                            :
+                            <button type="submit">Login</button>
+                    }
                 </form>
                 <p>New in Cubiverse?<Link to="/register"> register now!!</Link> </p>
             </div>

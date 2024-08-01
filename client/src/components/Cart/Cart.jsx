@@ -5,6 +5,7 @@ import "./Cart.css";
 import { Link, useNavigate } from "react-router-dom";
 import { globalContext } from "../../App.jsx";
 import CartCube from "../CartCube/CartCube.jsx";
+import LoadingCube from "../LoadingCube/LoadingCube.jsx";
 import axios from "axios";
 
 
@@ -12,16 +13,20 @@ export default function Cart() {
 
     const navigate = useNavigate();
 
-    const { userData, changeUserState, setChangeUserState } = useContext(globalContext);
+    const { userData, changeUserState, setChangeUserState, isLoading } = useContext(globalContext);
 
     const [cubes, setCubes] = useState([]);
     const [price, setPrice] = useState(0);
     const [offerPrice, setOfferPrice] = useState(0);
+    const [isCartLoading, setCartLoading] = useState(true);
 
     async function handleGetAllCartCube() {
         if (!userData) return;
         let tempPrice = 0;
         let tempOfferPrice = 0;
+
+        setCartLoading(true);
+
         try {
 
             let tempCubes = await Promise.all(
@@ -46,6 +51,10 @@ export default function Cart() {
             console.log(error);
             setCubes([]);
         }
+
+        setTimeout(() => {
+            setCartLoading(false);
+        }, 500);
     }
 
     const [confirmErase, setConfirmErase] = useState(false);
@@ -96,21 +105,32 @@ export default function Cart() {
             <div className="cartCollections">
                 <div className="cubes">
                     {
-                        cubes ?
-                            cubes.map((val, index) => {
-                                let userInfo = userData.data.user.cart[index];
-                                return <CartCube key={index} product={{ val, userInfo, setConfirmErase, setProduct }} />
-                            })
-                            :
-                            "Empty.."
+                        !isCartLoading ? (
+                            cubes && cubes.length > 0 ? (
+                                cubes.map((val, index) => {
+                                    let userInfo = userData.data.user.cart[index];
+                                    return (
+                                        <CartCube
+                                            key={index}
+                                            product={{ val, userInfo, setConfirmErase, setProduct }}
+                                        />
+                                    );
+                                })
+                            ) : (
+                                <div className="emptyCart">
+                                    <img src="/images/icons8-empty-box-100.png" alt="Empty" />
+                                    <p>Your cart is empty!!</p>
+                                </div>
+                            )
+                        ) :
+                            (
+                                <>
+                                    <LoadingCube />
+                                    <LoadingCube />
+                                </>
+                            )
                     }
-                    {
-                        !cubes.length &&
-                        <div className="emptyCart">
-                            <img src="/images/icons8-empty-box-100.png" alt="Empty" />
-                            <p>Your cart is empty!!</p>
-                        </div>
-                    }
+
                 </div>
                 <div className="total">
                     <div className="top">
@@ -121,7 +141,11 @@ export default function Cart() {
                         <p>You saved ₹{(price - offerPrice).toLocaleString()}!</p>
                     </div>
                     <p>Tax included. Shipping calculated at checkout</p>
-                    <button onClick={e => navigate('/user/order')} >PLACE ORDER</button>
+
+                    <button onClick={e => { if (cubes.length) navigate('/user/order') }} style={{
+                        backgroundColor: cubes.length ? "orangered" : "gray",
+                        cursor: cubes.length ? "pointer" : "not-allowed"
+                    }} >PLACE ORDER</button>
                 </div>
             </div>
         </div>

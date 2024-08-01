@@ -37,7 +37,7 @@ export default function User() {
             <div className="userSectionLeft">
                 <NavLink
                     to='/user'
-                    end
+                    end="true"
                     activeclassname="active"
                 >
                     Order history
@@ -48,7 +48,7 @@ export default function User() {
                 >
                     Address
                 </NavLink>
-                <Link onClick={handleLogOut} end activeclassname="active">Log out</Link>
+                <Link onClick={handleLogOut} end="true" activeclassname="active">Log out</Link>
             </div>
             <Outlet />
         </div>

@@ -11,23 +11,11 @@ import { Outlet, useLocation } from "react-router-dom"
 
 import { useState, createContext, useEffect } from "react";
 
+import BouncingLoader from "./components/BouncingLoader/BouncingLoader.jsx";
+
 const globalContext = createContext();
 
 export { globalContext };
-
-
-async function fetchData() {
-
-  try {
-    let response = await axios.get('http://localhost:5000/api/v1/user', { withCredentials: true });
-    console.log(response);
-    return response;
-
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
 
 export default function App() {
 
@@ -35,7 +23,27 @@ export default function App() {
 
   const [userData, setUserData] = useState(null);
 
+  const [isLoading, setLoading] = useState(true);
+
   const handleServeUserData = async () => {
+    async function fetchData() {
+      setLoading(true)
+      try {
+        let response = await axios.get('http://localhost:5000/api/v1/user', { withCredentials: true });
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+        return response;
+
+      } catch (error) {
+        console.log(error);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+        return null;
+      }
+    }
+
     let response = await fetchData();
     setUserData(response);
   }
@@ -52,6 +60,17 @@ export default function App() {
   const [color, setColor] = useState('red');
 
   const location = useLocation().pathname;
+
+  const [showRecentlyViewed, setShowRecentlyViewed] = useState(false);
+
+  useEffect(() => {
+    const pathsToBlock = ['/register', '/login', '/user', '/user/address', '/user/order'];
+    if (!pathsToBlock.includes(location)) {
+      setShowRecentlyViewed(true);
+    } else {
+      setShowRecentlyViewed(false);
+    }
+  }, [location]);
 
   return (
     <globalContext.Provider
@@ -70,18 +89,26 @@ export default function App() {
         message,
         setMessage,
         color,
-        setColor
+        setColor,
+        isLoading
       }}
     >
-      <Header />
-      <Outlet />
-      <PopupMessage />
       {
-        location !== '/register' && location !== '/login' && location !== '/user' && location !== '/user/address' && location!=='/user/order' ?
-          < RecentlyViewed />
-          : ""
+        !isLoading ?
+          (
+            <>
+              <Header />
+              <PopupMessage />
+              <Outlet />
+              {showRecentlyViewed && <RecentlyViewed />}
+              <Footer />
+            </>
+          )
+          :
+          <>
+            <BouncingLoader />
+          </>
       }
-      <Footer />
     </globalContext.Provider>
   )
 }

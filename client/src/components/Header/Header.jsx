@@ -37,10 +37,10 @@ export default function Header() {
                 document.querySelector('body').style.overflow = "auto";
             }
         })
-        console.log(userData)
+
     }, [])
 
-    const { userData, handleServeUserData, changeUserState, setChangeUserState } = useContext(globalContext);
+    const { userData, isLoading } = useContext(globalContext);
 
     const location = useLocation().pathname;
 
@@ -145,17 +145,23 @@ export default function Header() {
                     </div>
                     <div className="right">
                         {
-                            !userData ?
-                                <div className="left">
-                                    <Link to="/login">Login</Link>
-                                    <Link to="/login" className="userLogin">
-                                        <img src="/images/user.png" alt="user" />
-                                    </Link>
-                                    <span style={{ color: "white" }}> | </span>
-                                    <Link to="/register">Signup</Link>
-                                </div>
-                                :
-                                <Link to="/user" className="userLoggedIn">
+                            !isLoading ?
+                                (!userData ?
+                                    <div className="left">
+                                        <Link to="/login">Login</Link>
+                                        <Link to="/login" className="userLogin">
+                                            <img src="/images/user.png" alt="user" />
+                                        </Link>
+                                        <span style={{ color: "white" }}> | </span>
+                                        <Link to="/register">Signup</Link>
+                                    </div>
+                                    :
+                                    <Link to="/user" className="userLoggedIn">
+                                        <p style={{ textAlign: "center", width: "2rem", height: "2rem", backgroundColor: "purple", borderRadius: "50%",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"bold" }} >
+                                            {userData.data.user.firstName.split("")[0]}
+                                        </p>
+                                    </Link>)
+                                : <Link className="userLoggedIn">
                                     <img src="/images/user.png" style={{ width: "2rem" }} alt="user" />
                                 </Link>
                         }
@@ -177,7 +183,7 @@ export default function Header() {
                 </nav>
             </header>
             {
-                location !== '/buy' && location !== '/register' && location !== '/login' && location != '/user/cart' && location!=='/user/order' ? <CubeCollection /> : ""
+                location !== '/buy' && location !== '/register' && location !== '/login' && location != '/user/cart' && location !== '/user/order' ? <CubeCollection /> : ""
             }
         </>
     )

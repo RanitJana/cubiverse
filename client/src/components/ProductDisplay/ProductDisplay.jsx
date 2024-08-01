@@ -17,10 +17,12 @@ export default function ProductDisplay() {
 
     const [monitorImage, setMonitorImage] = useState("");
 
+    const [isLoading, setLoading] = useState(true);
+
     const { setProducts, setChangeUserState, setVisible, setMessage, setColor } = useContext(globalContext);
 
     async function handleFetchData() {
-
+        setLoading(true);
         try {
             const productID = searchParams.get("product");
             let response = await axios.get(`http://localhost:5000/api/v1/product/id?product=${productID}`, {
@@ -59,6 +61,8 @@ export default function ProductDisplay() {
             setMessage(message);
             setColor('red');
         }
+
+        setLoading(false);
 
     }
 
@@ -154,7 +158,6 @@ export default function ProductDisplay() {
             let res = await axios.post(`http://localhost:5000/api/v1/product/${productID}`, {}, { withCredentials: true });
             setChangeUserState(prev => prev + 1);
 
-            console.log(res);
             let message = res.data.message;
             setVisible(true);
             setMessage(message);

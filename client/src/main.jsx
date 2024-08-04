@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import { Suspense } from 'react';
 
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -82,7 +81,7 @@ const router = createBrowserRouter(
           <Route path="order" element={<Payment />} />
         </Route>
       </Route>
-      {/* <Route path='*' Component={<NotFound />} /> */}
+      <Route path='*' element={<NotFound />} />
     </Route>
 
   )

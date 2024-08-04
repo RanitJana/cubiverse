@@ -67,6 +67,13 @@
         width: 100%;
     }
 }
+@media screen and (max-width:561px) {
+    .userSection {
+        padding: 1rem;
+    }
+    
+}
+
 
 .orderCube .orderCubeImage {
     width: 10rem;

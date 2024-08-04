@@ -18,11 +18,9 @@ const reviewSchema = new Schema(
             type: String,
             required: true
         },
-        images: [
-            {
-                type: String
-            }
-        ],
+        image: {
+            type: String
+        }
     },
     {
         timestamps: true

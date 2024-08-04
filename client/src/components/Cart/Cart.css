@@ -136,3 +136,10 @@
     font-weight: bolder;
     font-size: 1.2rem;
 }
+@media screen and (max-width:561px) {
+
+    .cart{
+        padding: 2rem 1rem;
+        padding-top: 1rem;
+    }
+}

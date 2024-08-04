@@ -33,7 +33,7 @@ export default function Cart() {
 
                 userData.data.user.cart.map(async (val) => {
 
-                    let cube = await axios.get(`http://localhost:5000/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
+                    let cube = await axios.get(`/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
                     tempPrice += val.count * cube.price;
@@ -70,7 +70,7 @@ export default function Cart() {
     async function removeItem(e) {
 
         try {
-            let response = await axios.post(`http://localhost:5000/api/v1/product/cart/erase/${product}`, {},
+            let response = await axios.post(`/api/v1/product/cart/erase/${product}`, {},
                 {
                     headers: {
                         "Content-Type": "application/json"

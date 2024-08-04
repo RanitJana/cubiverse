@@ -27,7 +27,7 @@ export default function Login() {
 
         try {
 
-            let response = await axios.post("http://localhost:5000/api/v1/login", loginData, {
+            let response = await axios.post("/api/v1/login", loginData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

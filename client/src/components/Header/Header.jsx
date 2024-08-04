@@ -6,7 +6,6 @@ import { Link, NavLink, useLocation } from "react-router-dom"
 import { useRef, useEffect, useContext } from "react";
 import CubeCollection from "../CubeTop/CubeCollection";
 import { globalContext } from "../../App.jsx";
-import Cookies from 'js-cookie';
 
 
 export default function Header() {

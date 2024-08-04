@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import "./RecentlyViewed.css";
 import CubeBox from "../CubeBox/CubeBox.jsx";
 import { globalContext } from "../../App.jsx";

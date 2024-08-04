@@ -4,6 +4,7 @@
     grid-template-areas:
         'productImages productInfo'
         'productUserReview productInfo'
+        'productReview productInfo'
     ;
     padding: 2rem 3rem;
     gap: 2rem;
@@ -17,8 +18,14 @@
             'productImages'
             'productInfo'
             'productUserReview'
+            'productReview'
         ;
     }
+}
+
+
+.productReview {
+    grid-area: productReview;
 }
 
 .productDetails>div {
@@ -291,6 +298,7 @@
 }
 
 .productDetails .productUserReview span {
+    text-transform: uppercase;
     border-bottom: 3px solid #ccc;
     color: gray;
     width: 100%;
@@ -310,7 +318,8 @@
 
 .productDetails .details {
     margin-top: 1rem;
-    font-size: 1.0.5rem;
+    /* font-size: 1.05rem; */
+    overflow: auto;
 }
 
 pre {
@@ -353,4 +362,253 @@ table tr td:last-child {
     position: relative;
     padding: 0.5rem 0;
     padding-left: 1rem;
+}
+
+
+
+.productReview .reviewDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.productReview .viewProductReviewMore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    padding-bottom: 0;
+}
+
+.productReview .reviewTop {
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width:407px) {
+    .productReview .reviewTop {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .productReview .reviewTop button {
+        width: 100%;
+    }
+}
+
+.productReview .reviewTop button,
+.productReview .viewProductReviewMore button,
+#addReview {
+    padding: 0.5rem 1rem;
+    background-color: orangered;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.productReview .reviewTop button:hover,
+.productReview .viewProductReviewMore button:hover,
+#addReview:hover {
+    cursor: pointer;
+    background-color: rgb(213, 57, 0);
+}
+
+.productReview .reviewDetails .reviewBox {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    gap: 1rem;
+}
+
+.productReview .reviewDetails .reviewImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.reviewContent>div {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.reviewContent>div>div {
+    display: flex;
+    /* gap: 1rem; */
+}
+
+.reviewContent>div>div:last-child {
+    flex-wrap: wrap;
+    word-break: break-all;
+}
+
+.reviewContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.reviewContent>p {
+    word-break: break-all;
+}
+
+.reviewStars>* {
+    width: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width:430px) {
+    .productReview .reviewDetails .reviewBox {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .productReview .reviewDetails .reviewImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .productReview .reviewDetails .reviewImage img {
+        width: min(100%, 10rem);
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+@media only screen and (max-width:561px) {
+    .productDetails {
+        padding: 2rem 1rem;
+    }
+
+    table {
+        min-width: 27rem;
+    }
+
+    pre {
+        margin-top: 1rem;
+    }
+
+    .postFaq {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .productDetails .productUserReview {
+        display: flex;
+    }
+
+    .productDetails .productUserReview span {
+        width: calc(100%/3);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.writeReview {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.417);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.writeReview form {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 30rem;
+    max-height: 100dvh;
+    overflow: auto;
+}
+
+/* Styling for the file input */
+#reviewImage {
+    display: none;
+}
+
+#reviewImage+label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    word-break: break-all;
+}
+
+#reviewImage+label:hover {
+    color: rgb(0, 0, 97);
+    border-color: rgb(0, 0, 97);
+}
+
+/* Styling for the radio buttons */
+
+.rating-container {
+    color: rgb(0, 0, 97);
+    display: flex;
+    flex-direction: column;
+}
+
+input[name="ratings"] {
+    display: none;
+}
+
+.writeReview form>p {
+    color: rgb(0, 0, 97);
+}
+
+input[name="ratings"]+label {
+    font-size: 2rem;
+    color: rgb(176, 176, 176);
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* input[name="ratings"]:checked+label {
+    color: #FFD700;
+} */
+
+/* Container for the radio buttons */
+.rating-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.writeReview>form>textarea {
+    padding: 1rem;
+    border-color: #ccc;
+    transition: border 0.3s ease;
+    resize: vertical;
+    overflow: auto;
+    min-height: 5rem;
+}
+
+.writeReview>form>textarea:focus,
+.writeReview>form>textarea:user-valid {
+    border-color: rgb(0, 0, 97);
 }

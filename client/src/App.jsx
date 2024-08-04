@@ -29,7 +29,7 @@ export default function App() {
     async function fetchData() {
       setLoading(true)
       try {
-        let response = await axios.get('http://localhost:5000/api/v1/user', { withCredentials: true });
+        let response = await axios.get('/api/v1/user', { withCredentials: true });
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -90,7 +90,8 @@ export default function App() {
         setMessage,
         color,
         setColor,
-        isLoading
+        isLoading,
+        setLoading
       }}
     >
       {

@@ -38,7 +38,7 @@ export default function Payment() {
 
                 cartItemInfo.map(async (val) => {
 
-                    let cube = await axios.get(`http://localhost:5000/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
+                    let cube = await axios.get(`/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
                     tempPrice += val.count * cube.price;
@@ -98,7 +98,7 @@ export default function Payment() {
         setSuccessOrder(false);
         try {
 
-            let response = await axios.post("http://localhost:5000/api/v1/order",
+            let response = await axios.post("/api/v1/order",
                 {
                     cartItems,
                     address: `${userData.data.user.address[selectedAddress].location} , Pincode: ${userData.data.user.address[selectedAddress].pincode}`,

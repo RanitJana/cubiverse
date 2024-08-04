@@ -24,6 +24,7 @@ import faq from "./routes/faq.route.js";
 import address from "./routes/address.route.js";
 import logOut from "./routes/logout.route.js";
 import order from "./routes/order.route.js";
+import review from "./routes/review.route.js";
 
 app.use("/api/v1/register", register);
 app.use("/api/v1/login", login);
@@ -33,5 +34,6 @@ app.use("/api/v1/faqs", faq);
 app.use("/api/v1/address", address);
 app.use("/api/v1/logout", logOut);
 app.use("/api/v1/order", order);
+app.use("/api/v1/review", review);
 
 export default app;

@@ -145,7 +145,7 @@ async function handleRemoveFromCart(req, res) {
 
     try {
         const productId = req.params.id;
-        console.log(productId);
+
         const product = await productSchema.findById(productId);
 
         if (!product) return res.status(403).json({

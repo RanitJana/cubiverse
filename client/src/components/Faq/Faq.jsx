@@ -22,7 +22,7 @@ export default function Faq() {
             console.log(neighbour);
             if (!neighbour.value || neighbour.value.length == 0) return;
             const productID = searchParams.get("product");
-            let response = await axios.post(`http://localhost:5000/api/v1/faqs?product=${productID}`, {
+            let response = await axios.post(`/api/v1/faqs?product=${productID}`, {
                 question: neighbour.value
             }, {
                 headers: {
@@ -41,7 +41,7 @@ export default function Faq() {
     const handleFetchFaq = async () => {
         try {
             const productID = new URLSearchParams(window.location.search).get("product");
-            const response = (await axios.get(`http://localhost:5000/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
+            const response = (await axios.get(`/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
 
             setFaqs(response.faqs);
             setMaxPage(response.pages);

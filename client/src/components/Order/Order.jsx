@@ -27,7 +27,7 @@ export default function Order(user) {
 
                 orderData.map(async (val) => {
 
-                    let cube = await axios.get(`http://localhost:5000/api/v1/product/id?product=${val.product}`, { withCredentials: true });
+                    let cube = await axios.get(`/api/v1/product/id?product=${val.product}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
                     return cube;
                 })

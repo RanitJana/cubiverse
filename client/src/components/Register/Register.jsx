@@ -30,7 +30,7 @@ export default function Register() {
                 pincode
             };
 
-            let response = await axios.post("http://localhost:5000/api/v1/register",
+            let response = await axios.post("/api/v1/register",
                 registerData,
                 {
                     headers: {

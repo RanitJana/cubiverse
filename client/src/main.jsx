@@ -23,7 +23,7 @@ import { VerifyAuth } from './components/VerifyAuth/VerifyAuth.jsx';
 const handleUserData = async () => {
   try {
 
-    let response = await axios.get("http://localhost:5000/api/v1/user", { withCredentials: true })
+    let response = await axios.get("/api/v1/user", { withCredentials: true })
     return response.data;
 
   } catch (error) {
@@ -41,7 +41,7 @@ const router = createBrowserRouter(
             try {
 
               document.cookie = "limit=10; path=/";
-              let response = await (await axios.get(`http://localhost:5000/api/v1/product/most-favourite`, { withCredentials: true })).data
+              let response = await (await axios.get(`/api/v1/product/most-favourite`, { withCredentials: true })).data
               return JSON.parse(response);
             } catch (error) {
               console.log(error);
@@ -57,7 +57,7 @@ const router = createBrowserRouter(
           {
             async ({ params }) => {
               try {
-                let response = (await axios.get(`http://localhost:5000/api/v1/product/${params.product}`, { withCredentials: true })).data;
+                let response = (await axios.get(`/api/v1/product/${params.product}`, { withCredentials: true })).data;
                 return JSON.parse(response);
               } catch (error) {
                 console.log(error);

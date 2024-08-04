@@ -40,7 +40,7 @@ export default function Address() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/address/add",
+            const response = await axios.post("/api/v1/address/add",
                 {
                     address: e.target[0].value,
                     pincode: e.target[1].value
@@ -84,7 +84,7 @@ export default function Address() {
 
         try {
             let index = currAddress;
-            const response = await axios.post(`http://localhost:5000/api/v1/address/edit/${index}`,
+            const response = await axios.post(`/api/v1/address/edit/${index}`,
                 {
                     address: e.target[0].value,
                     pincode: e.target[1].value
@@ -123,7 +123,7 @@ export default function Address() {
 
     async function handleDeleteAddress(e, index) {
         try {
-            const response = await axios.post(`http://localhost:5000/api/v1/address/delete/${index}`, {}, {
+            const response = await axios.post(`/api/v1/address/delete/${index}`, {}, {
                 headers: {
                     "Content-Type": "application/json"
                 },

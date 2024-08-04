@@ -13,7 +13,7 @@ export default function User() {
 
     async function handleLogOut(e) {
         try {
-            let response = await axios.post("http://localhost:5000/api/v1/logout", {}, {
+            let response = await axios.post("/api/v1/logout", {}, {
                 headers: {
                     "Content-Type": "application/json"
                 },

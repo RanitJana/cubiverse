@@ -20,7 +20,7 @@ export default function CartCube(prop) {
 
     async function handleSendRequestToAddOrRemoveCartProduct(e) {
         try {
-            let response = await axios.post('http://localhost:5000/api/v1/product/user/cart',
+            let response = await axios.post('/api/v1/product/user/cart',
                 {
                     productId: prop.product.userInfo.productId,
                     operation: e.target.value

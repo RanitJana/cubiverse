@@ -26,6 +26,11 @@ import logOut from "./routes/logout.route.js";
 import order from "./routes/order.route.js";
 import review from "./routes/review.route.js";
 
+app.get('/', (req, res) => {
+    return res.status(200).json({
+        success: "Server is running"
+    })
+})
 app.use("/api/v1/register", register);
 app.use("/api/v1/login", login);
 app.use("/api/v1/product", Product);

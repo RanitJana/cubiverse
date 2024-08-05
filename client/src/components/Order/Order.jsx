@@ -26,8 +26,8 @@ export default function Order(user) {
             let tempCubes = await Promise.all(
 
                 orderData.map(async (val) => {
-                    let base = import.meta.env.BACKEND_URI || "";
-                    
+                    let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+
                     let cube = await axios.get(`${base}/api/v1/product/id?product=${val.product}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
                     return cube;

@@ -29,8 +29,8 @@ export default function Register() {
                 address,
                 pincode
             };
-
-            let response = await axios.post("/api/v1/register",
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+            let response = await axios.post(`${base}/api/v1/register`,
                 registerData,
                 {
                     headers: {

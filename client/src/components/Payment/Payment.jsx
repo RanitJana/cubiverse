@@ -38,7 +38,7 @@ export default function Payment() {
 
                 cartItemInfo.map(async (val) => {
 
-                    let base = import.meta.env.BACKEND_URI || "";
+                    let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
                     let cube = await axios.get(`${base}/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
@@ -99,7 +99,7 @@ export default function Payment() {
         setSuccessOrder(false);
         try {
 
-            let base = import.meta.env.BACKEND_URI || "";
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`${base}/api/v1/order`,
                 {
                     cartItems,

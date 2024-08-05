@@ -22,8 +22,8 @@ export default function Faq() {
             console.log(neighbour);
             if (!neighbour.value || neighbour.value.length == 0) return;
             const productID = searchParams.get("product");
-            
-            let base = import.meta.env.BACKEND_URI || "";
+
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`${base}/api/v1/faqs?product=${productID}`, {
                 question: neighbour.value
             }, {
@@ -43,8 +43,8 @@ export default function Faq() {
     const handleFetchFaq = async () => {
         try {
             const productID = new URLSearchParams(window.location.search).get("product");
-            
-            let base = import.meta.env.BACKEND_URI || "";
+
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             const response = (await axios.get(`${base}/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
 
             setFaqs(response.faqs);

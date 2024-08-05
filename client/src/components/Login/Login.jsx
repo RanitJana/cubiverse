@@ -26,7 +26,7 @@ export default function Login() {
         setSubmitForm(true);
 
         try {
-            let base = import.meta.env.BACKEND_URI || "";
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
             let response = await axios.post(`${base}/api/v1/login`, loginData, {
                 headers: {

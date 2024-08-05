@@ -33,7 +33,7 @@ export default function Cart() {
 
                 userData.data.user.cart.map(async (val) => {
 
-                    let base = import.meta.env.BACKEND_URI || "";
+                    let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
                     let cube = await axios.get(`${base}/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
@@ -71,7 +71,7 @@ export default function Cart() {
     async function removeItem(e) {
 
         try {
-            let base = import.meta.env.BACKEND_URI || "";
+            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`${base}/api/v1/product/cart/erase/${product}`, {},
                 {
                     headers: {

@@ -26,8 +26,9 @@ export default function Login() {
         setSubmitForm(true);
 
         try {
+            let base = import.meta.env.BACKEND_URI || "";
 
-            let response = await axios.post("/api/v1/login", loginData, {
+            let response = await axios.post(`${base}/api/v1/login`, loginData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

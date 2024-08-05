@@ -29,7 +29,8 @@ export default function App() {
     async function fetchData() {
       setLoading(true)
       try {
-        let response = await axios.get('/api/v1/user', { withCredentials: true });
+        let base = import.meta.env.BACKEND_URI || "";
+        let response = await axios.get(`${base}/api/v1/user`, { withCredentials: true });
         setTimeout(() => {
           setLoading(false);
         }, 500);

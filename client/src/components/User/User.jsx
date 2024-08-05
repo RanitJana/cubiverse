@@ -13,7 +13,8 @@ export default function User() {
 
     async function handleLogOut(e) {
         try {
-            let response = await axios.post("/api/v1/logout", {}, {
+            let base = import.meta.env.BACKEND_URI || "";
+            let response = await axios.post(`${base}/api/v1/logout`, {}, {
                 headers: {
                     "Content-Type": "application/json"
                 },

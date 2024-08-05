@@ -22,7 +22,9 @@ export default function Faq() {
             console.log(neighbour);
             if (!neighbour.value || neighbour.value.length == 0) return;
             const productID = searchParams.get("product");
-            let response = await axios.post(`/api/v1/faqs?product=${productID}`, {
+            
+            let base = import.meta.env.BACKEND_URI || "";
+            let response = await axios.post(`${base}/api/v1/faqs?product=${productID}`, {
                 question: neighbour.value
             }, {
                 headers: {
@@ -41,7 +43,9 @@ export default function Faq() {
     const handleFetchFaq = async () => {
         try {
             const productID = new URLSearchParams(window.location.search).get("product");
-            const response = (await axios.get(`/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
+            
+            let base = import.meta.env.BACKEND_URI || "";
+            const response = (await axios.get(`${base}/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
 
             setFaqs(response.faqs);
             setMaxPage(response.pages);

@@ -33,7 +33,8 @@ export default function ProductDisplay() {
         setProductLoading(true);
         try {
             const productID = searchParams.get("product");
-            let response = await axios.get(`/api/v1/product/id?product=${productID}`, {
+            let base = import.meta.env.BACKEND_URI || "";
+            let response = await axios.get(`${base}/api/v1/product/id?product=${productID}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -82,7 +83,8 @@ export default function ProductDisplay() {
 
             let productID = searchParams.get('product');
 
-            let response = await axios.get(`/api/v1/review/${productID}?limit=${reviewViewMoreLimit}`, { withCredentials: true });
+            let base = import.meta.env.BACKEND_URI || "";
+            let response = await axios.get(`${base}/api/v1/review/${productID}?limit=${reviewViewMoreLimit}`, { withCredentials: true });
 
             setReviewSize(response.data.total);
 
@@ -196,7 +198,8 @@ export default function ProductDisplay() {
     async function handleAddCart(e) {
         try {
             const productID = searchParams.get("product");
-            let res = await axios.post(`/api/v1/product/${productID}`, {}, { withCredentials: true });
+            let base = import.meta.env.BACKEND_URI || "";
+            let res = await axios.post(`${base}/api/v1/product/${productID}`, {}, { withCredentials: true });
             setChangeUserState(prev => prev + 1);
 
             let message = res.data.message;
@@ -278,7 +281,8 @@ export default function ProductDisplay() {
 
             const productID = searchParams.get("product");
 
-            let response = await axios.post(`/api/v1/review/${productID}`, formData, {
+            let base = import.meta.env.BACKEND_URI || "";
+            let response = await axios.post(`${base}/api/v1/review/${productID}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

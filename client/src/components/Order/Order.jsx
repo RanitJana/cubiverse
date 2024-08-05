@@ -26,8 +26,9 @@ export default function Order(user) {
             let tempCubes = await Promise.all(
 
                 orderData.map(async (val) => {
-
-                    let cube = await axios.get(`/api/v1/product/id?product=${val.product}`, { withCredentials: true });
+                    let base = import.meta.env.BACKEND_URI || "";
+                    
+                    let cube = await axios.get(`${base}/api/v1/product/id?product=${val.product}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
                     return cube;
                 })

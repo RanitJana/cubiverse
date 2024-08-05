@@ -10,7 +10,6 @@ const target = process.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  console.log(target);
 
   return {
 

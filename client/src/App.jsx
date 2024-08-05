@@ -29,9 +29,17 @@ export default function App() {
     async function fetchData() {
       setLoading(true)
       try {
-        let base = import.meta.env.VITE_BACKEND_URI || "http://locahost:5000";
+        let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
 
-        let response = await axios.get(`${base}/api/v1/user`, { withCredentials: true });
+        let response = await axios.get(`/api/v1/user`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true
+          }
+        );
+
         setTimeout(() => {
           setLoading(false);
         }, 500);

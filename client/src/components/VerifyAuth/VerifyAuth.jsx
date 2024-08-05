@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { globalContext } from "../../App.jsx";
 import { Outlet, useNavigate } from "react-router-dom";
 

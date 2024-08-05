@@ -1,7 +1,11 @@
+/* eslint-disable no-undef */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dotenv from 'dotenv';
 
-const target = 'http://localhost:5000';
+dotenv.config();
+
+const target = process.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
 // https://vitejs.dev/config/
 export default defineConfig({

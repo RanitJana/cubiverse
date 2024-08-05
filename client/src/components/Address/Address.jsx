@@ -41,7 +41,7 @@ export default function Address() {
 
         try {
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            const response = await axios.post(`${base}/api/v1/address/add`,
+            const response = await axios.post(`/api/v1/address/add`,
                 {
                     address: e.target[0].value,
                     pincode: e.target[1].value
@@ -86,7 +86,7 @@ export default function Address() {
         try {
             let index = currAddress;
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            const response = await axios.post(`${base}/api/v1/address/edit/${index}`,
+            const response = await axios.post(`/api/v1/address/edit/${index}`,
                 {
                     address: e.target[0].value,
                     pincode: e.target[1].value
@@ -126,7 +126,7 @@ export default function Address() {
     async function handleDeleteAddress(e, index) {
         try {
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            const response = await axios.post(`${base}/api/v1/address/delete/${index}`, {}, {
+            const response = await axios.post(`/api/v1/address/delete/${index}`, {}, {
                 headers: {
                     "Content-Type": "application/json"
                 },

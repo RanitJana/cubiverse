@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, NavLink } from "react-router-dom";
 import "./CubeCollection.css";
 

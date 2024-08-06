@@ -8,7 +8,8 @@ const app = express();
 //configurations
 app.use(compression());
 app.use(cors({
-    origin: ["https://cubiverse.vercel.app", "http://localhost:5173"],
+    origin: "*",
+    methods: ["GET", "POST"],
     credentials: true
 }))
 app.use(express.urlencoded({ extended: true }));

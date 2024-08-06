@@ -91,6 +91,8 @@ header .top .right .left img {
 }
 
 .carParent {
+    display: flex;
+    align-items: center;
     position: relative;
     padding-right: 0.5rem;
 }
@@ -137,7 +139,7 @@ header .top .right .left img {
 
 .navMenu>img {
     width: 2rem;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 @media only screen and (max-width:700px) {
@@ -171,14 +173,16 @@ header .top .right .left img {
 
 }
 
+@media only screen and (max-width:393px) {
+    header .top {
+        padding: 1.5rem 1rem;
+    }
+}
+
 @media only screen and (max-width:500px) {
     header .top .right .left {
         padding: 0;
         border: none;
-    }
-
-    header .top .right .right {
-        padding: 0;
     }
 }
 

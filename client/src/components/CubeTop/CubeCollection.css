@@ -43,3 +43,9 @@
     background-color: white;
     margin-bottom: 0.5rem;
 }
+
+@media only screen and (max-width:700px) {
+    .first {
+        padding: 1.5rem;
+    }
+}

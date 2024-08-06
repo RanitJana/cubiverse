@@ -26,9 +26,10 @@ export default function Order(user) {
             let tempCubes = await Promise.all(
 
                 orderData.map(async (val) => {
+                    
                     let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
-                    let cube = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${val.product}`, { withCredentials: true });
+                    let cube = await axios.get(`${base}/api/v1/product/id?product=${val.product}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
                     return cube;
                 })
@@ -49,8 +50,7 @@ export default function Order(user) {
         setOrderData(userData?.data.user.orderHistory);
 
         handleGetAllCartCube();
-        // if (orderData.length > 0) {
-        // }
+
     }, [userData, orderData])
 
     return (

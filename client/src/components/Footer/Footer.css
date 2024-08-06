@@ -107,6 +107,9 @@ footer a:hover {
         height: max-content;
         overflow: hidden;
     }
+    footer{
+        padding: 1.5rem;
+    }
 
     footer>div p:first-child {
         border-top: 1px solid #ccc;

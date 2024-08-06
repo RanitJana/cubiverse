@@ -136,6 +136,7 @@
 
     .second {
         padding: 2rem 0;
+        margin-top: -2rem;
     }
     .third{
         padding: 2rem 1rem;

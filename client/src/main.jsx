@@ -23,7 +23,7 @@ const handleUserData = async () => {
   try {
     let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
 
-    let response = await axios.get(`/api/v1/user`, { withCredentials: true })
+    let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/user`, { withCredentials: true })
     return response.data;
 
   } catch (error) {
@@ -47,8 +47,6 @@ const router = createBrowserRouter(
 
 
               let response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/most-favourite`, { withCredentials: true })).data
-
-              console.log(response);
 
               return JSON.parse(response);
 

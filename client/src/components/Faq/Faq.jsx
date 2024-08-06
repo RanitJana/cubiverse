@@ -24,7 +24,7 @@ export default function Faq() {
             const productID = searchParams.get("product");
 
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let response = await axios.post(`/api/v1/faqs?product=${productID}`, {
+            let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}`, {
                 question: neighbour.value
             }, {
                 headers: {
@@ -45,7 +45,7 @@ export default function Faq() {
             const productID = new URLSearchParams(window.location.search).get("product");
 
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            const response = (await axios.get(`/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
+            const response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
 
             setFaqs(response.faqs);
             setMaxPage(response.pages);

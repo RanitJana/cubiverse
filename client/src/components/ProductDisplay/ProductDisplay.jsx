@@ -34,7 +34,7 @@ export default function ProductDisplay() {
         try {
             const productID = searchParams.get("product");
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let response = await axios.get(`/api/v1/product/id?product=${productID}`, {
+            let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${productID}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -71,9 +71,8 @@ export default function ProductDisplay() {
             setColor('red');
         }
 
-        setTimeout(() => {
-            setProductLoading(false);
-        }, 500);
+        setProductLoading(false);
+
 
     }
 
@@ -84,7 +83,7 @@ export default function ProductDisplay() {
             let productID = searchParams.get('product');
 
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let response = await axios.get(`/api/v1/review/${productID}?limit=${reviewViewMoreLimit}`, { withCredentials: true });
+            let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/review/${productID}?limit=${reviewViewMoreLimit}`, { withCredentials: true });
 
             setReviewSize(response.data.total);
 
@@ -98,9 +97,8 @@ export default function ProductDisplay() {
             setMessage(message);
             setColor('red');
         }
-        setTimeout(() => {
-            setProductLoading(false);
-        }, 500);
+
+        setProductLoading(false);
     }
 
     const location = useLocation();
@@ -199,8 +197,8 @@ export default function ProductDisplay() {
         try {
             const productID = searchParams.get("product");
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let res = await axios.post(`/api/v1/product/${productID}`, {}, { withCredentials: true });
-            setChangeUserState(prev => prev + 1);
+            let res = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/${productID}`, {}, { withCredentials: true });
+            setChangeUserState(prev => (prev + 1) % 2);
 
             let message = res.data.message;
             setVisible(true);
@@ -282,7 +280,7 @@ export default function ProductDisplay() {
             const productID = searchParams.get("product");
 
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let response = await axios.post(`/api/v1/review/${productID}`, formData, {
+            let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/review/${productID}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

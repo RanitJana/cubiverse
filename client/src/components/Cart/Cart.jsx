@@ -34,7 +34,7 @@ export default function Cart() {
                 userData.data.user.cart.map(async (val) => {
 
                     let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-                    let cube = await axios.get(`/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
+                    let cube = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
                     tempPrice += val.count * cube.price;
@@ -53,9 +53,8 @@ export default function Cart() {
             setCubes([]);
         }
 
-        setTimeout(() => {
-            setCartLoading(false);
-        }, 500);
+        setCartLoading(false);
+
     }
 
     const [confirmErase, setConfirmErase] = useState(false);
@@ -72,7 +71,7 @@ export default function Cart() {
 
         try {
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let response = await axios.post(`/api/v1/product/cart/erase/${product}`, {},
+            let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/cart/erase/${product}`, {},
                 {
                     headers: {
                         "Content-Type": "application/json"

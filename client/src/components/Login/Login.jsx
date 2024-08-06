@@ -28,7 +28,7 @@ export default function Login() {
         try {
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
-            let response = await axios.post(`/api/v1/login`, loginData, {
+            let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/login`, loginData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

@@ -28,7 +28,7 @@ export default function Order(user) {
                 orderData.map(async (val) => {
                     let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
-                    let cube = await axios.get(`/api/v1/product/id?product=${val.product}`, { withCredentials: true });
+                    let cube = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${val.product}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
                     return cube;
                 })
@@ -40,9 +40,8 @@ export default function Order(user) {
         } catch (error) {
             console.log(error);
         }
-        setTimeout(() => {
-            setLoading(false);
-        }, 500)
+        setLoading(false);
+
     }
 
     useEffect(() => {

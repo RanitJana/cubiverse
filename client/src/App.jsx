@@ -31,7 +31,7 @@ export default function App() {
       try {
         let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
 
-        let response = await axios.get(`/api/v1/user`,
+        let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/user`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -39,9 +39,6 @@ export default function App() {
             withCredentials: true
           }
         );
-
-        console.log(response);
-
 
         setTimeout(() => {
           setLoading(false);

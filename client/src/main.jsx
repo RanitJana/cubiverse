@@ -43,8 +43,12 @@ const router = createBrowserRouter(
               document.cookie = "limit=10; path=/";
 
               let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
+              console.log(base);
 
-              let response = (await axios.get(`/api/v1/product/most-favourite`, { withCredentials: true })).data
+
+              let response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/most-favourite`, { withCredentials: true })).data
+
+              console.log(response);
 
               return JSON.parse(response);
 
@@ -64,7 +68,7 @@ const router = createBrowserRouter(
             async ({ params }) => {
               try {
                 let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
-                let response = (await axios.get(`/api/v1/product/${params.product}`, { withCredentials: true })).data;
+                let response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/${params.product}`, { withCredentials: true })).data;
                 return JSON.parse(response);
               } catch (error) {
                 console.log(error);

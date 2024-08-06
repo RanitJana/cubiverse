@@ -37,7 +37,7 @@ export default function Login() {
 
             setChangeUserState(true);
 
-            // navigate("/");
+            navigate("/");
 
             let message = response.data.message;
             setVisible(true);

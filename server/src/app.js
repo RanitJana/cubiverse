@@ -40,5 +40,15 @@ app.use("/api/v1/address", address);
 app.use("/api/v1/logout", logOut);
 app.use("/api/v1/order", order);
 app.use("/api/v1/review", review);
+app.get("*", (req, res) => {
+    res.status(404).json({
+        message: "Invalid route"
+    })
+})
+app.post("*", (req, res) => {
+    res.status(404).json({
+        message: "Invalid route"
+    })
+})
 
 export default app;

@@ -157,7 +157,7 @@ export default function Header() {
                                     :
                                     <Link to="/user" className="userLoggedIn">
                                         <p style={{ textAlign: "center", width: "2rem", height: "2rem", backgroundColor: "purple", borderRadius: "50%",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"bold" }} >
-                                            {userData.data.user.firstName.split("")[0]}
+                                            {userData?.data.user.firstName.split("")[0]}
                                         </p>
                                     </Link>)
                                 : <Link className="userLoggedIn">

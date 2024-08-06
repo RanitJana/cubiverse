@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// const target = process.env.VITE_BACKEND_URI || 'http://localhost:5000';
+const target = process.env.VITE_BACKEND_URI || 'http://localhost:5000';
 
 
 // https://vitejs.dev/config/
@@ -17,7 +17,7 @@ export default defineConfig(() => {
     server: {
       proxy: {
         '/api': {
-          target: `https://cubiverse-bakend.vercel.app/api`,
+          target: `${target}/api`,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

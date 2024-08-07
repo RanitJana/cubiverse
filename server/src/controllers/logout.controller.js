@@ -8,7 +8,11 @@ const handleLogOut = async function (req, res) {
 
         await user.save({ validateBeforeSave: false });
 
-        res.clearCookie("accessToken");
+        res.clearCookie("accessToken",{
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
 
         return res.status(200).json({
             message: "Logged out successfully!"

@@ -486,7 +486,7 @@ table tr td:last-child {
 
 @media only screen and (max-width:561px) {
     .productDetails {
-        padding: 2rem 1rem;
+        padding: 2rem 0;
     }
 
     table {
@@ -510,6 +510,16 @@ table tr td:last-child {
         width: calc(100%/3);
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+@media only screen and (max-width:430px) {
+
+    .productDetails .productImages,
+    .productDetails .productInfo,
+    .productDetails .productDescriptions,
+    .productDetails .productReview {
+        padding: 1.5rem 1rem;
     }
 }
 

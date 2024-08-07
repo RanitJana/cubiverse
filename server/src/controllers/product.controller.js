@@ -35,7 +35,11 @@ const handleProductRequest = async function (req, res) {
 
         products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(limitValue);
 
-        if (req.cookies.limit) res.clearCookie("limit");
+        if (req.cookies.limit) res.clearCookie("limit",{
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
     }
     else if (category == "sale") {
 

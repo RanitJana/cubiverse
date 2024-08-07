@@ -27,6 +27,8 @@ export default function ProductDisplay() {
 
     const [isProductLoading, setProductLoading] = useState(true);
 
+    const [isReviewLoading, setReviewLoading] = useState(false);
+
     const { setProducts, setChangeUserState, setVisible, setMessage, setColor, setLoading, isLoading } = useContext(globalContext);
 
     async function handleFetchData() {
@@ -77,12 +79,11 @@ export default function ProductDisplay() {
     }
 
     async function handleGetReview() {
-        setProductLoading(true);
+        setReviewLoading(true);
         try {
 
             let productID = searchParams.get('product');
 
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/review/${productID}?limit=${reviewViewMoreLimit}`, { withCredentials: true });
 
             setReviewSize(response.data.total);
@@ -98,7 +99,7 @@ export default function ProductDisplay() {
             setColor('red');
         }
 
-        setProductLoading(false);
+        setReviewLoading(false);
     }
 
     const location = useLocation();
@@ -108,9 +109,10 @@ export default function ProductDisplay() {
     }, [location])
 
     useEffect(() => {
+
         handleGetReview();
 
-    }, [reviewViewMoreLimit, location,])
+    }, [reviewViewMoreLimit])
 
 
     function handleRatings(ratings) {
@@ -261,8 +263,6 @@ export default function ProductDisplay() {
             }
         })
 
-        setReviewViewMoreLimit(3);
-
     }, []);
 
 
@@ -305,10 +305,6 @@ export default function ProductDisplay() {
             setMessage(message);
             setColor('green');
 
-            setTimeout(() => {
-                setLoading(false);
-            }, 500);
-
         } catch (error) {
 
             console.log(error);
@@ -317,11 +313,9 @@ export default function ProductDisplay() {
             setMessage(message);
             setColor('red');
 
-            setTimeout(() => {
-                setLoading(false);
-            }, 500);
         }
         setChangeUserState(prev => prev + 1);
+        setLoading(false);
 
     }
 
@@ -561,28 +555,28 @@ export default function ProductDisplay() {
                                 </div>
                                 <div className="viewProductReviewMore">
                                     {
-                                        reviews.length > 0 && reviewSize > reviews.length ?
-                                            <button id="viewMoreReview"
-                                                onClick={e => {
-                                                    if (reviews.length != reviewSize) {
-                                                        setProductLoading(true);
-                                                        setReviewViewMoreLimit(prev => prev + 1);
-                                                        setProductLoading(false);
-                                                    }
-                                                }}>View more</button>
+                                        isReviewLoading ?
+                                            <div style={{ width: "100%" }}>
+                                                <LoadingCube />
+                                                <LoadingCube />
+                                            </div>
+
                                             :
-                                            <button id="viewMoreReview"
-                                                style={{
-                                                    backgroundColor: "gray",
-                                                    cursor: "not-allowed"
-                                                }}
-                                                onClick={e => {
-                                                    if (reviews.length != reviewSize) {
-                                                        setProductLoading(true);
-                                                        setReviewViewMoreLimit(prev => prev + 10);
-                                                        setProductLoading(false);
-                                                    }
-                                                }}>View more</button>
+                                            reviews.length > 0 && reviewSize > reviews.length ?
+                                                <button id="viewMoreReview"
+                                                    onClick={e => {
+                                                        if (reviews.length != reviewSize) {
+                                                            setProductLoading(true);
+                                                            setReviewViewMoreLimit(prev => prev + 10);
+                                                            setProductLoading(false);
+                                                        }
+                                                    }}>View more</button>
+                                                :
+                                                <button id="viewMoreReview"
+                                                    style={{
+                                                        backgroundColor: "gray",
+                                                        cursor: "not-allowed"
+                                                    }}>View more</button>
                                     }
                                 </div>
                             </div>

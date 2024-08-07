@@ -5,6 +5,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { globalContext } from "../../App.jsx"
+import FaqLoad from "../FaqLoad/FaqLoad.jsx";
 
 export default function Faq() {
 
@@ -15,8 +16,11 @@ export default function Faq() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { changeUserState, setChangeUserState } = useContext(globalContext);
 
+    const [isFaqLoading, setFaqLoading] = useState(false);
+
 
     async function handlePostFaq(e) {
+        setFaqLoading(true);
         try {
             let neighbour = e.target.parentNode.childNodes[0];
             console.log(neighbour);
@@ -38,9 +42,11 @@ export default function Faq() {
         } catch (error) {
             console.log(error);
         }
+        setFaqLoading(false);
     }
 
     const handleFetchFaq = async () => {
+        setFaqLoading(true);
         try {
             const productID = new URLSearchParams(window.location.search).get("product");
 
@@ -53,6 +59,7 @@ export default function Faq() {
         } catch (error) {
             console.log(error);
         }
+        setFaqLoading(false);
     };
 
     useEffect(() => {
@@ -96,27 +103,34 @@ export default function Faq() {
     return (
         <>
             {
-                faqs.map((value, index) => {
-                    return (
-                        <div className="faqRes" key={index}>
-                            <div>
-                                <p>Q :</p>
-                                <p>{value.question}</p>
+                !isFaqLoading ?
+                    faqs.map((value, index) => {
+                        return (
+                            <div className="faqRes" key={index}>
+                                <div>
+                                    <p>Q :</p>
+                                    <p>{value.question}</p>
+                                </div>
+                                <div>
+                                    <p>A :</p>
+                                    {
+                                        value.answer ?
+                                            <p>
+                                                {value.answer}
+                                            </p>
+                                            :
+                                            <p style={{ color: "gray" }}>Wait until admin replys...</p>
+                                    }
+                                </div>
                             </div>
-                            <div>
-                                <p>A :</p>
-                                {
-                                    value.answer ?
-                                        <p>
-                                            {value.answer}
-                                        </p>
-                                        :
-                                        <p style={{ color: "gray" }}>Wait until admin replys...</p>
-                                }
-                            </div>
-                        </div>
-                    )
-                })
+                        )
+                    })
+                    :
+                    <>
+                        <FaqLoad />
+                        <FaqLoad />
+                        <FaqLoad />
+                    </>
 
             }
             <div className="pageBtns">

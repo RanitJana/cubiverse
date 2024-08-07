@@ -115,10 +115,7 @@ export default function Payment() {
 
             setSuccessOrder(true);
 
-            setTimeout(() => {
-                setSuccessOrder(false);
-                setChangeUserState(prev => prev + 1);
-            }, 2500);
+            setSuccessOrder(false);
 
         } catch (error) {
             console.log(error);
@@ -127,8 +124,9 @@ export default function Payment() {
             setMessage(error.response.data.message);
             setVisible(true);
 
-            setChangeUserState(prev => prev + 1);
         }
+        
+        setChangeUserState(prev => prev + 1);
     }
 
     if (!userData) return;

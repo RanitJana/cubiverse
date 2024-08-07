@@ -9,7 +9,7 @@
 
 @media only screen and (max-width:1050px) {
     .payment {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
     }
 }
 
@@ -247,11 +247,7 @@
     background-color: rgb(232, 62, 0);
 }
 
-@media only screen and (min-width:530px) {
-    .payment {
-        padding: 2rem 1rem;
-    }
-}
+
 
 @media only screen and (max-width:530px) {
     .storeAddress {
@@ -259,11 +255,11 @@
     }
 
     .payment {
-        padding: 2rem;
+        padding: 2rem 3rem;
     }
 
     .childBox {
-        /* grid-template-columns: 1fr; */
+        grid-template-columns: 100%;
     }
 
     .childBox .childBoxImage {
@@ -277,11 +273,15 @@
     }
 
     .payOptions {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
     }
 
     .proceed {
         width: 10rem;
+    }
+
+    .calculation>table {
+        min-width: fit-content;
     }
 }
 
@@ -309,6 +309,13 @@
     animation: appear 1s 0.5s ease forwards;
     margin-top: 8rem;
 }
+
+@media only screen and (max-width:600px) {
+    .payment {
+        padding: 1rem;
+    }
+}
+
 
 @keyframes appear {
     0% {

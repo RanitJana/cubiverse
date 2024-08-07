@@ -236,6 +236,8 @@ export default function ProductDisplay() {
     function handleStickyProductDetails(e) {
         const productInfo = document.querySelector('.productInfo');
 
+        if(!productInfo) return;
+
         if (window.innerWidth > 1000) {
 
             const rect = productInfo.getBoundingClientRect();

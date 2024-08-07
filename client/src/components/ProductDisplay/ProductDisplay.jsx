@@ -205,7 +205,7 @@ export default function ProductDisplay() {
             const productID = searchParams.get("product");
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let res = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/${productID}`, {}, { withCredentials: true });
-            setChangeUserState(prev => (prev + 1) % 2);
+            setChangeUserState(prev => prev + 1);
 
             let message = res.data.message;
             setVisible(true);

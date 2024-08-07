@@ -1,3 +1,13 @@
+.parentLoad {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: 500;
+}
+
 .loading {
     position: absolute;
     top: 50%;

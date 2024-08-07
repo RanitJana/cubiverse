@@ -13,7 +13,7 @@ export default function Cart() {
 
     const navigate = useNavigate();
 
-    const { userData, changeUserState, setChangeUserState, isLoading } = useContext(globalContext);
+    const { userData, changeUserState, setChangeUserState, isLoading, setLoading } = useContext(globalContext);
 
     const [cubes, setCubes] = useState([]);
     const [price, setPrice] = useState(0);
@@ -69,6 +69,8 @@ export default function Cart() {
 
     async function removeItem(e) {
 
+        setLoading(true);
+
         try {
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/cart/erase/${product}`, {},
@@ -85,6 +87,7 @@ export default function Cart() {
         }
         setProduct('');
         setConfirmErase(false);
+        setLoading(false);
     }
 
     return (

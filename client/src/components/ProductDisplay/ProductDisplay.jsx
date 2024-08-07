@@ -193,7 +193,14 @@ export default function ProductDisplay() {
         }
     }
 
+    const [addCartLoading, setAddCartLoading] = useState(false);
+
     async function handleAddCart(e) {
+        if (addCartLoading) return;
+        setAddCartLoading(true);
+
+        e.target.style.backgroundColor = "rgb(255, 142, 100)";
+        e.target.style.cursor = "not-allowed";
         try {
             const productID = searchParams.get("product");
             let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
@@ -214,6 +221,11 @@ export default function ProductDisplay() {
             setMessage(message);
             setColor('red');
         }
+
+        e.target.style.backgroundColor = "orangered";
+        e.target.style.cursor = "pointer";
+        setAddCartLoading(false);
+
     }
 
     const prevScrollY = useRef(0);
@@ -357,6 +369,10 @@ export default function ProductDisplay() {
             {
                 !isLoading ?
                     <>
+                        {
+                            isProductLoading &&
+                            <BouncingLoader />
+                        }
                         <div className="writeReview" onClick={handleCloseReviewFrom} ref={writeReviewSection}>
                             <form encType="multipart/form-data" onSubmit={handleReviewForm} ref={formReviewSection}>
                                 <h2>Write a Review</h2>
@@ -463,17 +479,17 @@ export default function ProductDisplay() {
                                     <Link>
                                         {
                                             productDetails.stock ?
-                                                <button onClick={handleAddCart}>Add to cart</button> :
+                                                <button onClick={handleAddCart}>
+                                                    {
+                                                        addCartLoading ?
+                                                            "Loading..."
+                                                            :
+                                                            "Add to cart"
+                                                    }
+                                                </button> :
                                                 <button style={{ backgroundColor: "gray" }} onMouseOver={e => e.target.style.cursor = "not-allowed"}>Out of stock</button>
                                         }
                                     </Link>
-                                    {/* <Link>
-                            {
-                                productDetails.stock ?
-                                    <button>Buy now</button> :
-                                    <button style={{ backgroundColor: "gray" }} onMouseOver={e => e.target.style.cursor = "not-allowed"}>Out of stock</button>
-                            }
-                        </Link> */}
                                 </div>
                                 <div className="information">
                                     <div className="div">
@@ -550,10 +566,8 @@ export default function ProductDisplay() {
                                                 onClick={e => {
                                                     if (reviews.length != reviewSize) {
                                                         setProductLoading(true);
-                                                        setReviewViewMoreLimit(prev => prev + 10);
-                                                        setTimeout(() => {
-                                                            setProductLoading(false);
-                                                        }, 500);
+                                                        setReviewViewMoreLimit(prev => prev + 1);
+                                                        setProductLoading(false);
                                                     }
                                                 }}>View more</button>
                                             :
@@ -566,9 +580,7 @@ export default function ProductDisplay() {
                                                     if (reviews.length != reviewSize) {
                                                         setProductLoading(true);
                                                         setReviewViewMoreLimit(prev => prev + 10);
-                                                        setTimeout(() => {
-                                                            setProductLoading(false);
-                                                        }, 500);
+                                                        setProductLoading(false);
                                                     }
                                                 }}>View more</button>
                                     }

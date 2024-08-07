@@ -35,7 +35,7 @@ export default function ProductDisplay() {
         setProductLoading(true);
         try {
             const productID = searchParams.get("product");
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+
             let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${productID}`, {
                 headers: {
                     "Content-Type": "application/json"
@@ -198,21 +198,22 @@ export default function ProductDisplay() {
     const [addCartLoading, setAddCartLoading] = useState(false);
 
     async function handleAddCart(e) {
-        if (addCartLoading) return;
+        
         setAddCartLoading(true);
 
         e.target.style.backgroundColor = "rgb(255, 142, 100)";
         e.target.style.cursor = "not-allowed";
         try {
-            const productID = searchParams.get("product");
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            let res = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/${productID}`, {}, { withCredentials: true });
-            setChangeUserState(prev => prev + 1);
+            if (!addCartLoading) {
+                const productID = searchParams.get("product");
+                let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+                let res = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/${productID}`, {}, { withCredentials: true });
 
-            let message = res.data.message;
-            setVisible(true);
-            setMessage(message);
-            setColor('green');
+                let message = res.data.message;
+                setVisible(true);
+                setMessage(message);
+                setColor('green');
+            }
 
         } catch (error) {
 
@@ -226,42 +227,48 @@ export default function ProductDisplay() {
 
         e.target.style.backgroundColor = "orangered";
         e.target.style.cursor = "pointer";
+
+        setChangeUserState(prev => prev + 1);
         setAddCartLoading(false);
 
     }
 
+    function handleStickyProductDetails(e) {
+        const productInfo = document.querySelector('.productInfo');
+
+        if (window.innerWidth > 1000) {
+
+            const rect = productInfo.getBoundingClientRect();
+            const topBoundary = 11 * 16;
+            const bottomBoundary = window.innerHeight - rect.height - 32;
+            const currentScrollY = window.scrollY;
+            const delScrollY = currentScrollY - prevScrollY.current;
+
+            productInfo.style.position = 'sticky';
+
+            if (delScrollY > 0 && rect.bottom > bottomBoundary) {
+
+                productInfo.style.top = `${bottomBoundary}px`;
+
+            } else if (delScrollY < 0 && rect.top < topBoundary) {
+
+                productInfo.style.top = '11rem';
+            }
+
+            prevScrollY.current = currentScrollY;
+        }
+        else {
+            productInfo.style.position = 'static';
+
+        }
+    }
     const prevScrollY = useRef(0);
 
     useEffect(() => {
         const productInfo = document.querySelector('.productInfo');
 
-        window.addEventListener('scroll', e => {
-
-            if (window.innerWidth > 1000) {
-
-                const rect = productInfo.getBoundingClientRect();
-                const topBoundary = 11 * 16;
-                const bottomBoundary = window.innerHeight - rect.height - 32;
-                const currentScrollY = window.scrollY;
-                const delScrollY = currentScrollY - prevScrollY.current;
-
-                productInfo.style.position = 'sticky';
-
-                if (delScrollY > 0 && rect.bottom > bottomBoundary) {
-
-                    productInfo.style.top = `${bottomBoundary}px`;
-
-                } else if (delScrollY < 0 && rect.top < topBoundary) {
-
-                    productInfo.style.top = '11rem';
-                }
-
-                prevScrollY.current = currentScrollY;
-            }
-            else {
-                productInfo.style.position = 'static';
-            }
-        })
+        window.addEventListener('scroll', handleStickyProductDetails);
+        window.addEventListener('load', handleStickyProductDetails);
 
     }, []);
 

@@ -4,6 +4,7 @@ import "./CubeList.css";
 import CubeBox from "../CubeBox/CubeBox.jsx";
 import Filter from "../Filter/Filter.jsx";
 import { createContext, useEffect, useState } from "react";
+import BouncingLoader from "../BouncingLoader/BouncingLoader.jsx";
 
 const cubeContext = createContext();
 
@@ -37,6 +38,9 @@ export default function CubeList() {
 
     return (
         <cubeContext.Provider value={{ setCubeData, setLoadingState, searchParams, setSearchParams, sortBy }}>
+            {
+                !initialData && <BouncingLoader />
+            }
             <main>
                 <section className="filter">
                     <Filter />

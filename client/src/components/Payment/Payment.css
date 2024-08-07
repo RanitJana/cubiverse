@@ -247,6 +247,12 @@
     background-color: rgb(232, 62, 0);
 }
 
+@media only screen and (min-width:530px) {
+    .payment {
+        padding: 2rem 1rem;
+    }
+}
+
 @media only screen and (max-width:530px) {
     .storeAddress {
         grid-template-columns: 1fr;
@@ -257,7 +263,7 @@
     }
 
     .childBox {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
 
     .childBox .childBoxImage {

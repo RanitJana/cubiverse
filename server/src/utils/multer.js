@@ -6,7 +6,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/uploads"));
+        // cb(null, path.join(__dirname, "../public/uploads"));
+        cb(null, "/tmp");   //**** THIS IS FOR VERCEL ONLY
     },
     filename: function (req, file, cb) {
         cb(null, `${Date.now() + file.originalname}`);

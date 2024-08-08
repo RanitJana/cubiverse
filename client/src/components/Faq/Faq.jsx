@@ -44,8 +44,8 @@ export default function Faq() {
         setFaqLoading(true);
         try {
             const productID = searchParams.get("product");
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            const response = (await axios.get(`${base}/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
+
+            const response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}&limit=3&page=${faqPage}`, { withCredentials: true })).data;
 
             setFaqs(response.faqs);
             setMaxPage(response.pages);

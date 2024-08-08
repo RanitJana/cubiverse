@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Payment.css";
 import PaymentSuccess from "../PaymentSuccess/PaymentSuccess.jsx";
 import LoadingCube from "../LoadingCube/LoadingCube.jsx";
+import BouncingLoader from "../BouncingLoader/BouncingLoader.jsx";
 
 export default function Payment() {
 
@@ -94,11 +95,13 @@ export default function Payment() {
 
     }, [paymentType])
 
+    const [isPaymentLoading, setPaymentLoading] = useState(false);
+
     async function handleOrderPlace(e) {
         setSuccessOrder(false);
+        setPaymentLoading(true);
         try {
 
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/order`,
                 {
                     cartItems,
@@ -112,21 +115,31 @@ export default function Payment() {
                     withCredentials: true
                 }
             )
+            setPaymentLoading(false);
 
             setSuccessOrder(true);
 
-            setSuccessOrder(false);
+            setTimeout(() => {
+                setChangeUserState(prev => prev + 1);
+            }, 2000);
 
         } catch (error) {
+
             console.log(error);
+
+            setPaymentLoading(false);
 
             setColor('red')
             setMessage(error.response.data.message);
-            setVisible(true);
+            setVisible(false);
+
+            setTimeout(() => {
+                setChangeUserState(prev => prev + 1);
+            }, 1500);
 
         }
-        
-        setChangeUserState(prev => prev + 1);
+
+
     }
 
     if (!userData) return;
@@ -140,6 +153,10 @@ export default function Payment() {
                         <p>Order placed !!</p>
                     </div>
                 )
+            }
+            {
+                isPaymentLoading && <BouncingLoader />
+
             }
             <div className="paymentDetails">
                 <div className="orderSummary">

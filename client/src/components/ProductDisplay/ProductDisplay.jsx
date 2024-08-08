@@ -112,7 +112,7 @@ export default function ProductDisplay() {
 
         handleGetReview();
 
-    }, [reviewViewMoreLimit])
+    }, [reviewViewMoreLimit, location])
 
 
     function handleRatings(ratings) {
@@ -198,7 +198,7 @@ export default function ProductDisplay() {
     const [addCartLoading, setAddCartLoading] = useState(false);
 
     async function handleAddCart(e) {
-        
+
         setAddCartLoading(true);
 
         e.target.style.backgroundColor = "rgb(255, 142, 100)";
@@ -236,7 +236,7 @@ export default function ProductDisplay() {
     function handleStickyProductDetails(e) {
         const productInfo = document.querySelector('.productInfo');
 
-        if(!productInfo) return;
+        if (!productInfo) return;
 
         if (window.innerWidth > 1000) {
 

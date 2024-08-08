@@ -22,8 +22,7 @@ export default function Faq() {
             if (!neighbour.value || neighbour.value.length === 0) return;
             const productID = searchParams.get("product");
 
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
-            await axios.post(`${base}/api/v1/faqs?product=${productID}`, {
+            await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}`, {
                 question: neighbour.value
             }, {
                 headers: {

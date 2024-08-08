@@ -1,10 +1,8 @@
 .skeletion {
     height: 10rem;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     gap: 2rem;
-    /* margin-left: 2rem; */
     max-width: 100%;
 }
 
@@ -69,11 +67,6 @@
         height: fit-content;
         padding: 2rem 0;
         gap: 1rem;
-    }
-
-    .skeletion>p {
-        /* min-width: 8rem;
-        height: 7rem; */
     }
 
     .skeletion>div {

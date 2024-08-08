@@ -1,4 +1,5 @@
 .skeletion {
+    margin-left: 2rem;
     height: 10rem;
     display: flex;
     align-items: center;
@@ -63,7 +64,7 @@
 @media only screen and (max-width:430px) {
     .skeletion {
         flex-direction: column;
-        /* margin-left: 1.5rem; */
+        margin-left: 0;
         height: fit-content;
         padding: 2rem 0;
         gap: 1rem;

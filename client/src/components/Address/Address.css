@@ -13,6 +13,8 @@
     font-weight: bold;
     color: rgb(0, 0, 97);
     display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -234,7 +236,8 @@
     font-size: small;
     font-weight: bold;
 }
-.editAddressSection button:hover{
+
+.editAddressSection button:hover {
     cursor: pointer;
     background-color: rgb(224, 60, 0);
 }

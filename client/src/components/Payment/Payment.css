@@ -312,7 +312,12 @@
 
 @media only screen and (max-width:600px) {
     .payment {
-        padding: 1rem;
+        padding: 1rem 0;
+    }
+
+    .payment>div>h2,
+    .payment>div>div>h2 {
+        padding-left: 1rem;
     }
 }
 

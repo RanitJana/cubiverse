@@ -47,7 +47,6 @@
 .orderCube:last-child {
     border: none;
 }
-
 @media only screen and (max-width:626px) {
     .userSection {
         padding: 2rem;
@@ -69,7 +68,7 @@
 }
 @media screen and (max-width:561px) {
     .userSection {
-        padding: 1rem;
+        padding: 1rem 0;
     }
     
 }

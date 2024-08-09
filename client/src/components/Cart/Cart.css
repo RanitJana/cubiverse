@@ -139,7 +139,10 @@
 @media screen and (max-width:561px) {
 
     .cart{
-        padding: 2rem 1rem;
+        padding: 2rem 0rem;
         padding-top: 1rem;
+    }
+    .cart>h2{
+        padding-left: 1rem;
     }
 }

@@ -15,13 +15,12 @@ import Order from './components/Order/Order.jsx';
 import Address from './components/Address/Address.jsx';
 import Payment from './components/Payment/Payment.jsx';
 
-import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import { VerifyAuth } from './components/VerifyAuth/VerifyAuth.jsx';
 
 
 const handleUserData = async () => {
   try {
-    let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
 
     let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/user`, { withCredentials: true })
     return response.data;
@@ -34,48 +33,9 @@ const handleUserData = async () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
-      <Route path=""
-        loader=
-        {
-          async () => {
-            try {
-
-              document.cookie = "limit=10; path=/";
-
-              let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
-              console.log(base);
-
-
-              let response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/most-favourite`, { withCredentials: true })).data
-
-              return JSON.parse(response);
-
-            } catch (error) {
-              console.log(error);
-
-              return [];
-            }
-          }
-        }
-        element={<Home />}
-      />
+      <Route path="" element={<Home />} />
       <Route path="collections/">
-        <Route
-          loader=
-          {
-            async ({ params }) => {
-              try {
-                let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
-                let response = (await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/${params.product}`, { withCredentials: true })).data;
-                return JSON.parse(response);
-              } catch (error) {
-                console.log(error);
-                return {}
-              }
-            }
-          }
-          path=":product"
-          element={<CubeList />} />
+        <Route loader={async ({ params }) => params} path=":product" element={<CubeList />} />
       </Route>
       <Route path="buy" element={<ProductDisplay />} />
       <Route path="register" element={<Register />} />

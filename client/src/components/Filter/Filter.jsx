@@ -1,11 +1,12 @@
 import "./Filter.css";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import { cubeContext } from "../CubeLists/CubeList.jsx";
 import { useState, useEffect, useContext, useRef } from "react";
 
-export default function Filter() {
+export default function Filter(cubeData) {
 
-    let data = useLoaderData();
+    let data = cubeData.value;
+
     let max = 10000;
 
     const { setCubeData, setLoadingState, searchParams, setSearchParams, sortBy } = useContext(cubeContext);

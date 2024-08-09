@@ -29,7 +29,7 @@ export default function Header() {
 
         document.addEventListener('click', e => {
 
-            if (sideNavOpen && e.x > Math.max(320, e.width)) {
+            if (sideNavOpen && e.x > Math.max(256, e.width)) {
                 blackCoverRef.current.classList.toggle("navOpen");
                 sideNavOpen = !sideNavOpen;
                 navRef.current.classList.toggle("navOpen");

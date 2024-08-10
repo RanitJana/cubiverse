@@ -38,7 +38,9 @@ export default function Order(user) {
         } catch (error) {
             console.log(error);
         }
-        setLoading(false);
+        finally {
+            setLoading(false);
+        }
 
     }
 

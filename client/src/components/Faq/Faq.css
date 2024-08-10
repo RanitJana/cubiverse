@@ -34,10 +34,20 @@
     border: none;
 }
 
-.postFaq button {
+.postFaq button,
+.pageBtns button {
     background-color: orangered;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 
+}
+
+.postFaq button img {
+    width: 1.5rem;
+    filter: invert(100%);
 }
 
 .postFaq button:hover {
@@ -58,18 +68,18 @@
 }
 
 .pageBtns button {
-    padding: 0.5rem 1rem;
-    border-radius: 3px;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
     border: none;
-    color: white;
 }
 
-.enabled {
-    background-color: orangered;
-    cursor: pointer;
+.pageBtns button:first-child {
+    transform: rotate(180deg);
 }
 
-.disabled {
-    background-color: #b1b1b1;
-    cursor: not-allowed;
+.pageBtns img {
+    filter: invert(100%);
+    width: 1.5rem;
 }

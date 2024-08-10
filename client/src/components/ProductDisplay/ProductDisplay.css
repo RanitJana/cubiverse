@@ -143,6 +143,15 @@
     gap: 1rem;
 }
 
+.productInfo .leftStock {
+    color: orangered;
+    border: 2px solid orangered;
+    padding: 0.1rem 0.5rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
 .productInfo .stock .availStock::before {
     content: "";
     background-color: green;
@@ -246,10 +255,14 @@
 }
 
 .buyButtons a {
+    text-decoration: none;
+    background-color: orangered;
     border-radius: 3px;
+    min-width: 15rem;
 }
 
 .buyButtons button:hover {
+    background-color: rgb(230, 63, 2);
     cursor: pointer;
 }
 
@@ -258,15 +271,41 @@
     border: none;
     border-radius: 3px;
     background-color: transparent;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
     height: 100%;
     width: 100%;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 15rem;
 }
 
-.buyButtons a {
-    background-color: orangered;
+.buyButtons button img {
+    width: 2rem;
+    filter: invert(100%);
+}
+
+.cartSpinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    border-top-color: white;
+    border-right-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .productInfo .information {
@@ -413,6 +452,17 @@ table tr td:last-child {
     align-items: center;
     gap: 0.25rem;
     border-radius: 20px;
+}
+
+.productReview .viewProductReviewMore button img {
+    filter: invert(100%);
+}
+
+.productReview .viewProductReviewMore button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .productReview .reviewTop button:hover,

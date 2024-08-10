@@ -80,6 +80,7 @@ export default function Cart() {
                     withCredentials: true
                 }
             );
+            await handleGetAllCartCube();
             setChangeUserState(prev => prev + 1);
         } catch (error) {
             console.log(error);

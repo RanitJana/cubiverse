@@ -58,35 +58,6 @@ export default function Faq() {
         handleFetchFaq();
     }, [faqPage, changeUserState]);
 
-    useEffect(() => {
-        const updateButtonState = () => {
-            const prev = document.querySelector('.prev');
-            const next = document.querySelector('.next');
-
-            if (faqPage === 1) {
-                prev.setAttribute('disabled', true);
-                prev.classList.add('disabled');
-                prev.classList.remove('enabled');
-            } else {
-                prev.removeAttribute('disabled');
-                prev.classList.add('enabled');
-                prev.classList.remove('disabled');
-            }
-
-            if (faqPage === maxPage || maxPage === 0) {
-                next.setAttribute('disabled', true);
-                next.classList.add('disabled');
-                next.classList.remove('enabled');
-            } else {
-                next.removeAttribute('disabled');
-                next.classList.add('enabled');
-                next.classList.remove('disabled');
-            }
-        };
-
-        updateButtonState();
-    }, [faqPage, maxPage]);
-
     return (
         <>
             {isFaqLoading ? (
@@ -117,19 +88,32 @@ export default function Faq() {
                         <button
                             className="prev enabled"
                             onClick={() => setFaqPage(Math.max(faqPage - 1, 1))}
+                            style={{
+                                backgroundColor: faqPage == 1 ? "#b1b1b1" : "orangered",
+                                cursor: faqPage == 1 ? "not-allowed" : "pointer"
+                            }}
                         >
-                            Prev
+                            <img src="/images/icons8-next-48.png" alt="" />
                         </button>
                         <button
                             className="next enabled"
                             onClick={() => setFaqPage(Math.min(faqPage + 1, maxPage))}
+                            style={{
+                                backgroundColor: faqPage == maxPage || maxPage == 0 ? "#b1b1b1" : "orangered",
+                                cursor: faqPage == maxPage || maxPage == 0 ? "not-allowed" : "pointer"
+                            }}
                         >
-                            Next
+                            <img src="/images/icons8-next-48.png" alt="" />
                         </button>
                     </div>
                     <div className="postFaq">
                         <input type="text" name="question" id="question" placeholder="Ask a question.." />
-                        <button onClick={handlePostFaq}>Ask a question</button>
+                        <button onClick={handlePostFaq}>
+                            <img src="/images/icons8-ask-question-48.png" alt="" />
+                            <span>
+                                Ask a question
+                            </span>
+                        </button>
                     </div>
                 </>
             )}

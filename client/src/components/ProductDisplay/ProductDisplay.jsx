@@ -206,7 +206,6 @@ export default function ProductDisplay() {
         try {
             if (!addCartLoading) {
                 const productID = searchParams.get("product");
-                let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
                 let res = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/${productID}`, {}, { withCredentials: true });
 
                 let message = res.data.message;
@@ -225,10 +224,11 @@ export default function ProductDisplay() {
             setColor('red');
         }
 
+        setChangeUserState(prev => prev + 1);
+
         e.target.style.backgroundColor = "orangered";
         e.target.style.cursor = "pointer";
 
-        setChangeUserState(prev => prev + 1);
         setAddCartLoading(false);
 
     }
@@ -300,7 +300,6 @@ export default function ProductDisplay() {
 
             const productID = searchParams.get("product");
 
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/review/${productID}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -425,21 +424,9 @@ export default function ProductDisplay() {
                             <div className="productInfo">
                                 <h2>{productDetails.name}</h2>
                                 <div className="offers">
-                                    {
-                                        productDetails.New ?
-                                            <span className="new">new</span>
-                                            : ""
-                                    }
-                                    {
-                                        productDetails.ratings?.count >= 50 ?
-                                            <span className="bestseller">bestseller</span>
-                                            : ""
-                                    }
-                                    {
-                                        productDetails.discount ?
-                                            <span className="discount">{productDetails.discount}% off</span>
-                                            : ""
-                                    }
+                                    {productDetails.New && <span className="new">new</span>}
+                                    {productDetails.ratings?.count >= 50 && <span className="bestseller">bestseller</span>}
+                                    {productDetails.discount && <span className="discount">{productDetails.discount}% off</span>}
                                 </div>
                                 <div className="companyAndRatings">
                                     <span>{productDetails.company}</span>
@@ -477,6 +464,9 @@ export default function ProductDisplay() {
                                             <div className="availStock">In stock</div>
                                             : <div className="outStock">Out of stock</div>
                                     }
+                                    {
+                                        productDetails.stock < 100 && <span className="leftStock">{productDetails.stock} left</span>
+                                    }
                                 </div>
                                 <div className="buyButtons">
                                     <Link>
@@ -485,9 +475,14 @@ export default function ProductDisplay() {
                                                 <button onClick={handleAddCart}>
                                                     {
                                                         addCartLoading ?
-                                                            "Loading..."
+                                                            <div className="cartSpinner"></div>
                                                             :
-                                                            "Add to cart"
+                                                            <>
+                                                                <img src="/images/cart.png" alt="" />
+                                                                <span>
+                                                                    Add to cart
+                                                                </span>
+                                                            </>
                                                     }
                                                 </button> :
                                                 <button style={{ backgroundColor: "gray" }} onMouseOver={e => e.target.style.cursor = "not-allowed"}>Out of stock</button>
@@ -584,13 +579,23 @@ export default function ProductDisplay() {
                                                             setReviewViewMoreLimit(prev => prev + 10);
                                                             setProductLoading(false);
                                                         }
-                                                    }}>View more</button>
+                                                    }}>
+                                                    <img src="/images/icons8-more-24.png" alt="" />
+                                                    <span>
+                                                        View more
+                                                    </span>
+                                                </button>
                                                 :
                                                 <button id="viewMoreReview"
                                                     style={{
                                                         backgroundColor: "gray",
                                                         cursor: "not-allowed"
-                                                    }}>View more</button>
+                                                    }}>
+                                                    <img src="/images/icons8-more-24.png" alt="" />
+                                                    <span>
+                                                        View more
+                                                    </span>
+                                                </button>
                                     }
                                 </div>
                             </div>

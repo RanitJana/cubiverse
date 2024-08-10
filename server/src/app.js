@@ -15,6 +15,10 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParsar());
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'public, max-age=86400'); // Cache for 1 hour
+    next();
+})
 
 //routes
 import register from "./routes/register.route.js";

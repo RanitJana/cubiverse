@@ -11,7 +11,7 @@ import TrackOrder from "../TrackOrder/TrackOrder.jsx";
 
 export default function Order(user) {
 
-    const { userData } = useContext(globalContext);
+    const { userData, setChangeUserState, setProducts, setVisible, setMessage, setColor } = useContext(globalContext);
     const [orderData, setOrderData] = useState([]);
     const [orderItemDetails, setOrderItemDetails] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -43,6 +43,7 @@ export default function Order(user) {
     }
 
     async function handleOrderCancel(e, order) {
+        setLoading(true);
         try {
 
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/order/${order._id}/${order.product}/${order.count}`, {}, {
@@ -51,12 +52,21 @@ export default function Order(user) {
                 },
                 withCredentials: true
             })
-            console.log(response);
+
+            let message = response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('green');
 
 
         } catch (error) {
             console.log(error);
+            let message = error.response.data.message;
+            setVisible(true);
+            setMessage(message);
+            setColor('red');
         }
+        setChangeUserState(prev => prev + 1);
     }
 
     useEffect(() => {
@@ -64,9 +74,6 @@ export default function Order(user) {
         setOrderData(userData?.data.user.orderHistory);
 
         handleGetAllCartCube();
-        console.log(orderData);
-
-
 
     }, [userData, orderData])
 
@@ -97,8 +104,8 @@ export default function Order(user) {
                                                 <p>Order date : {(new Date(order.orderedDate)).toLocaleString()}</p>
                                             </div>
                                             {
-                                                order.state != "DELIVERED" &&
-                                                <button className="orderCancel" onClick={e => handleOrderCancel(e, order)}>Cancel order</button>
+                                                order.state != "DELIVERED" && order.state != "CANCELLED" &&
+                                                < button className="orderCancel" onClick={e => handleOrderCancel(e, order)}>Cancel order</button>
                                             }
                                         </div>
                                     </div>
@@ -110,7 +117,7 @@ export default function Order(user) {
                                 <Link to="/collections/all">Make your first order</Link>
                             </div>
                 }
-            </div>
+            </div >
         </>
     )
 }

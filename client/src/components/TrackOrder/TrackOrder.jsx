@@ -51,13 +51,13 @@ export default function TrackOrder(prop) {
                     </div>
                     <div className="progressName"
                         style={{
-                            backgroundColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : "#fd7e14"
+                            backgroundColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : order?.state == "DELIVERED" ? "#fd7e14" : "red"
                         }}
                     >{order?.state}
                         <div className="triangle"
 
                             style={{
-                                borderTopColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : "#fd7e14"
+                                borderTopColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : order?.state == "DELIVERED" ? "#fd7e14" : "red"
                             }}                    ></div>
                     </div>
                 </div>

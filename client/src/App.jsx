@@ -29,7 +29,6 @@ export default function App() {
     async function fetchData() {
       setLoading(true)
       try {
-        let base = import.meta.env.VITE_BACKEND_URI || "http://localhost:5000";
 
         let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/user`,
           {

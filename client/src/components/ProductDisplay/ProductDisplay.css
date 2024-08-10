@@ -357,8 +357,23 @@
 
 .productDetails .details {
     margin-top: 1rem;
-    /* font-size: 1.05rem; */
     overflow: auto;
+}
+
+.emptyReview {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyReview>* {
+    font-weight: bold;
+    color: gray;
+}
+
+.emptyReview>img {
+    filter: grayscale(100%) brightness(50%) contrast(0%);
 }
 
 pre {

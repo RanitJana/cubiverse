@@ -18,18 +18,6 @@ import Payment from './components/Payment/Payment.jsx';
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import { VerifyAuth } from './components/VerifyAuth/VerifyAuth.jsx';
 
-
-const handleUserData = async () => {
-  try {
-
-    let response = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/user`, { withCredentials: true })
-    return response.data;
-
-  } catch (error) {
-    return error.response;
-  }
-}
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >

@@ -19,7 +19,7 @@ export default function Faq() {
         setFaqLoading(true);
         try {
             let neighbour = e.target.parentNode.childNodes[0];
-            if (!neighbour.value || neighbour.value.length === 0) return;
+            if (!neighbour.value || neighbour.value.length === 0) return setFaqLoading(false);
             const productID = searchParams.get("product");
 
             await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}`, {
@@ -107,7 +107,7 @@ export default function Faq() {
                         </button>
                     </div>
                     <div className="postFaq">
-                        <input type="text" name="question" id="question" placeholder="Ask a question.." />
+                        <input type="text" name="question" id="question" placeholder="Ask a question.." required />
                         <button onClick={handlePostFaq}>
                             <img src="/images/icons8-ask-question-48.png" alt="" />
                             <span>

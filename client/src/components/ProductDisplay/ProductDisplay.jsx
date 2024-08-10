@@ -267,10 +267,10 @@ export default function ProductDisplay() {
     const prevScrollY = useRef(0);
 
     useEffect(() => {
-        const productInfo = document.querySelector('.productInfo');
 
-        window.addEventListener('scroll', handleStickyProductDetails);
         window.addEventListener('load', handleStickyProductDetails);
+        window.addEventListener('scroll', handleStickyProductDetails);
+        window.addEventListener('resize', handleStickyProductDetails);
 
     }, []);
 
@@ -426,7 +426,7 @@ export default function ProductDisplay() {
                                 <div className="offers">
                                     {productDetails.New && <span className="new">new</span>}
                                     {productDetails.ratings?.count >= 50 && <span className="bestseller">bestseller</span>}
-                                    {productDetails.discount && <span className="discount">{productDetails.discount}% off</span>}
+                                    {productDetails.discount ? <span className="discount">{productDetails.discount}% off</span> : ""}
                                 </div>
                                 <div className="companyAndRatings">
                                     <span>{productDetails.company}</span>
@@ -553,7 +553,10 @@ export default function ProductDisplay() {
                                                         </div>)
                                                     })
                                                     :
-                                                    "🤐 Needs review"
+                                                    <div className="emptyReview">
+                                                        <img src="/images/icons8-page-80.png" alt="" />
+                                                        <p>Write a review first..</p>
+                                                    </div>
                                             )
                                             :
                                             <>
@@ -571,31 +574,20 @@ export default function ProductDisplay() {
                                             </div>
 
                                             :
-                                            reviews.length > 0 && reviewSize > reviews.length ?
-                                                <button id="viewMoreReview"
-                                                    onClick={e => {
-                                                        if (reviews.length != reviewSize) {
-                                                            setProductLoading(true);
-                                                            setReviewViewMoreLimit(prev => prev + 10);
-                                                            setProductLoading(false);
-                                                        }
-                                                    }}>
-                                                    <img src="/images/icons8-more-24.png" alt="" />
-                                                    <span>
-                                                        View more
-                                                    </span>
-                                                </button>
-                                                :
-                                                <button id="viewMoreReview"
-                                                    style={{
-                                                        backgroundColor: "gray",
-                                                        cursor: "not-allowed"
-                                                    }}>
-                                                    <img src="/images/icons8-more-24.png" alt="" />
-                                                    <span>
-                                                        View more
-                                                    </span>
-                                                </button>
+                                            reviews.length > 0 && reviewSize > reviews.length &&
+                                            <button id="viewMoreReview"
+                                                onClick={e => {
+                                                    if (reviews.length != reviewSize) {
+                                                        setProductLoading(true);
+                                                        setReviewViewMoreLimit(prev => prev + 10);
+                                                        setProductLoading(false);
+                                                    }
+                                                }}>
+                                                <img src="/images/icons8-more-24.png" alt="" />
+                                                <span>
+                                                    View more
+                                                </span>
+                                            </button>
                                     }
                                 </div>
                             </div>

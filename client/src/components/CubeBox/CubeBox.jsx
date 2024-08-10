@@ -31,26 +31,25 @@ export default function CubeBox({ cube }) {
             starUI.push(<img src="/images/icons8-star-48.png" alt="star" key={key++} />);
         }
 
-        return starUI
+        return starUI;
     }
 
     return (
         <div className="box">
             {
 
-                cube.New ? <div className="new">new</div> : ""
+                cube.New && <div className="new">new</div>
             }
             {
-                cube.ratings.count >= 50 ?
-                    (
-                        cube.New ?
-                            (
-                                <div className="bestseller">bestseller</div>
-                            )
-                            :
-                            <div className="bestseller" style={{ top: "2%" }}>bestseller</div>
-                    )
-                    : ""
+                cube.ratings.count >= 50 &&
+                (
+                    cube.New ?
+                        (
+                            <div className="bestseller">bestseller</div>
+                        )
+                        :
+                        <div className="bestseller" style={{ top: "2%" }}>bestseller</div>
+                )
             }
             <Link to={`/buy?product=${cube._id}`} >
                 <img src={cube.images[0]} alt="cube" />
@@ -91,7 +90,11 @@ export default function CubeBox({ cube }) {
                                     e.target.style.cursor = 'pointer';
                                 }}
                             >
-                                Buy Now</button>
+                                <img src="/images/icons8-paper-bag-64.png" alt="" />
+                                <span>
+                                    Buy Now
+                                </span>
+                            </button>
                         </Link>
                     )
                     :
@@ -103,7 +106,11 @@ export default function CubeBox({ cube }) {
                             e.target.style.cursor = 'not-allowed';
                         }}
                     >
-                        Sold Out</button>
+                        <img src="/images/icons8-empty-box-100.png" alt="" />
+                        <span>
+                            Sold Out
+                        </span>
+                    </button>
             }
 
         </div>

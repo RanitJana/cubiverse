@@ -520,7 +520,12 @@ export default function ProductDisplay() {
                             <div className="productReview">
                                 <div className="reviewTop">
                                     <span>{reviews.length} reviews</span>
-                                    <button onClick={handleOpenReview}>Write a review</button>
+                                    <button onClick={handleOpenReview}>
+                                        <img src="/images/icons8-write-48.png" alt="" />
+                                        <span>
+                                            Write a review
+                                        </span>
+                                    </button>
                                 </div>
                                 <div className="reviewDetails">
                                     {

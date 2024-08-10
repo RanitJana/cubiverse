@@ -33,7 +33,6 @@ export default function Cart() {
 
                 userData.data.user.cart.map(async (val) => {
 
-                    let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
                     let cube = await axios.get(`https://cubiverse-bakend.vercel.app/api/v1/product/id?product=${val.productId}`, { withCredentials: true });
                     cube = JSON.parse(cube.data);
 
@@ -116,7 +115,7 @@ export default function Cart() {
                                     return (
                                         <CartCube
                                             key={index}
-                                            product={{ val, userInfo, setConfirmErase, setProduct }}
+                                            product={{ val, userInfo, setConfirmErase, setProduct, setCartLoading, handleGetAllCartCube }}
                                         />
                                     );
                                 })
@@ -146,9 +145,9 @@ export default function Cart() {
                     </div>
                     <p>Tax included. Shipping calculated at checkout</p>
 
-                    <button onClick={e => { if (cubes.length) navigate('/user/order') }} style={{
-                        backgroundColor: cubes.length ? "orangered" : "gray",
-                        cursor: cubes.length ? "pointer" : "not-allowed"
+                    <button onClick={e => { if (cubes.length && !isCartLoading) navigate('/user/order') }} style={{
+                        backgroundColor: cubes.length && !isCartLoading ? "orangered" : "gray",
+                        cursor: cubes.length && !isCartLoading ? "pointer" : "not-allowed"
                     }} >PLACE ORDER</button>
                 </div>
             </div>

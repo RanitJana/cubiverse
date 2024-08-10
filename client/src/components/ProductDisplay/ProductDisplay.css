@@ -390,15 +390,10 @@ table tr td:last-child {
     align-items: center;
 }
 
-@media screen and (max-width:407px) {
-    .productReview .reviewTop {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
 
-    .productReview .reviewTop button {
-        width: 100%;
-    }
+.productReview .reviewTop button img {
+    filter: invert(100%);
+    width: 1rem;
 }
 
 .productReview .reviewTop button,
@@ -412,11 +407,36 @@ table tr td:last-child {
     outline: none;
 }
 
+.productReview .reviewTop button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 20px;
+}
+
 .productReview .reviewTop button:hover,
 .productReview .viewProductReviewMore button:hover,
 #addReview:hover {
     cursor: pointer;
     background-color: rgb(213, 57, 0);
+}
+
+
+@media screen and (max-width:407px) {
+
+    .productReview .reviewTop button img {
+        width: 1.5rem;
+    }
+
+    .productReview .reviewTop button span {
+        display: none;
+    }
+
+    .productReview .reviewTop button {
+        padding: 0.5rem;
+        border-radius: 50%;
+    }
 }
 
 .productReview .reviewDetails .reviewBox {

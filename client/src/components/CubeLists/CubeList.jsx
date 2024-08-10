@@ -95,15 +95,22 @@ export default function CubeList() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bottom">
+                            {
+                                cubeData.length ?
+                                    <div className="bottom">
+                                        {
+                                            cubeData.map((cube, idx) => {
+                                                return <CubeBox key={idx} cube={{ cube }} />
+                                            })
+                                        }
+                                    </div>
+                                    :
+                                    <div className="cubeListEmpty">
+                                        <img src="/images/icons8-empty-box-100.png" alt="" />
+                                        <p>No product is found</p>
+                                    </div>
+                            }
 
-                                {
-                                    cubeData.map((cube, idx) => {
-                                        return <CubeBox key={idx} cube={{ cube }} />
-                                    })
-                                }
-
-                            </div>
                         </section>
                     </main>
             }

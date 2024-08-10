@@ -95,9 +95,14 @@ export default function Order(user) {
                                         <TrackOrder cubeData={{ order, index }} />
                                         <div className="orderCube">
                                             <div className="orderCubeImage">
-                                                <img src={orderItemDetails[index]?.images[0]} alt="" />
+                                                <img src={orderItemDetails[index]?.images[0]} alt="" style={{ filter: order.state == "CANCELLED" ? "grayscale(100%)" : "" }} />
                                             </div>
-                                            <div className="orderCubeDetails">
+                                            <div className="orderCubeDetails"
+                                                style={{
+                                                    filter: order.state == "CANCELLED" ? "grayscale(100%) contrast(0%)" : "",
+                                                    textDecoration: order.state == "CANCELLED" ? "line-through" : ""
+
+                                                }}>
                                                 <Link to={`/buy?product=${order.product}`}>{orderItemDetails[index]?.name}</Link>
                                                 <p>Price : <span>₹{order.finalPrice}</span></p>
                                                 <p>Quantity : {order.count}</p>

@@ -77,7 +77,13 @@ export default function CubeBox({ cube }) {
                 <span>({cube.ratings.count})</span>
             </div>
             {
-                cube.stock ? <div className="inStock">In Stock</div> :
+                cube.stock ? <div className="inStock">
+                    <span>In Stock</span>
+                    {
+                        cube.stock < 100 &&
+                        <span style={{ color: "orangered", marginLeft: "0.5rem" }}> ({cube.stock} left)</span>
+                    }
+                </div> :
                     <div className="outOfStock">Out Of Stock</div>
             }
             {

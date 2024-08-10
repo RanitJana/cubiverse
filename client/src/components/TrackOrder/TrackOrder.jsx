@@ -25,14 +25,14 @@ export default function TrackOrder(prop) {
                 let progress = order.progress;
 
 
-                orderPlaced.style.backgroundColor = "blue";
+                orderPlaced.style.backgroundColor = "#34bbff";
                 path.style.width = `${progress}%`;
 
                 if (progress >= 50) {
-                    orderShipped.style.backgroundColor = "blue";
+                    orderShipped.style.backgroundColor = "#34bbff";
                 }
                 if (progress == 100) {
-                    orderDelivered.style.backgroundColor = "blue";
+                    orderDelivered.style.backgroundColor = "#34bbff";
                 }
             }
 
@@ -47,8 +47,19 @@ export default function TrackOrder(prop) {
             <div className="path">
                 <div className="colorPath">
                     <div className="highlightPath"></div>
-                    <div className="highlightPath"></div>
+                    <div className="highlightPath">
+                    </div>
+                    <div className="progressName"
+                        style={{
+                            backgroundColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : "#fd7e14"
+                        }}
+                    >{order?.state}
+                        <div className="triangle"
 
+                            style={{
+                                borderTopColor: order?.state == "ORDER PLACED" ? "#28a745" : order?.state == "ORDER SHIPPED" ? "#007bff" : "#fd7e14"
+                            }}                    ></div>
+                    </div>
                 </div>
                 <div className="orderPlaced" title="Ordered"></div>
                 <div className="orderShipped" title="Shipped"></div>

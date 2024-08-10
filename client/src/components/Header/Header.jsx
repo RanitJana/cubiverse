@@ -6,9 +6,20 @@ import { Link, NavLink, useLocation } from "react-router-dom"
 import { useRef, useEffect, useContext } from "react";
 import CubeCollection from "../CubeTop/CubeCollection";
 import { globalContext } from "../../App.jsx";
-
+import axios from "axios";
 
 export default function Header() {
+    async function handleSearchGoogle() {
+        // try {
+        //     let res = await axios.post("https://cse.google.com/cse.js?cx=e573ce9d386f94e76", {}, { withCredentials: true });
+        //     console.log(res);
+
+        // }
+        // catch (err) {
+        //     console.log(err);
+
+        // }
+    }
 
     const hambergRef = useRef(null);
     const navRef = useRef(null);
@@ -71,6 +82,7 @@ export default function Header() {
     return (
         <>
             <header>
+
                 <div className="blackCover" ref={blackCoverRef}></div>
                 <div className="top">
                     <div className="navMenu" ref={hambergRef}>
@@ -93,7 +105,7 @@ export default function Header() {
                             onBlur={handleSuggestionBlur}
                             onInput={handleSearchBarInput}
                         />
-                        <img src="/images/search.png" alt="Search" />
+                        <img src="/images/search.png" alt="Search" onClick={handleSearchGoogle} />
                         <ul style={{ height: 0, padding: 0 }}>
                             <li>
                                 <Link to="/collections/all">All cubes</Link>
@@ -156,7 +168,7 @@ export default function Header() {
                                     </div>
                                     :
                                     <Link to="/user" className="userLoggedIn">
-                                        <p style={{ textAlign: "center", width: "2rem", height: "2rem", backgroundColor: "purple", borderRadius: "50%",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"bold" }} >
+                                        <p style={{ textAlign: "center", width: "2rem", height: "2rem", backgroundColor: "purple", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }} >
                                             {userData.data.user.firstName.split("")[0]}
                                         </p>
                                     </Link>)

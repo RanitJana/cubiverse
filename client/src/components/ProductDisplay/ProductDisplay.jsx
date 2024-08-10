@@ -524,46 +524,41 @@ export default function ProductDisplay() {
                                 </div>
                                 <div className="reviewDetails">
                                     {
-                                        !isProductLoading ?
-                                            (
-                                                reviews.length > 0 ?
-                                                    reviews.map((review, index) => {
-                                                        return (<div className="reviewBox" key={index}>
-                                                            <div className="reviewImage">
-                                                                <img src={review.image} alt="" />
-                                                            </div>
-                                                            <div className="reviewContent">
-                                                                <div>
-                                                                    <div className="reviewStars">
-                                                                        {
-                                                                            handleRatings({ count: 1, result: review.ratings })
-                                                                        }
-                                                                    </div>
-                                                                    <div>
-                                                                        <div className="reviewer">{review.user}, </div>
-                                                                        <div className="reviewDate">{review.createdAt}</div>
-                                                                    </div>
-                                                                </div>
-                                                                <p>
-                                                                    {
-                                                                        review.content
-                                                                    }
-                                                                </p>
-                                                            </div>
-                                                        </div>)
-                                                    })
-                                                    :
-                                                    <div className="emptyReview">
-                                                        <img src="/images/icons8-page-80.png" alt="" />
-                                                        <p>Write a review first..</p>
-                                                    </div>
-                                            )
-                                            :
+                                        isProductLoading ? (
                                             <>
                                                 <LoadingCube />
                                                 <LoadingCube />
                                             </>
+                                        ) : (
+                                            reviews.length > 0 ? (
+                                                reviews.map((review, index) => (
+                                                    <div className="reviewBox" key={index}>
+                                                        <div className="reviewImage">
+                                                            <img src={review.image} alt="" />
+                                                        </div>
+                                                        <div className="reviewContent">
+                                                            <div>
+                                                                <div className="reviewStars">
+                                                                    {handleRatings({ count: 1, result: review.ratings })}
+                                                                </div>
+                                                                <div>
+                                                                    <div className="reviewer">{review.user}, </div>
+                                                                    <div className="reviewDate">{review.createdAt}</div>
+                                                                </div>
+                                                            </div>
+                                                            <p>{review.content}</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="emptyReview">
+                                                    <img src="/images/icons8-page-80.png" alt="" />
+                                                    <p>Write a review first..</p>
+                                                </div>
+                                            )
+                                        )
                                     }
+
                                 </div>
                                 <div className="viewProductReviewMore">
                                     {

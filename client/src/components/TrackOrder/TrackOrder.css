@@ -11,7 +11,7 @@
     position: relative;
     width: 100%;
     max-width: 25rem;
-    height: 0.4rem;
+    height: 0.3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,8 +23,8 @@
     position: absolute;
     top: 50%;
     z-index: 2;
-    width: 1rem;
-    height: 1rem;
+    width: 0.7rem;
+    height: 0.7rem;
     border-radius: 50%;
     background-color: #ccc;
 
@@ -51,7 +51,7 @@
 .trackPath>.path>.colorPath {
     left: 0;
     transform: translateY(-50%);
-    background-color: blue;
+    background-color: #87d7ff;
     border-radius: 0;
     width: 0%;
 }
@@ -62,22 +62,22 @@
     right: 0%;
     top: 50%;
     transform: translate(50%, -50%);
-    width: 1rem;
-    height: 1rem;
-    background-color: blue;
+    width: 0.7rem;
+    height: 0.7rem;
+    background-color: #34bbff;
     border-radius: 50%;
 }
 
 .trackPath>.path>.colorPath>.highlightPath {
 
     z-index: 3;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 0.7rem;
+    height: 0.7rem;
     border-radius: 50%;
     transform: translateX(50%);
     position: absolute;
     right: 0;
-    animation: blink 2s ease infinite;
+    animation: blink 1.5s ease infinite;
     border: 1px solid;
 }
 
@@ -89,14 +89,41 @@
     0% {
         width: 1rem;
         height: 1rem;
-        background-color: rgba(0, 0, 255, 0.521);
-        border-color: rgba(0, 0, 255, 0.513);
+        background-color: #6cceff;
+        border-color: #c5ecff91;
     }
 
     100% {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2rem;
+        height: 2rem;
         background-color: transparent;
-        border-color: rgba(154, 154, 245, 0.154);
+        border-color: rgba(255, 255, 255, 0.154);
     }
+}
+
+.progressName {
+    position: absolute;
+    right: 0;
+    transform: translate(50%, -120%);
+    text-wrap: nowrap;
+    border-radius: 3px;
+    padding: 0.3rem;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: #28a745;
+    z-index: 99;
+}
+
+.triangle {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid green;
 }

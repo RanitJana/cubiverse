@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { globalContext } from "../../App.jsx";
 import { useContext, useEffect, useState } from "react";
 import "./Order.css"
@@ -9,8 +9,6 @@ import LoadingCube from "../LoadingCube/LoadingCube.jsx";
 import TrackOrder from "../TrackOrder/TrackOrder.jsx";
 
 export default function Order(user) {
-
-    const navigate = useNavigate();
 
     const { userData } = useContext(globalContext);
     const [orderData, setOrderData] = useState([]);

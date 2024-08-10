@@ -13,7 +13,7 @@ export default function User() {
 
     async function handleLogOut(e) {
         try {
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/logout`, {}, {
                 headers: {
                     "Content-Type": "application/json"

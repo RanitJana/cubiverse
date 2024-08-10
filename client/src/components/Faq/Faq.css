@@ -84,3 +84,17 @@
     filter: invert(100%);
     width: 1.5rem;
 }
+
+.faqEmpty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.faqEmpty>img {
+    filter: grayscale(100%) brightness(100%) contrast(10%);
+}

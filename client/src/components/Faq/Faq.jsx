@@ -84,28 +84,42 @@ export default function Faq() {
                             </div>
                         </div>
                     ))}
-                    <div className="pageBtns">
-                        <button
-                            className="prev enabled"
-                            onClick={() => setFaqPage(Math.max(faqPage - 1, 1))}
-                            style={{
-                                backgroundColor: faqPage == 1 ? "#b1b1b1" : "orangered",
-                                cursor: faqPage == 1 ? "not-allowed" : "pointer"
-                            }}
-                        >
-                            <img src="/images/icons8-next-48.png" alt="" />
-                        </button>
-                        <button
-                            className="next enabled"
-                            onClick={() => setFaqPage(Math.min(faqPage + 1, maxPage))}
-                            style={{
-                                backgroundColor: faqPage == maxPage || maxPage == 0 ? "#b1b1b1" : "orangered",
-                                cursor: faqPage == maxPage || maxPage == 0 ? "not-allowed" : "pointer"
-                            }}
-                        >
-                            <img src="/images/icons8-next-48.png" alt="" />
-                        </button>
-                    </div>
+                    {
+                        faqs?.length == 0 &&
+                        (
+                            <div className="faqEmpty">
+                                <img src="/images/icons8-ask-question-48.png" alt="" />
+                                <p>Ask a question..</p>
+                            </div>
+                        )
+                    }
+                    {
+                        faqs?.length ?
+
+                            <div className="pageBtns">
+                                <button
+                                    className="prev enabled"
+                                    onClick={() => setFaqPage(Math.max(faqPage - 1, 1))}
+                                    style={{
+                                        backgroundColor: faqPage == 1 ? "#b1b1b1" : "orangered",
+                                        cursor: faqPage == 1 ? "not-allowed" : "pointer"
+                                    }}
+                                >
+                                    <img src="/images/icons8-next-48.png" alt="" />
+                                </button>
+                                <button
+                                    className="next enabled"
+                                    onClick={() => setFaqPage(Math.min(faqPage + 1, maxPage))}
+                                    style={{
+                                        backgroundColor: faqPage == maxPage || maxPage == 0 ? "#b1b1b1" : "orangered",
+                                        cursor: faqPage == maxPage || maxPage == 0 ? "not-allowed" : "pointer"
+                                    }}
+                                >
+                                    <img src="/images/icons8-next-48.png" alt="" />
+                                </button>
+                            </div>
+                            : ""
+                    }
                     <div className="postFaq">
                         <input type="text" name="question" id="question" placeholder="Ask a question.." required />
                         <button onClick={handlePostFaq}>

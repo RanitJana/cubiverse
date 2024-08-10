@@ -38,7 +38,7 @@ export default function Home() {
             }
         }
         handleMostfav();
-    }, [cubeData])
+    }, [])
 
     return (
         <>

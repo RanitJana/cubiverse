@@ -35,7 +35,7 @@ const handleProductRequest = async function (req, res) {
 
         products = await productSchema.aggregate([{ $sort: { "ratings.result": -1 } }]).limit(limitValue);
 
-        if (req.cookies.limit) res.clearCookie("limit",{
+        if (req.cookies.limit) res.clearCookie("limit", {
             httpOnly: true,
             secure: true,
             sameSite: "none",
@@ -158,9 +158,16 @@ async function handleRemoveFromCart(req, res) {
 
         const user = await userSchema.findById(req.user._id);
 
-        user.cart = user.cart.filter(products => products.productId.toString() !== productId.toString());
+        user.cart = user.cart.filter((products, index) => {
+            if (products.productId.toString() !== productId.toString()) return products;
+            else {
+                product.stock = parseInt(product.stock) + parseInt(user.cart[index].count);
+            }
+
+        });
 
         user.save({ validateBeforeSave: false });
+        product.save({ validateBeforeSave: false });
 
         return res.status(200).json({
             message: "Successfully deleted the item"

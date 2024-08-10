@@ -62,7 +62,7 @@ export default function Cart() {
 
     useEffect(() => {
         handleGetAllCartCube();
-    }, [changeUserState, userData, product])
+    }, [changeUserState, userData])
 
 
 
@@ -71,7 +71,7 @@ export default function Cart() {
         setLoading(true);
 
         try {
-            let base = import.meta.env.VITE_BACKEND_URI || 'http://localhost:5000';
+
             let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/product/cart/erase/${product}`, {},
                 {
                     headers: {
@@ -109,7 +109,7 @@ export default function Cart() {
                 <div className="cubes">
                     {
                         !isCartLoading ? (
-                            cubes && cubes.length > 0 ? (
+                            cubes?.length > 0 ? (
                                 cubes.map((val, index) => {
                                     let userInfo = userData.data.user.cart[index];
                                     return (

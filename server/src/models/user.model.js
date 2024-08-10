@@ -67,7 +67,7 @@ const userSchema = new Schema(
                 },
                 state: {
                     type: String,
-                    enum: ["ORDER PLACED", "SHIPPED", "CANCELLED", "DELIVERED"],
+                    enum: ["ORDER PLACED", "ORDER SHIPPED", "CANCELLED", "DELIVERED"],
                     default: "DELIVERED",
                     required: true
                 },

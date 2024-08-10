@@ -1,6 +1,7 @@
 
 import userSchema from "../models/user.model.js";
 import orderSchema from "../models/order.model.js";
+import ProductShema from "../models/prodect.model.js";
 
 async function handleOrder(req, res) {
     try {
@@ -29,7 +30,6 @@ async function handleOrder(req, res) {
                 orderedDate: new Date(),
                 count: order.count
             });
-            // await user.save({ validateBeforeSave: false });
         });
 
         await Promise.all(orderPromises);
@@ -50,6 +50,43 @@ async function handleOrder(req, res) {
     }
 }
 
+async function handleOrderCancel(req, res) {
+    try {
+
+        let user = await userSchema.findById(req.user._id);
+
+        let productId = req.params.productId.toString();
+
+        user.orderHistory = user.orderHistory.map((order) => {
+            if (order._id.toString() == productId) {
+                order.state = "CANCELLED";
+            }
+            return order;
+        })
+        user.save({ validateBeforeSave: false });
+
+        let productMain = req.params.productMain;
+        let count = req.params.count;
+
+        let product = await ProductShema.findById(productMain);
+        product.stock = parseInt(product.stock) + parseInt(count);
+
+        product.save({ validateBeforeSave: false });
+
+        return res.status(200).json({
+            message: "Ordered cancelled!"
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occurred!!"
+        })
+
+    }
+}
+
 export {
-    handleOrder
+    handleOrder,
+    handleOrderCancel
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
@@ -41,11 +42,30 @@ export default function Order(user) {
 
     }
 
+    async function handleOrderCancel(e, order) {
+        try {
+
+            let response = await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/order/${order._id}/${order.product}/${order.count}`, {}, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            })
+            console.log(response);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
 
         setOrderData(userData?.data.user.orderHistory);
 
         handleGetAllCartCube();
+        console.log(orderData);
+
 
 
     }, [userData, orderData])
@@ -76,6 +96,10 @@ export default function Order(user) {
                                                 <p>Quantity : {order.count}</p>
                                                 <p>Order date : {(new Date(order.orderedDate)).toLocaleString()}</p>
                                             </div>
+                                            {
+                                                order.state != "DELIVERED" &&
+                                                <button className="orderCancel" onClick={e => handleOrderCancel(e, order)}>Cancel order</button>
+                                            }
                                         </div>
                                     </div>
                                 )

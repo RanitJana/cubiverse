@@ -229,6 +229,12 @@
         flex-direction: column-reverse;
     }
 
+    .productDetails .productImages .imageRemote {
+        overflow: auto;
+        width: 100%;
+
+    }
+
     .productDetails .productImages {
         min-height: fit-content;
         height: auto;

@@ -4,8 +4,7 @@ Welcome to **Cubiverse**, an e-commerce platform dedicated to selling a wide var
 
 ## Demo
 
-Check out the demo video here: [Watch](./readme.video/Cubiverse.mp4)
-
+Check out the demo video here: [Watch](https://res.cloudinary.com/db8ksbpjm/video/upload/v1723390170/Cubiverse_nbvmbl.mp4)
 
 ## **Table of Contents**
 

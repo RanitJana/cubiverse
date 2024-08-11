@@ -11,6 +11,6 @@ router
     .post("/cart/erase/:id", handleAuthVerify, handleRemoveFromCart)
     .post("/:product", handleAuthVerify, handleProductAddCart)
     .get("/:product", handleProductRequest)
-    .post("/", upload.array('images', 5), handleProductUpload)
+    .post("/", upload.array('images', 10), handleProductUpload)
 
 export default router;

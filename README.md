@@ -4,7 +4,8 @@ Welcome to **Cubiverse**, an e-commerce platform dedicated to selling a wide var
 
 ## Demo
 
-<iframe width="560" height="315" src="./readme.video/Cubiverse.mp4" frameborder="0" allowfullscreen></iframe>
+Check out the demo video here: [Watch](./readme.video/Cubiverse.mp4)
+
 
 ## **Table of Contents**
 

@@ -148,14 +148,21 @@ export default function ProductDisplay() {
     }
 
     function handleDisplayMonitorImage(e) {
+        let monitor = document.querySelector(".imageMonitor");
+
+        monitor.style.animation = 'none';
+        monitor.offsetHeight; // Trigger a reflow, flushing the CSS changes -> important
+
         document.querySelectorAll('.remoteBox').forEach(val => {
             val.style.borderColor = "white";
-        })
-        e.target.parentNode.style.borderColor = "orange";
+        });
 
-        document.querySelector(".imageMonitor").style.animation = "appearMonitor 0.5s ease"
+        e.target.parentNode.style.borderColor = "orange";
+        monitor.style.animation = "appearMonitor 0.5s ease";
+
         setMonitorImage(e.target.getAttribute('src'));
     }
+
 
     const [details, setDetails] = useState("");
 
@@ -403,9 +410,6 @@ export default function ProductDisplay() {
                         </div>
                         <div className="productDetails" id="top">
                             <div className="productImages">
-                                <div className="imageMonitor">
-                                    <img src={monitorImage} alt="image" />
-                                </div>
                                 <div className="imageRemote">
                                     {
                                         productDetails.images?.map(
@@ -419,6 +423,9 @@ export default function ProductDisplay() {
                                             )
                                         )
                                     }
+                                </div>
+                                <div className="imageMonitor">
+                                    <img src={monitorImage} alt="image" />
                                 </div>
                             </div>
                             <div className="productInfo">

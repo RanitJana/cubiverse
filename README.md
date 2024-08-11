@@ -93,7 +93,7 @@ Check out the demo video here: [Watch](https://res.cloudinary.com/db8ksbpjm/vide
    API_SECRECT="***"
    ```
 
-4. **Change api request URI to your backend server** : <https://cubiverse->.... to <http://localhost>:... or another
+4. **Change api request URI to your backend server** : https://cubiverse-.... to http://localhost:... or another
 
 5. **Run the application:**
 

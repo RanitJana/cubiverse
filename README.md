@@ -2,6 +2,10 @@
 
 Welcome to **Cubiverse**, an e-commerce platform dedicated to selling a wide variety of Rubik's cubes and puzzle accessories. Whether you're a seasoned speedcuber or just getting started, Cubiverse has something for everyone.
 
+## Demo
+
+<iframe width="560" height="315" src="./readme.video/Cubiverse.mp4" frameborder="0" allowfullscreen></iframe>
+
 ## **Table of Contents**
 
 - [Features](#features)

@@ -7,7 +7,7 @@ export default function Filter(cubeData) {
 
     let data = cubeData.value;
 
-    let max = 10000;
+    let max = 50000;
 
     const { setCubeData, setLoadingState, searchParams, setSearchParams, sortBy } = useContext(cubeContext);
 

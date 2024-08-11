@@ -19,7 +19,7 @@ export default function Faq() {
         setFaqLoading(true);
         try {
             let neighbour = e.target.parentNode.childNodes[0];
-            if (!neighbour.value || neighbour.value.length === 0) return setFaqLoading(false);
+            if (!neighbour.value) return setFaqLoading(false);
             const productID = searchParams.get("product");
 
             await axios.post(`https://cubiverse-bakend.vercel.app/api/v1/faqs?product=${productID}`, {

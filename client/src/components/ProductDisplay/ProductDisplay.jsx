@@ -74,7 +74,7 @@ export default function ProductDisplay() {
         }
 
         setProductLoading(false);
-
+        handleStickyProductDetails();
 
     }
 
@@ -240,7 +240,7 @@ export default function ProductDisplay() {
 
     }
 
-    function handleStickyProductDetails(e) {
+    function handleStickyProductDetails() {
         const productInfo = document.querySelector('.productInfo');
 
         if (!productInfo) return;

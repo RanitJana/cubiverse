@@ -190,6 +190,7 @@
 .imageMonitor {
     height: 25rem;
     max-width: 100%;
+    overflow: hidden;
 }
 
 @keyframes appearMonitor {
@@ -218,7 +219,8 @@
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
     grid-area: productImages;
-    height: 28rem;
+    place-items: center;
+    height: 29rem;
 }
 
 @media only screen and (max-width:690px) {
@@ -462,6 +464,11 @@ table tr td:last-child {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.productReview .reviewTop>span {
+    font-weight: bold;
+    color: rgb(0, 0, 97);
 }
 
 

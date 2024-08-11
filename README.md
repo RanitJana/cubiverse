@@ -93,13 +93,15 @@ Check out the demo video here: [Watch](https://res.cloudinary.com/db8ksbpjm/vide
    API_SECRECT="***"
    ```
 
-4. **Run the application:**
+4. **Change api request URI to your backend server** : <https://cubiverse->.... to <http://localhost>:... or another
+
+5. **Run the application:**
 
    ```bash
    npm start
    ```
 
-5. **Open your browser and visit:**
+6. **Open your browser and visit:**
 
    ```bash
    http://localhost:5173
